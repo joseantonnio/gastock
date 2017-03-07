@@ -27,4 +27,4 @@ O GASTOCK será dividido em dois sistemas, o primeiro será uma simulação de u
    
 Esse sistema embarcado irá realizar o armazenamento das informações da bomba de combustvível no banco de dados e irá travar/destravar a bomba.
 
-Já o segundo sistema será o de gerenciamento de estoque de combustíveis, que **IRÁ** exibir um relatório de combustíveis vendidos, disponíveis e quais estão próximos do limite mínimo, e um relatório básico de vendas. Este, por sua vez, **NÃO** irá exibir relatórios de faturamento, **NÃO** realizará o controle de caixa e **NÃO** realizará qualquer controle administrativo de posto de abastecimento com exceção dos itens listados anteriormente.
+Já o segundo sistema será o de gerenciamento de estoque de combustíveis, que **irá** exibir um relatório de combustíveis vendidos, disponíveis e quais estão próximos do limite mínimo, e um relatório básico de vendas. Este, por sua vez, **não** irá exibir relatórios de faturamento, **não** realizará o controle de caixa e **não** realizará qualquer controle administrativo de posto de abastecimento com exceção dos itens listados anteriormente.
