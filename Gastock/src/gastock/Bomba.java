@@ -15,7 +15,7 @@ public class Bomba {
     private String senha;
     private int combustível;
     
-    Bomba(int num, String pass) {
+    public Bomba(int num, String pass) {
         
         if (num == 5 && pass.equals("1234")){
             System.out.println("Bomba "+num+" conectada com sucesso!");
