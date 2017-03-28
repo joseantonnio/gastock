@@ -83,8 +83,16 @@
                                       <Component id="btnNove" min="-2" pref="60" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="btnAbastecer" min="-2" pref="168" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="btnAbastecerL" min="-2" pref="168" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnAbastecerRS" min="-2" pref="168" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -122,10 +130,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="textBandeira" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="textPreco" alignment="3" max="32767" attributes="0"/>
-                  <Component id="textLitros" alignment="3" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="textPreco" max="32767" attributes="0"/>
+                  <Component id="textLitros" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -146,21 +154,18 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnSete" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="btnOito" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="btnNove" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnQuatro" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="btnCinco" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="btnSeis" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="btnAbastecer" min="-2" pref="138" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSete" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnOito" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnNove" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnAbastecerL" alignment="0" pref="60" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnQuatro" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnCinco" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnSeis" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnAbastecerRS" alignment="0" pref="60" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -315,18 +320,18 @@
         <Property name="text" type="java.lang.String" value="PARAR BOMBA"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAbastecer">
+    <Component class="javax.swing.JButton" name="btnAbastecerL">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="ff" red="0" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dialog" size="18" style="1"/>
+          <Font name="Dialog" size="16" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="ABASTECER"/>
+        <Property name="text" type="java.lang.String" value="ABASTECER (L)"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAbastecerActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAbastecerLActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textBandeira">
@@ -358,7 +363,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="3.766"/>
+        <Property name="text" type="java.lang.String" value="3,766"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textLitros">
@@ -374,7 +379,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="0.00"/>
+        <Property name="text" type="java.lang.String" value="0,00"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textQuantidade">
@@ -430,8 +435,11 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="0.00"/>
+        <Property name="text" type="java.lang.String" value="0,00"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textTotalActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelTotal">
       <Properties>
@@ -440,6 +448,20 @@
         </Property>
         <Property name="text" type="java.lang.String" value="TOTAL A PAGAR"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAbastecerRS">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="ff" red="0" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="16" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="ABASTECER (R$)"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAbastecerRSActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

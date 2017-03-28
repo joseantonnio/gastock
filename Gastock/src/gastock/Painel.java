@@ -6,7 +6,6 @@
 package gastock;
 
 import java.awt.Font;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 /**
@@ -51,7 +50,7 @@ public class Painel extends javax.swing.JFrame {
         btnLimpar = new javax.swing.JButton();
         btnEntrar = new javax.swing.JButton();
         btnParar = new javax.swing.JButton();
-        btnAbastecer = new javax.swing.JButton();
+        btnAbastecerL = new javax.swing.JButton();
         textBandeira = new javax.swing.JTextField();
         textPreco = new javax.swing.JTextField();
         textLitros = new javax.swing.JTextField();
@@ -61,6 +60,7 @@ public class Painel extends javax.swing.JFrame {
         labelPreco = new javax.swing.JLabel();
         textTotal = new javax.swing.JTextField();
         labelTotal = new javax.swing.JLabel();
+        btnAbastecerRS = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gastock - Sistema Embarcado");
@@ -170,12 +170,12 @@ public class Painel extends javax.swing.JFrame {
         btnParar.setForeground(new java.awt.Color(255, 255, 255));
         btnParar.setText("PARAR BOMBA");
 
-        btnAbastecer.setBackground(new java.awt.Color(0, 255, 0));
-        btnAbastecer.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnAbastecer.setText("ABASTECER");
-        btnAbastecer.addActionListener(new java.awt.event.ActionListener() {
+        btnAbastecerL.setBackground(new java.awt.Color(0, 255, 0));
+        btnAbastecerL.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnAbastecerL.setText("ABASTECER (L)");
+        btnAbastecerL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAbastecerActionPerformed(evt);
+                btnAbastecerLActionPerformed(evt);
             }
         });
 
@@ -191,14 +191,14 @@ public class Painel extends javax.swing.JFrame {
         textPreco.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         textPreco.setForeground(new java.awt.Color(255, 255, 255));
         textPreco.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textPreco.setText("3.766");
+        textPreco.setText("3,766");
 
         textLitros.setEditable(false);
         textLitros.setBackground(new java.awt.Color(0, 0, 0));
         textLitros.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         textLitros.setForeground(new java.awt.Color(255, 255, 255));
         textLitros.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textLitros.setText("0.00");
+        textLitros.setText("0,00");
 
         textQuantidade.setEditable(false);
         textQuantidade.setBackground(new java.awt.Color(0, 0, 0));
@@ -221,10 +221,24 @@ public class Painel extends javax.swing.JFrame {
         textTotal.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         textTotal.setForeground(new java.awt.Color(255, 255, 255));
         textTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textTotal.setText("0.00");
+        textTotal.setText("0,00");
+        textTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textTotalActionPerformed(evt);
+            }
+        });
 
         labelTotal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         labelTotal.setText("TOTAL A PAGAR");
+
+        btnAbastecerRS.setBackground(new java.awt.Color(0, 255, 0));
+        btnAbastecerRS.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnAbastecerRS.setText("ABASTECER (R$)");
+        btnAbastecerRS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbastecerRSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -276,8 +290,13 @@ public class Painel extends javax.swing.JFrame {
                                         .addComponent(btnOito, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnNove, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAbastecer, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnAbastecerL, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnAbastecerRS, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(textQuantidade, javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,8 +321,8 @@ public class Painel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(textBandeira, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textPreco)
                     .addComponent(textLitros))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -321,18 +340,17 @@ public class Painel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelTotal)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOito, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNove, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnQuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCinco, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSeis, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnAbastecer, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOito, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNove, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAbastecerL, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCinco, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeis, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAbastecerRS, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUm, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -450,24 +468,56 @@ public class Painel extends javax.swing.JFrame {
         textQuantidade.setText("0");
     }//GEN-LAST:event_btnLimparActionPerformed
 
-    private void btnAbastecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerActionPerformed
-        new Thread(abastecendo).start();
-    }//GEN-LAST:event_btnAbastecerActionPerformed
+    private void btnAbastecerLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerLActionPerformed
+        new Thread(abastecendoL).start();
+    }//GEN-LAST:event_btnAbastecerLActionPerformed
 
-    private Runnable abastecendo = new Runnable() {
+    private void btnAbastecerRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerRSActionPerformed
+        new Thread(abastecendoRS).start();
+    }//GEN-LAST:event_btnAbastecerRSActionPerformed
+
+    private void textTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textTotalActionPerformed
+
+    private Runnable abastecendoL = new Runnable() {
         public void run() {
-            
-            float litros = Float.parseFloat(textLitros.getText());
-            float quantidade = Float.parseFloat(textQuantidade.getText());
-            float preco = Float.parseFloat(textPreco.getText());
-            
-            while (litros < quantidade){
-                
+
+            float litros = strToFloat(textLitros.getText());
+            float quantidade = strToFloat(textQuantidade.getText());
+            float preco = strToFloat(textPreco.getText());
+
+            while (litros < quantidade) {
+
                 litros += 0.01;
                 NumberFormat total = NumberFormat.getInstance();
                 NumberFormat total_litros = NumberFormat.getInstance();
                 textTotal.setText(total.format(litros * preco));
                 textLitros.setText(total_litros.format(litros));
+            }
+        }
+    };
+
+    private Runnable abastecendoRS = new Runnable() {
+        public void run() {
+
+            float litros = strToFloat(textLitros.getText());
+            float quantidade = strToFloat(textQuantidade.getText());
+            float preco = strToFloat(textPreco.getText());
+            float preco_total = strToFloat(textTotal.getText());
+            
+            while (preco_total < quantidade) {
+                
+                litros += 0.01;
+                
+                NumberFormat total = NumberFormat.getInstance();
+                NumberFormat total_litros = NumberFormat.getInstance();
+                
+                preco_total = litros * preco;
+                
+                textTotal.setText(total.format(litros * preco));
+                textLitros.setText(total_litros.format(litros));
+                
             }
         }
     };
@@ -498,13 +548,21 @@ public class Painel extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Painel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Painel().setVisible(true);
             }
         });
+    }
+    
+    private float strToFloat(String valor){
+        
+        valor = valor.replace(".", "");
+        valor = valor.replace(",", ".");
+        
+        return Float.parseFloat(valor);
     }
 
     private void btnPress(String valor) {
@@ -520,7 +578,8 @@ public class Painel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAbastecer;
+    private javax.swing.JButton btnAbastecerL;
+    private javax.swing.JButton btnAbastecerRS;
     private javax.swing.JButton btnAsterisco;
     private javax.swing.JButton btnCinco;
     private javax.swing.JButton btnDois;
