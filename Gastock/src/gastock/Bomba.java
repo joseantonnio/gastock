@@ -14,36 +14,20 @@ public class Bomba {
     private int numero;
     private String senha;
     private int combustível;
-    public String mensagem;
+    public boolean autenticado;
 
     public Bomba(int num, String pass) {
 
         if (num == 5 && pass.equals("1234")) {
-            mensagem = "Bomba " + num + " conectada com sucesso!";
+            autenticado = true;
         } else {
-            mensagem = "Número ou senha da bomba incorretos!";
+            autenticado = false;
         }
     }
 
-    public void setCombustivel(String nome) {
+    public void setCombustivel(int combustivel) {
 
-        switch (nome) {
-            case "gasolina":
-                this.combustível = 1;
-                break;
-
-            case "alcool":
-                this.combustível = 2;
-                break;
-
-            case "diesel":
-                this.combustível = 3;
-                break;
-
-            default:
-                System.out.println("Combustível não identificado!");
-                break;
-        }
+        this.combustível = combustivel;
     }
 
     public String getCombustivel() {
@@ -52,19 +36,23 @@ public class Bomba {
 
         switch (this.combustível) {
             case 1:
-                retorno = "Gasolina";
+                retorno = "GASOLINA COMUM";
                 break;
 
             case 2:
-                retorno = "Álcool";
+                retorno = "GASOLINA ADITIVADA";
                 break;
 
             case 3:
-                retorno = "Diesel";
+                retorno = "ETANOL";
+                break;
+                
+            case 4:
+                retorno = "DIESEL";
                 break;
 
             default:
-                retorno = "Nenhum combustível ativo!";
+                retorno = "NENHUM";
                 break;
         }
 

@@ -325,6 +325,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="ABASTECER"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAbastecerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="textBandeira">
       <Properties>
@@ -339,7 +342,7 @@
           <Color blue="0" green="ff" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="PRECIONE &quot;ENTRAR&quot;"/>
+        <Property name="text" type="java.lang.String" value="PRESSIONE &quot;ENTRAR&quot;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textPreco">
@@ -355,7 +358,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="0,00"/>
+        <Property name="text" type="java.lang.String" value="3.766"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textLitros">
@@ -371,7 +374,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="0,00"/>
+        <Property name="text" type="java.lang.String" value="0.00"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textQuantidade">
@@ -427,7 +430,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="0,00"/>
+        <Property name="text" type="java.lang.String" value="0.00"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelTotal">

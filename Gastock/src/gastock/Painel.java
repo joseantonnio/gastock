@@ -5,11 +5,20 @@
  */
 package gastock;
 
+import java.awt.Font;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 /**
  *
  * @author Vaio
  */
 public class Painel extends javax.swing.JFrame {
+
+    private int entrarStatus = 0;
+    private Bomba bomba;
+    private String numero;
+    private String senha;
 
     /**
      * Creates new form Painel
@@ -164,27 +173,32 @@ public class Painel extends javax.swing.JFrame {
         btnAbastecer.setBackground(new java.awt.Color(0, 255, 0));
         btnAbastecer.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnAbastecer.setText("ABASTECER");
+        btnAbastecer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbastecerActionPerformed(evt);
+            }
+        });
 
         textBandeira.setEditable(false);
         textBandeira.setBackground(new java.awt.Color(0, 0, 0));
         textBandeira.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         textBandeira.setForeground(new java.awt.Color(0, 255, 0));
         textBandeira.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textBandeira.setText("PRECIONE \"ENTRAR\"");
+        textBandeira.setText("PRESSIONE \"ENTRAR\"");
 
         textPreco.setEditable(false);
         textPreco.setBackground(new java.awt.Color(0, 0, 0));
         textPreco.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         textPreco.setForeground(new java.awt.Color(255, 255, 255));
         textPreco.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textPreco.setText("0,00");
+        textPreco.setText("3.766");
 
         textLitros.setEditable(false);
         textLitros.setBackground(new java.awt.Color(0, 0, 0));
         textLitros.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         textLitros.setForeground(new java.awt.Color(255, 255, 255));
         textLitros.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textLitros.setText("0,00");
+        textLitros.setText("0.00");
 
         textQuantidade.setEditable(false);
         textQuantidade.setBackground(new java.awt.Color(0, 0, 0));
@@ -207,7 +221,7 @@ public class Painel extends javax.swing.JFrame {
         textTotal.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         textTotal.setForeground(new java.awt.Color(255, 255, 255));
         textTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textTotal.setText("0,00");
+        textTotal.setText("0.00");
 
         labelTotal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         labelTotal.setText("TOTAL A PAGAR");
@@ -343,7 +357,53 @@ public class Painel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCincoActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        textBandeira.setText("INSIRA O NÚMERO DA BOMBA");
+
+        switch (entrarStatus) {
+            case 0:
+                textBandeira.setText("INSIRA O NÚMERO DA BOMBA");
+                entrarStatus = 1;
+                break;
+
+            case 1:
+                numero = textQuantidade.getText();
+                textQuantidade.setText("0");
+                textBandeira.setText("DIGITE A SENHA DA BOMBA");
+                entrarStatus = 2;
+                break;
+
+            case 2:
+                senha = textQuantidade.getText();
+                textQuantidade.setText("0");
+                textBandeira.setText("AUTENTICANDO...");
+                bomba = new Bomba(Integer.parseInt(numero), senha);
+                if (bomba.autenticado) {
+                    entrarStatus = 3;
+                    textBandeira.setFont(new Font("Arial", Font.PLAIN, 20));
+                    textBandeira.setText("ESCOLHA O COMBUSTÍVEL (1, 2, 3 OU 4)");
+                } else {
+                    entrarStatus = 0;
+                    textBandeira.setText("DADOS INCORRETOS");
+                }
+                break;
+
+            case 3:
+                bomba.setCombustivel(Integer.parseInt(textQuantidade.getText()));
+                textBandeira.setText(bomba.getCombustivel());
+                textQuantidade.setText("0");
+                entrarStatus = 4;
+                break;
+
+            case 4:
+                break;
+
+            default:
+                numero = null;
+                senha = null;
+                entrarStatus = 0;
+                textBandeira.setText("PRESSIONE \"ENTRAR\"");
+                break;
+
+        }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnAsteriscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsteriscoActionPerformed
@@ -390,6 +450,28 @@ public class Painel extends javax.swing.JFrame {
         textQuantidade.setText("0");
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    private void btnAbastecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerActionPerformed
+        new Thread(abastecendo).start();
+    }//GEN-LAST:event_btnAbastecerActionPerformed
+
+    private Runnable abastecendo = new Runnable() {
+        public void run() {
+            
+            float litros = Float.parseFloat(textLitros.getText());
+            float quantidade = Float.parseFloat(textQuantidade.getText());
+            float preco = Float.parseFloat(textPreco.getText());
+            
+            while (litros < quantidade){
+                
+                litros += 0.01;
+                NumberFormat total = NumberFormat.getInstance();
+                NumberFormat total_litros = NumberFormat.getInstance();
+                textTotal.setText(total.format(litros * preco));
+                textLitros.setText(total_litros.format(litros));
+            }
+        }
+    };
+
     /**
      * @param args the command line arguments
      */
@@ -416,7 +498,7 @@ public class Painel extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Painel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -424,15 +506,16 @@ public class Painel extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void btnPress(String valor){
-        
+
+    private void btnPress(String valor) {
+
         if (textQuantidade.getText().length() < 7) {
-            
-            if (textQuantidade.getText().equals("0"))
+
+            if (textQuantidade.getText().equals("0")) {
                 textQuantidade.setText(valor);
-            else
+            } else {
                 textQuantidade.setText(textQuantidade.getText() + valor);
+            }
         }
     }
 
