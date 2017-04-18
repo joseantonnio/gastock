@@ -18,6 +18,7 @@ public class Painel extends javax.swing.JFrame {
     private Bomba bomba;
     private String numero;
     private String senha;
+    private int numCombustivel = 0;
 
     /**
      * Creates new form Painel
@@ -340,17 +341,19 @@ public class Painel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelTotal)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOito, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNove, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAbastecerL, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAbastecerL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnOito, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNove, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnQuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCinco, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeis, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAbastecerRS, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAbastecerRS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnQuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCinco, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSeis, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUm, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,6 +373,14 @@ public class Painel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setNumCombustivel(int num){
+        this.numCombustivel = num;
+    }
+    
+    public int getNumCombustivel(){
+        return this.numCombustivel;
+    }
+    
     private void btnCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCincoActionPerformed
         btnPress("5");
     }//GEN-LAST:event_btnCincoActionPerformed
@@ -405,10 +416,19 @@ public class Painel extends javax.swing.JFrame {
                 break;
 
             case 3:
-                bomba.setCombustivel(Integer.parseInt(textQuantidade.getText()));
-                textBandeira.setText(bomba.getCombustivel());
-                textQuantidade.setText("0");
-                entrarStatus = 4;
+                
+                this.numCombustivel = (Integer.parseInt(textQuantidade.getText()));
+                if (this.numCombustivel > 0 && this.numCombustivel < 5){                
+                    bomba.setCombustiveis();
+                    textBandeira.setText(bomba.getCombustivel(this.numCombustivel));
+                    textPreco.setText(String.valueOf(bomba.getPreco(this.numCombustivel)));
+                    textQuantidade.setText("0");
+                    entrarStatus = 4;
+                }
+                else{
+                    entrarStatus = 3;
+                    textBandeira.setText("(1, 2, 3 OU 4)");
+                }
                 break;
 
             case 4:
@@ -485,7 +505,7 @@ public class Painel extends javax.swing.JFrame {
 
             float litros = strToFloat(textLitros.getText());
             float quantidade = strToFloat(textQuantidade.getText());
-            float preco = strToFloat(textPreco.getText());
+            float preco = bomba.getPreco(getNumCombustivel());
 
             while (litros < quantidade) {
 

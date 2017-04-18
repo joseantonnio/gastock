@@ -13,51 +13,30 @@ public class Bomba {
 
     private int numero;
     private String senha;
-    private int combustível;
+    private Combustivel[] combustivel = new Combustivel[4];
     public boolean autenticado;
 
     public Bomba(int num, String pass) {
 
         if (num == 5 && pass.equals("1234")) {
-            autenticado = true;
+            autenticado = true;  
         } else {
             autenticado = false;
         }
     }
 
-    public void setCombustivel(int combustivel) {
-
-        this.combustível = combustivel;
+    public String getCombustivel(int num) {
+        return this.combustivel[num-1].getNome();
     }
-
-    public String getCombustivel() {
-
-        String retorno;
-
-        switch (this.combustível) {
-            case 1:
-                retorno = "GASOLINA COMUM";
-                break;
-
-            case 2:
-                retorno = "GASOLINA ADITIVADA";
-                break;
-
-            case 3:
-                retorno = "ETANOL";
-                break;
-                
-            case 4:
-                retorno = "DIESEL";
-                break;
-
-            default:
-                retorno = "NENHUM";
-                break;
-        }
-
-        return retorno;
-
+    
+    public float getPreco(int num) {
+        return this.combustivel[num-1].getPreco();
     }
-
+    
+    public void setCombustiveis(){
+        this.combustivel[0] = new Combustivel(1,"Gasolina",3.769f);
+        this.combustivel[1] = new Combustivel(2,"Gasolina Aditivada",3.899f);
+        this.combustivel[2] = new Combustivel(3,"Etanol",2.769f);
+        this.combustivel[3] = new Combustivel(4,"Diesel",2.999f);   
+    }
 }
