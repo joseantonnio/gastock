@@ -192,7 +192,7 @@ public class Painel extends javax.swing.JFrame {
         textPreco.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         textPreco.setForeground(new java.awt.Color(255, 255, 255));
         textPreco.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textPreco.setText("3,766");
+        textPreco.setText("0,000");
 
         textLitros.setEditable(false);
         textLitros.setBackground(new java.awt.Color(0, 0, 0));
@@ -419,9 +419,10 @@ public class Painel extends javax.swing.JFrame {
                 
                 this.numCombustivel = (Integer.parseInt(textQuantidade.getText()));
                 if (this.numCombustivel > 0 && this.numCombustivel < 5){                
-                    bomba.setCombustiveis();
+                    bomba.setCombustiveis();  
+                    NumberFormat preco = NumberFormat.getInstance();
                     textBandeira.setText(bomba.getCombustivel(this.numCombustivel));
-                    textPreco.setText(String.valueOf(bomba.getPreco(this.numCombustivel)));
+                    textPreco.setText(preco.format(bomba.getPreco(this.numCombustivel)));
                     textQuantidade.setText("0");
                     entrarStatus = 4;
                 }
