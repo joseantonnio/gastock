@@ -533,8 +533,8 @@ public class Painel extends javax.swing.JFrame {
 
             float litros = 0;
             float quantidade = strToFloat(textQuantidade.getText());
-            float preco = strToFloat(textPreco.getText());
-            float preco_total = strToFloat(textTotal.getText());
+            float preco = bomba.getPreco(getNumCombustivel());
+            float preco_total = 0;
             
             while (preco_total < quantidade) {
                 
