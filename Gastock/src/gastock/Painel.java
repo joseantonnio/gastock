@@ -18,7 +18,7 @@ public class Painel extends javax.swing.JFrame {
     private Bomba bomba;
     private String numero;
     private String senha;
-    private int numCombustivel = 0;
+    private int numCombustivel = -1;
 
     /**
      * Creates new form Painel
@@ -489,11 +489,21 @@ public class Painel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnAbastecerLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerLActionPerformed
-        new Thread(abastecendoL).start();
+        if (numCombustivel == -1){
+            textBandeira.setText("POR FAVOR ENTRE");
+        }
+        else{
+            new Thread(abastecendoL).start();
+        }
     }//GEN-LAST:event_btnAbastecerLActionPerformed
 
     private void btnAbastecerRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerRSActionPerformed
-        new Thread(abastecendoRS).start();
+        if (numCombustivel == -1){
+            textBandeira.setText("POR FAVOR ENTRE");
+        }
+        else{
+            new Thread(abastecendoRS).start();
+        }
     }//GEN-LAST:event_btnAbastecerRSActionPerformed
 
     private void textTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTotalActionPerformed
@@ -503,7 +513,7 @@ public class Painel extends javax.swing.JFrame {
     private Runnable abastecendoL = new Runnable() {
         public void run() {
 
-            float litros = strToFloat(textLitros.getText());
+            float litros = 0;
             float quantidade = strToFloat(textQuantidade.getText());
             float preco = bomba.getPreco(getNumCombustivel());
 
@@ -521,7 +531,7 @@ public class Painel extends javax.swing.JFrame {
     private Runnable abastecendoRS = new Runnable() {
         public void run() {
 
-            float litros = strToFloat(textLitros.getText());
+            float litros = 0;
             float quantidade = strToFloat(textQuantidade.getText());
             float preco = strToFloat(textPreco.getText());
             float preco_total = strToFloat(textTotal.getText());
