@@ -19,6 +19,7 @@ public class Painel extends javax.swing.JFrame {
     private String numero;
     private String senha;
     private int numCombustivel = -1;
+    private boolean abastecendo = false;
 
     /**
      * Creates new form Painel
@@ -170,6 +171,11 @@ public class Painel extends javax.swing.JFrame {
         btnParar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnParar.setForeground(new java.awt.Color(255, 255, 255));
         btnParar.setText("PARAR BOMBA");
+        btnParar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPararActionPerformed(evt);
+            }
+        });
 
         btnAbastecerL.setBackground(new java.awt.Color(0, 255, 0));
         btnAbastecerL.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -511,21 +517,32 @@ public class Painel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textTotalActionPerformed
 
+    private void btnPararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPararActionPerformed
+        abastecendo = false;
+    }//GEN-LAST:event_btnPararActionPerformed
+
     private Runnable abastecendoL = new Runnable() {
         public void run() {
 
             float litros = 0;
             float quantidade = strToFloat(textQuantidade.getText());
             float preco = bomba.getPreco(getNumCombustivel());
+            abastecendo = true;
+            
+            while (litros < quantidade && abastecendo == true) {
 
-            while (litros < quantidade) {
-
-                litros += 0.01;
+                if ( litros <= (0.95*quantidade))
+                    litros += 0.0001;
+                else
+                    litros += 0.00001;
+                
                 NumberFormat total = NumberFormat.getInstance();
                 NumberFormat total_litros = NumberFormat.getInstance();
+                
                 textTotal.setText(total.format(litros * preco));
                 textLitros.setText(total_litros.format(litros));
             }
+            abastecendo = false;
         }
     };
 
@@ -536,10 +553,14 @@ public class Painel extends javax.swing.JFrame {
             float quantidade = strToFloat(textQuantidade.getText());
             float preco = bomba.getPreco(getNumCombustivel());
             float preco_total = 0;
+            abastecendo = true; 
             
-            while (preco_total < quantidade) {
+            while (preco_total < quantidade && abastecendo == true) {
                 
-                litros += 0.01;
+                if ( preco_total <= (0.95*quantidade))
+                    litros += 0.0001;
+                else
+                    litros += 0.00001;
                 
                 NumberFormat total = NumberFormat.getInstance();
                 NumberFormat total_litros = NumberFormat.getInstance();
@@ -548,8 +569,8 @@ public class Painel extends javax.swing.JFrame {
                 
                 textTotal.setText(total.format(litros * preco));
                 textLitros.setText(total_litros.format(litros));
-                
             }
+            abastecendo = false;
         }
     };
 
