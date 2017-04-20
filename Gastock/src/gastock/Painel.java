@@ -500,7 +500,8 @@ public class Painel extends javax.swing.JFrame {
             textBandeira.setText("POR FAVOR ENTRE");
         }
         else{
-            new Thread(abastecendoL).start();
+            if (abastecendo == false)
+                new Thread(abastecendoL).start();
         }
     }//GEN-LAST:event_btnAbastecerLActionPerformed
 
@@ -509,7 +510,8 @@ public class Painel extends javax.swing.JFrame {
             textBandeira.setText("POR FAVOR ENTRE");
         }
         else{
-            new Thread(abastecendoRS).start();
+            if (abastecendo == false)
+                new Thread(abastecendoRS).start();
         }
     }//GEN-LAST:event_btnAbastecerRSActionPerformed
 
