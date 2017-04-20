@@ -422,7 +422,6 @@ public class Painel extends javax.swing.JFrame {
                 break;
 
             case 3:
-                
                 this.numCombustivel = (Integer.parseInt(textQuantidade.getText()));
                 if (this.numCombustivel > 0 && this.numCombustivel < 5){                
                     bomba.setCombustiveis();  
@@ -433,6 +432,7 @@ public class Painel extends javax.swing.JFrame {
                     entrarStatus = 4;
                 }
                 else{
+                    this.numCombustivel = -1;
                     entrarStatus = 3;
                     textBandeira.setText("(1, 2, 3 OU 4)");
                 }
