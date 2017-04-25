@@ -423,15 +423,15 @@ public class Painel extends javax.swing.JFrame {
 
             case 3:
                 this.numCombustivel = (Integer.parseInt(textQuantidade.getText()));
-                if (this.numCombustivel > 0 && this.numCombustivel < 5){                
-                    bomba.setCombustiveis();  
+                bomba.setCombustiveis(); 
+                try{
                     NumberFormat preco = NumberFormat.getInstance();
                     textBandeira.setText(bomba.getCombustivel(this.numCombustivel));
                     textPreco.setText(preco.format(bomba.getPreco(this.numCombustivel)));
                     textQuantidade.setText("0");
                     entrarStatus = 4;
                 }
-                else{
+                catch(ArrayIndexOutOfBoundsException e){
                     this.numCombustivel = -1;
                     entrarStatus = 3;
                     textBandeira.setText("(1, 2, 3 OU 4)");
