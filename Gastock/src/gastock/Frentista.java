@@ -14,6 +14,16 @@ public class Frentista {
     private String nome;
     private String senha;
     private float salario;
+    
+    public Frentista(){
+        
+    }
+    
+    public Frentista(String nome, String senha, float salario){
+        this.nome = nome;
+        this.senha = senha;
+        this.salario = salario;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;

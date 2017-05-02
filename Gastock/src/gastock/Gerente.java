@@ -16,4 +16,6 @@ public class Gerente extends Frentista{
      public void cancelaVenda(){
          
      }
+     
+    
 }

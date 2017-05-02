@@ -16,6 +16,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form sistema
      */
+    
+    
     public Login() {
         initComponents();
     }
@@ -64,7 +66,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtLogin);
-        txtLogin.setBounds(260, 290, 270, 22);
+        txtLogin.setBounds(260, 290, 270, 30);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -73,30 +75,50 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setBounds(260, 340, 100, 22);
 
         txtSenha.setText("jPasswordField1");
+        txtSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSenhaFocusGained(evt);
+            }
+        });
         getContentPane().add(txtSenha);
-        txtSenha.setBounds(260, 360, 270, 22);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alex\\Desktop\\fundo.png")); // NOI18N
+        txtSenha.setBounds(260, 360, 270, 30);
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 800, 700);
+        jLabel3.setBounds(0, 0, 0, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEntarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntarActionPerformed
+    private void btnEntarActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
-        if (txtLogin.getText().equals("admin") && txtSenha.getText().equals("admin")) {
-
-            JOptionPane.showMessageDialog(null, "Bem vindo");
-    }//GEN-LAST:event_btnEntarActionPerformed
-      else {
-            JOptionPane.showMessageDialog(null, " Acesso Negado");
+        Frentista[] f = new Frentista[3];
+        f[0] = new Frentista("Geraldo","1234",1000.01f);
+        f[1] = new Frentista("Agnalda","1234",2000.01f);
+        f[2] = new Frentista("Robertina","1234",2000.01f);
+        
+        Gerente[] g = new Gerente[1];
+        g[0] = new Gerente();
+        g[0].setNome("admin");
+        g[0].setSalario(9999.99f);
+        g[0].setSenha("admin");
+        
+        Gerente user = null;
+        
+        for (Gerente ger : g){
+            if (txtLogin.getText().equals(ger.getNome()) && txtSenha.getText().equals(ger.getSenha())) {
+                JOptionPane.showMessageDialog(null, "Bem vindo");
+                user = ger;
+            }
         }
-
+        if (user == null)
+             JOptionPane.showMessageDialog(null, "Acesso Negado");
     }
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLoginActionPerformed
+
+    private void txtSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSenhaFocusGained
+        txtSenha.setText("");
+    }//GEN-LAST:event_txtSenhaFocusGained
 
     /**
      * @param args the command line arguments
