@@ -11,7 +11,7 @@ package gastock;
  */
 public class Tanque {
     
-    private double quantidade = 1000;
+    private double quantidade = 100;
     private Combustivel combustivel;
     private boolean status;
     
@@ -28,5 +28,13 @@ public boolean verificarQuantidade(double qtd){
    return status = true;
    
 }
+
+    public double getQuantidade(){
+        return this.quantidade;
+    }
+    
+    public void abasteceVeiculo(double qtd){
+        this.quantidade -= qtd;
+    }
     
 }

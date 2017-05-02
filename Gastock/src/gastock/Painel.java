@@ -20,6 +20,7 @@ public class Painel extends javax.swing.JFrame {
     private String senha;
     private int numCombustivel = -1;
     private boolean abastecendo = false;
+    private Tanque tanque = new Tanque();
 
     /**
      * Creates new form Painel
@@ -550,19 +551,34 @@ public class Painel extends javax.swing.JFrame {
             float preco = bomba.getPreco(getNumCombustivel());
             abastecendo = true;
             
-            while (litros < quantidade && abastecendo == true) {
+            if (quantidade <= tanque.getQuantidade()){
+                while (litros < quantidade && abastecendo == true) {
 
-                if ( litros <= (0.95*quantidade))
-                    litros += 0.0001;
-                else
-                    litros += 0.00001;
+                    if ( litros <= (0.95*quantidade))
+                        litros += 0.0001;
+                    else
+                        litros += 0.00001;
                 
-                NumberFormat total = NumberFormat.getInstance();
-                NumberFormat total_litros = NumberFormat.getInstance();
+                    NumberFormat total = NumberFormat.getInstance();
+                    NumberFormat total_litros = NumberFormat.getInstance();
                 
-                textTotal.setText(total.format(litros * preco));
-                textLitros.setText(total_litros.format(litros));
+                    textTotal.setText(total.format(litros * preco));
+                    textLitros.setText(total_litros.format(litros));
+                }
+                tanque.abasteceVeiculo(strToFloat(textLitros.getText()));
             }
+            else{
+                NumberFormat qtdTanque = NumberFormat.getInstance();
+                textBandeira.setText("Apenas " + qtdTanque.format(tanque.getQuantidade()) + "L no tanque");
+                try {
+                    Thread.sleep(2000);        //delay the code for 2 secs
+                }
+                catch(InterruptedException ex) {  //and handle the exceptions
+                    Thread.currentThread().interrupt();
+                }
+                textBandeira.setText(bomba.getCombustivel(numCombustivel));
+            }
+            
             abastecendo = false;
         }
     };
@@ -576,20 +592,34 @@ public class Painel extends javax.swing.JFrame {
             float preco_total = 0;
             abastecendo = true; 
             
-            while (preco_total < quantidade && abastecendo == true) {
+            if (preco * quantidade <= tanque.getQuantidade()){
+                while (preco_total < quantidade && abastecendo == true) {
                 
-                if ( preco_total <= (0.95*quantidade))
-                    litros += 0.0001;
-                else
-                    litros += 0.00001;
+                    if ( preco_total <= (0.95*quantidade))
+                        litros += 0.0001;
+                    else
+                        litros += 0.00001;
                 
-                NumberFormat total = NumberFormat.getInstance();
-                NumberFormat total_litros = NumberFormat.getInstance();
+                    NumberFormat total = NumberFormat.getInstance();
+                    NumberFormat total_litros = NumberFormat.getInstance();
                 
-                preco_total = litros * preco;
+                    preco_total = litros * preco;
                 
-                textTotal.setText(total.format(litros * preco));
-                textLitros.setText(total_litros.format(litros));
+                    textTotal.setText(total.format(litros * preco));
+                    textLitros.setText(total_litros.format(litros));
+                }
+                tanque.abasteceVeiculo(strToFloat(textLitros.getText()));
+            }
+            else{
+                NumberFormat qtdTanque = NumberFormat.getInstance();
+                textBandeira.setText("Apenas " + qtdTanque.format(tanque.getQuantidade()) + "L no tanque");
+                try {
+                    Thread.sleep(2000);        //delay the code for 2 secs
+                }
+                catch(InterruptedException ex) {  //and handle the exceptions
+                    Thread.currentThread().interrupt();
+                }
+                textBandeira.setText(bomba.getCombustivel(numCombustivel));
             }
             abastecendo = false;
         }
