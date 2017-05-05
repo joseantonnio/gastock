@@ -1,13 +1,19 @@
+# Arquivos de classe java no diretório raiz #
 *.class
 
-# Mobile Tools for Java (J2ME)
+# Mobile e J2ME #
 .mtj.tmp/
 
-# Package Files #
+# Arquivos compilados #
 *.jar
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Pastas do Netbeans #
+/Gastock/nbproject/private/
+/Gastock/build/
+/Gastock/nbbuild/
 /Gastock/dist/
+/Gastock/nbdist/
+/Gastock/nbactions.xml
+/Gastock/nb-configuration.xml
