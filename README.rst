@@ -20,7 +20,7 @@ Alguns postos (no Brasil, inclusive), fornecem combustíveis alternativos tais c
 
 O GASTOCK será dividido em dois sistemas, o primeiro será uma simulação de um sistema embarcado, onde existirá um terminal que o usuário irá digitar a quantidade de combustível que será liberado para seu veículo.
 
-.. figure:: https://raw.githubusercontent.com/joseantonnio/gastock/master/terminal.jpg
+.. figure:: https://raw.githubusercontent.com/joseantonnio/gastock/master/Apresenta%C3%A7%C3%A3o%201/terminal.jpg
    :alt: map to buried treasure
 
    Exemplo do sistema Embarcado
