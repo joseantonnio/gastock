@@ -65,7 +65,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEntrar);
-        btnEntrar.setBounds(30, 340, 120, 50);
+        btnEntrar.setBounds(30, 320, 120, 40);
 
         btnSair.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSair.setText("Sair");
@@ -75,11 +75,11 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSair);
-        btnSair.setBounds(350, 340, 120, 50);
+        btnSair.setBounds(350, 320, 120, 40);
 
         jLabel1.setText("Unidade: São Carlos");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 120, 230, 15);
+        jLabel1.setBounds(250, 120, 230, 16);
 
         labelDia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         labelDia.setForeground(new java.awt.Color(255, 0, 0));
@@ -87,7 +87,7 @@ public class Login extends javax.swing.JFrame {
         labelDia.setText("Segunda-Feira");
         labelDia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(labelDia);
-        labelDia.setBounds(340, 300, 140, 15);
+        labelDia.setBounds(340, 290, 140, 15);
 
         labelData.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelData.setForeground(new java.awt.Color(255, 0, 0));
@@ -95,7 +95,7 @@ public class Login extends javax.swing.JFrame {
         labelData.setText("04/05/2017");
         labelData.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(labelData);
-        labelData.setBounds(340, 280, 140, 20);
+        labelData.setBounds(340, 270, 140, 20);
 
         labelMensagem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelMensagem.setForeground(new java.awt.Color(255, 0, 0));
@@ -131,7 +131,7 @@ public class Login extends javax.swing.JFrame {
         labelSenha.setForeground(new java.awt.Color(255, 255, 255));
         labelSenha.setText("Senha");
         getContentPane().add(labelSenha);
-        labelSenha.setBounds(30, 260, 100, 22);
+        labelSenha.setBounds(30, 250, 100, 22);
 
         textSenha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -139,7 +139,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(textSenha);
-        textSenha.setBounds(30, 280, 300, 30);
+        textSenha.setBounds(30, 270, 300, 30);
 
         imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/fundo.png"))); // NOI18N
         getContentPane().add(imagemFundo);

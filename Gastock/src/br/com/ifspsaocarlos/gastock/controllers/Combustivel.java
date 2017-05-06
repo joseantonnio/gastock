@@ -12,7 +12,7 @@ package br.com.ifspsaocarlos.gastock.controllers;
 public class Combustivel {
     private int combustivel;
     private String nome;
-    private float precoL;
+    private double precoL;
     
     public void setCombustivel(int num) {
         this.combustivel = num;
@@ -30,15 +30,15 @@ public class Combustivel {
         return this.nome;
     }
     
-    public void setPreco(float preco) {
+    public void setPreco(double preco) {
         this.precoL = preco;
     }
     
-    public float getPreco() {
+    public double getPreco() {
         return this.precoL;
     }
     
-    public Combustivel(int num, String nome, float preco) {
+    public Combustivel(int num, String nome, double preco) {
         this.combustivel = num;
         this.nome = nome;
         this.precoL = preco;        
