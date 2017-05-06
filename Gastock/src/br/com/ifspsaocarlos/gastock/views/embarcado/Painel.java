@@ -5,11 +5,11 @@
  */
 package br.com.ifspsaocarlos.gastock.views.embarcado;
 
-import br.com.ifspsaocarlos.gastock.views.desktop.Login;
 import br.com.ifspsaocarlos.gastock.controllers.Bomba;
 import br.com.ifspsaocarlos.gastock.controllers.Tanque;
 import java.awt.Font;
 import java.text.NumberFormat;
+import java.util.Arrays;
 
 /**
  *
@@ -523,82 +523,82 @@ public class Painel extends javax.swing.JFrame {
     private Runnable abastecendoL = new Runnable() {
         public void run() {
 
-            float litros = 0;
-            float quantidade = strToFloat(textQuantidade.getText());
-            float preco = bomba.getPreco(getNumCombustivel());
+            // Define a quantidade que já foi abastecida para zero
+            bomba.setAbastecido(0);
+            
+            // Declara a quantidade que vai ser abastecida
+            double quantidade = Double.parseDouble(textQuantidade.getText());
+            
+            double[] retorno = new double[] {0.0, 0.0, 0.0};
             abastecendo = true;
             
-            if (quantidade <= tanque.getQuantidade()){
-                while (litros < quantidade && abastecendo == true) {
-
-                    if ( litros <= (0.95*quantidade))
-                        litros += 0.0001;
-                    else
-                        litros += 0.00001;
+            // Enquanto tiver que abastecer
+            while (retorno[1] < quantidade && abastecendo == true) {
                 
-                    NumberFormat total = NumberFormat.getInstance();
-                    NumberFormat total_litros = NumberFormat.getInstance();
+                // Chama o método de abastecimento
+                retorno = bomba.abasteceLitros(quantidade, numCombustivel);
                 
-                    textTotal.setText(total.format(litros * preco));
-                    textLitros.setText(total_litros.format(litros));
-                }
-                tanque.abasteceVeiculo(strToFloat(textLitros.getText()));
-            }
-            else{
-                NumberFormat qtdTanque = NumberFormat.getInstance();
-                textBandeira.setText("Apenas " + qtdTanque.format(tanque.getQuantidade()) + "L no tanque");
+                // Declara objetos do NumberFormat
+                NumberFormat total_pagar = NumberFormat.getInstance();
+                NumberFormat litros_abastecido = NumberFormat.getInstance();
+                
+                // Coloca os valores atuais nos textos
+                textTotal.setText(total_pagar.format(retorno[0]));
+                textLitros.setText(litros_abastecido.format(retorno[1]));
+                
+                // Simula o tempo de abastecimento da bomba
                 try {
-                    Thread.sleep(2000);        //delay the code for 2 secs
-                }
-                catch(InterruptedException ex) {  //and handle the exceptions
+                    Thread.sleep(20);
+                } catch(InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
-                textBandeira.setText(bomba.getCombustivel(numCombustivel));
             }
             
+            // Define que acabou de abastecer            
             abastecendo = false;
+            
         }
     };
 
     private Runnable abastecendoRS = new Runnable() {
         public void run() {
 
-            float litros = 0;
-            float quantidade = strToFloat(textQuantidade.getText());
-            float preco = bomba.getPreco(getNumCombustivel());
-            float preco_total = 0;
-            abastecendo = true; 
-            
-            if (preco * quantidade <= tanque.getQuantidade()){
-                while (preco_total < quantidade && abastecendo == true) {
-                
-                    if ( preco_total <= (0.95*quantidade))
-                        litros += 0.0001;
-                    else
-                        litros += 0.00001;
-                
-                    NumberFormat total = NumberFormat.getInstance();
-                    NumberFormat total_litros = NumberFormat.getInstance();
-                
-                    preco_total = litros * preco;
-                
-                    textTotal.setText(total.format(litros * preco));
-                    textLitros.setText(total_litros.format(litros));
-                }
-                tanque.abasteceVeiculo(strToFloat(textLitros.getText()));
-            }
-            else{
-                NumberFormat qtdTanque = NumberFormat.getInstance();
-                textBandeira.setText("Apenas " + qtdTanque.format(tanque.getQuantidade()) + "L no tanque");
-                try {
-                    Thread.sleep(2000);        //delay the code for 2 secs
-                }
-                catch(InterruptedException ex) {  //and handle the exceptions
-                    Thread.currentThread().interrupt();
-                }
-                textBandeira.setText(bomba.getCombustivel(numCombustivel));
-            }
-            abastecendo = false;
+//            float litros = 0;
+//            float quantidade = strToFloat(textQuantidade.getText());
+//            float preco = bomba.getPreco(getNumCombustivel());
+//            float preco_total = 0;
+//            abastecendo = true; 
+//            
+//            if (preco * quantidade <= tanque.getQuantidade()){
+//                while (preco_total < quantidade && abastecendo == true) {
+//                
+//                    if ( preco_total <= (0.95*quantidade))
+//                        litros += 0.0001;
+//                    else
+//                        litros += 0.00001;
+//                
+//                    NumberFormat total = NumberFormat.getInstance();
+//                    NumberFormat total_litros = NumberFormat.getInstance();
+//                
+//                    preco_total = litros * preco;
+//                
+//                    textTotal.setText(total.format(litros * preco));
+//                    textLitros.setText(total_litros.format(litros));
+//                }
+//                tanque.abasteceVeiculo(strToFloat(textLitros.getText()));
+//            }
+//            else{
+//                NumberFormat qtdTanque = NumberFormat.getInstance();
+//                textBandeira.setText("Apenas " + qtdTanque.format(tanque.getQuantidade()) + "L no tanque");
+//                try {
+//                    Thread.sleep(2000);        //delay the code for 2 secs
+//                }
+//                catch(InterruptedException ex) {  //and handle the exceptions
+//                    Thread.currentThread().interrupt();
+//                }
+//                textBandeira.setText(bomba.getCombustivel(numCombustivel));
+//            }
+//            abastecendo = false;
         }
     };
 
@@ -635,14 +635,6 @@ public class Painel extends javax.swing.JFrame {
                 new Painel().setVisible(true);
             }
         });
-    }
-    
-    private float strToFloat(String valor){
-        
-        valor = valor.replace(".", "");
-        valor = valor.replace(",", ".");
-        
-        return Float.parseFloat(valor);
     }
 
     private void btnPress(String valor) {
