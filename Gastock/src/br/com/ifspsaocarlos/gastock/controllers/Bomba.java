@@ -27,9 +27,19 @@ public class Bomba {
             autenticado = false;
         }
     }
+    
+    public boolean verificaTanque(double abastecer, int numCombustivel){
+        // Verifica se possui a quantidade no tanque
+        if (tanque.verificarQuantidade(abastecido)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
     // Métodos
-    public double[] abasteceLitros(double abastecer, int numCombustivel) {
+    public double[] abastece(double abastecido, int numCombustivel) {
         
         System.out.println("Abastecido: " + abastecido);
         System.out.println("Total: " + abastecido * this.getPreco(numCombustivel));
@@ -41,26 +51,27 @@ public class Bomba {
         // Verifica se está abastecendo
         boolean abastecendo = true;
 
-        // Verifica se possui a quantidade no tanque
-        if (tanque.verificarQuantidade(abastecer)) {
+        // Faltando 5% para o final, abastece mais devagar    
+        if (abastecido <= (0.95 * abastecido)) {
+            abastecido += 0.1;
+        }
+        else {
+            abastecido += 0.01;
+        }
 
-            // Faltando 5% para o final, abastece mais devagar
-            if (abastecido <= (0.95 * abastecer)) {
-                abastecido += 0.1;
-            } else {
-                abastecido += 0.01;
-            }
+        // Define a array de retorno
+        retorno[0] = abastecido * this.getPreco(numCombustivel);
+        retorno[1] = abastecido;
 
-            // Define a array de retorno
-            retorno[0] = abastecido * this.getPreco(numCombustivel);
-            retorno[1] = abastecido;
-
-        } else {
+        //} else {
+            
+           // retorno[0] = abastecido * this.getPreco(numCombustivel);
+          //  retorno[1] = abastecido;
 
             // Pega quanto tem no tanque
-            retorno[2] = tanque.getQuantidade();
+         //   retorno[2] = tanque.getQuantidade();
 
-        }
+        //}
 
         // Retorna o resultado
         return retorno;

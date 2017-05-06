@@ -520,6 +520,15 @@ public class Painel extends javax.swing.JFrame {
         abastecendo = false;
     }//GEN-LAST:event_btnPararActionPerformed
 
+    private void atualizaValores(double valorTotal, double litrosAbastecido){
+        // Declara objetos do NumberFormat
+        NumberFormat total_pagar = NumberFormat.getInstance();
+        NumberFormat litros_abastecido = NumberFormat.getInstance();
+
+        // Coloca os valores atuais nos textos
+        textTotal.setText(total_pagar.format(valorTotal));
+        textLitros.setText(litros_abastecido.format(litrosAbastecido));
+    }
     private Runnable abastecendoL = new Runnable() {
         public void run() {
 
@@ -532,25 +541,24 @@ public class Painel extends javax.swing.JFrame {
             double[] retorno = new double[] {0.0, 0.0, 0.0};
             abastecendo = true;
             
+            //Verifica quantidade no tanque
+            if (bomba.verificaTanque(quantidade, numCombustivel)){
+                
             // Enquanto tiver que abastecer
-            while (retorno[1] < quantidade && abastecendo == true) {
-                
-                // Chama o método de abastecimento
-                retorno = bomba.abasteceLitros(quantidade, numCombustivel);
-                
-                // Declara objetos do NumberFormat
-                NumberFormat total_pagar = NumberFormat.getInstance();
-                NumberFormat litros_abastecido = NumberFormat.getInstance();
-                
-                // Coloca os valores atuais nos textos
-                textTotal.setText(total_pagar.format(retorno[0]));
-                textLitros.setText(litros_abastecido.format(retorno[1]));
-                
-                // Simula o tempo de abastecimento da bomba
-                try {
-                    Thread.sleep(20);
-                } catch(InterruptedException ex) {
-                    Thread.currentThread().interrupt();
+                while (retorno[1] < quantidade && abastecendo == true) {
+
+                    // Chama o método de abastecimento
+                    retorno = bomba.abastece(retorno[1], numCombustivel);
+
+                    //Atualiza valores do painel
+                    atualizaValores(retorno[0],retorno[1]);
+                    
+                    // Simula o tempo de abastecimento da bomba
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
                 }
             }
             
@@ -562,43 +570,38 @@ public class Painel extends javax.swing.JFrame {
 
     private Runnable abastecendoRS = new Runnable() {
         public void run() {
+            // Define a quantidade que já foi abastecida para zero
+            bomba.setAbastecido(0);
+            
+            // Declara a quantidade que vai ser abastecida
+            double quantidade = Double.parseDouble(textQuantidade.getText());
+            
+            double[] retorno = new double[] {0.0, 0.0, 0.0};
+            abastecendo = true;
+            
+            //Verifica quantidade no tanque
+            if (bomba.verificaTanque(quantidade/bomba.getPreco(numCombustivel), numCombustivel)){
+                
+            // Enquanto tiver que abastecer
+                while (retorno[0] < quantidade && abastecendo == true) {
 
-//            float litros = 0;
-//            float quantidade = strToFloat(textQuantidade.getText());
-//            float preco = bomba.getPreco(getNumCombustivel());
-//            float preco_total = 0;
-//            abastecendo = true; 
-//            
-//            if (preco * quantidade <= tanque.getQuantidade()){
-//                while (preco_total < quantidade && abastecendo == true) {
-//                
-//                    if ( preco_total <= (0.95*quantidade))
-//                        litros += 0.0001;
-//                    else
-//                        litros += 0.00001;
-//                
-//                    NumberFormat total = NumberFormat.getInstance();
-//                    NumberFormat total_litros = NumberFormat.getInstance();
-//                
-//                    preco_total = litros * preco;
-//                
-//                    textTotal.setText(total.format(litros * preco));
-//                    textLitros.setText(total_litros.format(litros));
-//                }
-//                tanque.abasteceVeiculo(strToFloat(textLitros.getText()));
-//            }
-//            else{
-//                NumberFormat qtdTanque = NumberFormat.getInstance();
-//                textBandeira.setText("Apenas " + qtdTanque.format(tanque.getQuantidade()) + "L no tanque");
-//                try {
-//                    Thread.sleep(2000);        //delay the code for 2 secs
-//                }
-//                catch(InterruptedException ex) {  //and handle the exceptions
-//                    Thread.currentThread().interrupt();
-//                }
-//                textBandeira.setText(bomba.getCombustivel(numCombustivel));
-//            }
-//            abastecendo = false;
+                    // Chama o método de abastecimento
+                    retorno = bomba.abastece(retorno[1], numCombustivel);
+
+                    //Atualiza valores do painel
+                    atualizaValores(retorno[0],retorno[1]);
+
+                    // Simula o tempo de abastecimento da bomba
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            }
+            
+            // Define que acabou de abastecer            
+            abastecendo = false;
         }
     };
 
