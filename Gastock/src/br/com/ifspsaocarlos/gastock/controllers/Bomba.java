@@ -27,23 +27,18 @@ public class Bomba {
             autenticado = false;
         }
     }
-    
-    public boolean verificaTanque(double abastecer, int numCombustivel){
+
+    // Métodos
+    public boolean verificaTanque(double abastecer, int numCombustivel) {
         // Verifica se possui a quantidade no tanque
-        if (tanque.verificarQuantidade(abastecido)){
+        if (tanque.verificarQuantidade(abastecido)) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
-
-    // Métodos
+    
     public double[] abastece(double abastecido, int numCombustivel) {
-        
-        System.out.println("Abastecido: " + abastecido);
-        System.out.println("Total: " + abastecido * this.getPreco(numCombustivel));
-        System.out.println("");
 
         // Cria uma array de retorno com as informações
         double[] retorno = new double[3];
@@ -54,24 +49,13 @@ public class Bomba {
         // Faltando 5% para o final, abastece mais devagar    
         if (abastecido <= (0.95 * abastecido)) {
             abastecido += 0.1;
-        }
-        else {
+        } else {
             abastecido += 0.01;
         }
 
         // Define a array de retorno
         retorno[0] = abastecido * this.getPreco(numCombustivel);
         retorno[1] = abastecido;
-
-        //} else {
-            
-           // retorno[0] = abastecido * this.getPreco(numCombustivel);
-          //  retorno[1] = abastecido;
-
-            // Pega quanto tem no tanque
-         //   retorno[2] = tanque.getQuantidade();
-
-        //}
 
         // Retorna o resultado
         return retorno;

@@ -70,6 +70,7 @@ public class Painel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gastock - Sistema Embarcado");
+        setAlwaysOnTop(true);
         setLocationByPlatform(true);
         setName("formPainel"); // NOI18N
         setResizable(false);
@@ -376,14 +377,14 @@ public class Painel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setNumCombustivel(int num){
+    public void setNumCombustivel(int num) {
         this.numCombustivel = num;
     }
-    
-    public int getNumCombustivel(){
+
+    public int getNumCombustivel() {
         return this.numCombustivel;
     }
-    
+
     private void btnCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCincoActionPerformed
         btnPress("5");
     }//GEN-LAST:event_btnCincoActionPerformed
@@ -420,15 +421,14 @@ public class Painel extends javax.swing.JFrame {
 
             case 3:
                 this.numCombustivel = (Integer.parseInt(textQuantidade.getText()));
-                bomba.setCombustiveis(); 
-                try{
+                bomba.setCombustiveis();
+                try {
                     NumberFormat preco = NumberFormat.getInstance();
                     textBandeira.setText(bomba.getCombustivel(this.numCombustivel));
                     textPreco.setText(preco.format(bomba.getPreco(this.numCombustivel)));
                     textQuantidade.setText("0");
                     entrarStatus = 4;
-                }
-                catch(ArrayIndexOutOfBoundsException e){
+                } catch (ArrayIndexOutOfBoundsException e) {
                     this.numCombustivel = -1;
                     entrarStatus = 3;
                     textBandeira.setText("(1, 2, 3 OU 4)");
@@ -493,22 +493,22 @@ public class Painel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnAbastecerLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerLActionPerformed
-        if (numCombustivel == -1){
+        if (numCombustivel == -1) {
             textBandeira.setText("POR FAVOR ENTRE");
-        }
-        else{
-            if (abastecendo == false)
+        } else {
+            if (abastecendo == false) {
                 new Thread(abastecendoL).start();
+            }
         }
     }//GEN-LAST:event_btnAbastecerLActionPerformed
 
     private void btnAbastecerRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerRSActionPerformed
-        if (numCombustivel == -1){
+        if (numCombustivel == -1) {
             textBandeira.setText("POR FAVOR ENTRE");
-        }
-        else{
-            if (abastecendo == false)
+        } else {
+            if (abastecendo == false) {
                 new Thread(abastecendoRS).start();
+            }
         }
     }//GEN-LAST:event_btnAbastecerRSActionPerformed
 
@@ -520,7 +520,7 @@ public class Painel extends javax.swing.JFrame {
         abastecendo = false;
     }//GEN-LAST:event_btnPararActionPerformed
 
-    private void atualizaValores(double valorTotal, double litrosAbastecido){
+    private void atualizaValores(double valorTotal, double litrosAbastecido) {
         // Declara objetos do NumberFormat
         NumberFormat total_pagar = NumberFormat.getInstance();
         NumberFormat litros_abastecido = NumberFormat.getInstance();
@@ -529,42 +529,43 @@ public class Painel extends javax.swing.JFrame {
         textTotal.setText(total_pagar.format(valorTotal));
         textLitros.setText(litros_abastecido.format(litrosAbastecido));
     }
+
     private Runnable abastecendoL = new Runnable() {
         public void run() {
 
             // Define a quantidade que já foi abastecida para zero
             bomba.setAbastecido(0);
-            
+
             // Declara a quantidade que vai ser abastecida
             double quantidade = Double.parseDouble(textQuantidade.getText());
-            
-            double[] retorno = new double[] {0.0, 0.0, 0.0};
+
+            double[] retorno = new double[]{0.0, 0.0, 0.0};
             abastecendo = true;
-            
+
             //Verifica quantidade no tanque
-            if (bomba.verificaTanque(quantidade, numCombustivel)){
-                
-            // Enquanto tiver que abastecer
+            if (bomba.verificaTanque(quantidade, numCombustivel)) {
+
+                // Enquanto tiver que abastecer
                 while (retorno[1] < quantidade && abastecendo == true) {
 
                     // Chama o método de abastecimento
                     retorno = bomba.abastece(retorno[1], numCombustivel);
 
                     //Atualiza valores do painel
-                    atualizaValores(retorno[0],retorno[1]);
-                    
+                    atualizaValores(retorno[0], retorno[1]);
+
                     // Simula o tempo de abastecimento da bomba
                     try {
-                        Thread.sleep(20);
+                        Thread.sleep(5);
                     } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
                 }
             }
-            
+
             // Define que acabou de abastecer            
             abastecendo = false;
-            
+
         }
     };
 
@@ -572,24 +573,24 @@ public class Painel extends javax.swing.JFrame {
         public void run() {
             // Define a quantidade que já foi abastecida para zero
             bomba.setAbastecido(0);
-            
+
             // Declara a quantidade que vai ser abastecida
             double quantidade = Double.parseDouble(textQuantidade.getText());
-            
-            double[] retorno = new double[] {0.0, 0.0, 0.0};
+
+            double[] retorno = new double[]{0.0, 0.0, 0.0};
             abastecendo = true;
-            
+
             //Verifica quantidade no tanque
-            if (bomba.verificaTanque(quantidade/bomba.getPreco(numCombustivel), numCombustivel)){
-                
-            // Enquanto tiver que abastecer
+            if (bomba.verificaTanque(quantidade / bomba.getPreco(numCombustivel), numCombustivel)) {
+
+                // Enquanto tiver que abastecer
                 while (retorno[0] < quantidade && abastecendo == true) {
 
                     // Chama o método de abastecimento
                     retorno = bomba.abastece(retorno[1], numCombustivel);
 
                     //Atualiza valores do painel
-                    atualizaValores(retorno[0],retorno[1]);
+                    atualizaValores(retorno[0], retorno[1]);
 
                     // Simula o tempo de abastecimento da bomba
                     try {
@@ -599,7 +600,7 @@ public class Painel extends javax.swing.JFrame {
                     }
                 }
             }
-            
+
             // Define que acabou de abastecer            
             abastecendo = false;
         }

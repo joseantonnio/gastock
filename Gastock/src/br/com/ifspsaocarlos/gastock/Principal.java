@@ -5,9 +5,10 @@
  */
 package br.com.ifspsaocarlos.gastock;
 
-import java.util.Scanner;
 import br.com.ifspsaocarlos.gastock.views.desktop.Login;
 import br.com.ifspsaocarlos.gastock.views.embarcado.Painel;
+import br.com.ifspsaocarlos.gastock.models.Mongodb;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,18 +17,17 @@ import br.com.ifspsaocarlos.gastock.views.embarcado.Painel;
 public class Principal {
 
     public static void main(String args[]) {
+        
+        Mongodb banco = new Mongodb();
+        
 
         // Declara verificador de abertura
         boolean abriu = false;
 
-        // Declara variavel de leitura
-        Scanner in = new Scanner(System.in);
-
         while (!abriu) {
 
-            System.out.println("Qual solução deseja executar? (embarcado|desktop)");
-            String opcao = in.next();
-
+            String opcao = JOptionPane.showInputDialog(null, "Selecione o sistema que deseja utilizar: \n(1) embarcado \n(2) desktop\n", "Escolha uma opção", JOptionPane.QUESTION_MESSAGE);
+            
             switch (opcao) {
                 case "embarcado":
                 case "1":
@@ -35,6 +35,7 @@ public class Principal {
                     Painel embarcado = new Painel();
                     abriu = true;
                     embarcado.setVisible(true);
+                    embarcado.toFront();
                     break;
 
                 case "desktop":
@@ -43,10 +44,11 @@ public class Principal {
                     Login desktop = new Login();
                     abriu = true;
                     desktop.setVisible(true);
+                    desktop.toFront();
                     break;
 
                 default:
-                    System.out.println("Escolha uma das opções: embarcado (1) ou desktop (2).");
+                    JOptionPane.showMessageDialog(null, "Escolha uma das opções: (1) embarcado ou (2) desktop!", "Escolha uma opção", JOptionPane.ERROR_MESSAGE);
                     break;
             }
         }
