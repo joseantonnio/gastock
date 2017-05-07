@@ -25,7 +25,7 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
         init();
 
         setModal(true); // sempre ira travar a tela anterior
-        setLocationRelativeTo(parent);// a tela irá abrir no centro
+        setLocationRelativeTo(null);// a tela irá abrir no centro
     }
 
     private void init() {
@@ -34,15 +34,14 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
         tabelaCombustivel.setModel(tableModel);
     }
 
-    private Combustivel getCombustivelSelecionado() throws Exception {
+    public Combustivel getCombustivelSelecionado() throws Exception {
 
-        int linha = tabelaCombustivel.getSelectedRow();
-
-        if (linha == -1) {
-
-            throw new Exception("Selecione um item ");
+        int row = tabelaCombustivel.getSelectedRow();
+        if (row == -1) {
+            throw new Exception("Por favor, selecione uma linha da tabela.");
         }
-        return null;
+
+        return tableModel.get(row);
     }
 
 
@@ -141,14 +140,19 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
     private void editarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBtnActionPerformed
 
         try {
-            
+
             Combustivel c = getCombustivelSelecionado();
 
             CombustivelJDialog dialog = new CombustivelJDialog(this);
             dialog.setCombustivel(c);
             dialog.setVisible(true);
-            dialog.dispose();
 
+            if (dialog.isSalvou()) {
+                tableModel.modificar(tabelaCombustivel.getSelectedRow(),
+                        dialog.getCombustivel());
+            }
+
+            dialog.dispose();
             dialog = null;
 
         } catch (Exception err) {
@@ -161,8 +165,12 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
 
         CombustivelJDialog dialog = new CombustivelJDialog(this);
         dialog.setVisible(true);
-        dialog.dispose();
 
+        if (dialog.isSalvou()) {
+            tableModel.adicionar(dialog.getCombustivel());
+        }
+
+        dialog.dispose();
         dialog = null;
     }//GEN-LAST:event_adcionarBtnActionPerformed
 
@@ -185,16 +193,17 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
         try {
             Combustivel c = getCombustivelSelecionado();
 
-            int resposta = JOptionPane.showConfirmDialog(this, "Deseja deletar o item");
+            String txt = "Você deseja deletar o produto " + c.getNome() + " ?";
+            int resultado = JOptionPane.showConfirmDialog(this, txt);
 
-            if (resposta == JOptionPane.YES_OPTION) {
+            if (resultado == JOptionPane.YES_OPTION) {
 
                 Ccombustivel.getInstancia().excluir(c.getCombustivelId());
-                JOptionPane.showMessageDialog(this, "Combustivel deletado com sucesso");
+                tableModel.excluir(tabelaCombustivel.getSelectedRow());
             } else {
-                JOptionPane.showMessageDialog(this, "Ação cancelada");
+                throw new Exception("A ação foi cancelada pelo usuário.");
             }
-
+            JOptionPane.showMessageDialog(this, "O produto foi excluido com sucesso.");
         } catch (Exception err) {
             JOptionPane.showMessageDialog(this, err);
         }

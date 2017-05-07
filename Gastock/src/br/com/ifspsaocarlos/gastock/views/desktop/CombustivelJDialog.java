@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 public class CombustivelJDialog extends javax.swing.JDialog {
 
     private Combustivel combustivel;
+    private boolean salvou;
 
     /**
      * Creates new form CombustivelJDialog
@@ -29,7 +30,7 @@ public class CombustivelJDialog extends javax.swing.JDialog {
     }
 
     private void init() {
-
+        salvou = false;
         setCombustivel(new Combustivel());
     }
 
@@ -44,20 +45,26 @@ public class CombustivelJDialog extends javax.swing.JDialog {
 
         nomeTxt.setText(combustivel.getNome());
         precoTxt.setText(combustivel.getPreco() + "");// Transformando o valor em string
+
+        salvou = false;
     }
 
     public Combustivel getCombustivel() {
 
         combustivel.setNome(nomeTxt.getText());
 
-        //convertendo texto em int
-        // String combustivelId = idTxt.getText();
-        //combustivel.setCombustivelId(Integer.parseInt(combustivelId));
-        //convertendo texto em double
-        String preco = precoTxt.getText();
-        combustivel.setPreco(Double.parseDouble(preco));
+        double preco = Double.parseDouble(precoTxt.getText());
+        combustivel.setPreco(preco);
 
         return combustivel;
+    }
+
+    public boolean isSalvou() {
+        return salvou;
+    }
+
+    public void setSalvou(boolean salvou) {
+        this.salvou = salvou;
     }
 
 
@@ -138,29 +145,32 @@ public class CombustivelJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
-
+        salvou = false;
         setVisible(false);
     }//GEN-LAST:event_cancelarBtnActionPerformed
 
     private void salvarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBtnActionPerformed
 
         try {
+
+            salvou = false;
+
             Combustivel c = getCombustivel();
 
             if (c.getCombustivelId() == 0) {
-                Ccombustivel.getInstancia().adcionar(c); // salva no bd
-                System.out.println("Adicionar");
-                
-            }else {
+                Ccombustivel.getInstancia().adcionar(c); // salva no bd    
+            } else {
                 Ccombustivel.getInstancia().modificar(c); // modificar 
-                System.out.println("Modificar");
+                
             }
-
-            JOptionPane.showMessageDialog(this, "Salvou com sucesso!");
+            
             setVisible(false);
+            JOptionPane.showMessageDialog(this, "O produto foi salvo com sucesso!");
             
+            salvou = true;
+
         } catch (Exception err) {
-            
+
             JOptionPane.showMessageDialog(this, err);
         }
     }//GEN-LAST:event_salvarBtnActionPerformed
