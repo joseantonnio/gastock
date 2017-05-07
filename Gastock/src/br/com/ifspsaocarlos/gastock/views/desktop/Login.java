@@ -5,6 +5,7 @@
  */
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
+import br.com.ifspsaocarlos.gastock.controllers.Combustivel;
 import br.com.ifspsaocarlos.gastock.controllers.Frentista;
 import br.com.ifspsaocarlos.gastock.controllers.Gerente;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
+         
     }
 
     /**
@@ -165,7 +167,31 @@ public class Login extends javax.swing.JFrame {
         
         for (Gerente ger : g){
             if (textLogin.getText().equals(ger.getNome()) && textSenha.getText().equals(ger.getSenha())) {
+           
                 JOptionPane.showMessageDialog(null, "Bem vindo");
+                
+                // Inicio teste
+                
+//                Combustivel c = new Combustivel();
+//                c.setCombustivelId(1);    
+//                c.setNome("Gasolina teste");
+//                c.setPreco(3.85);
+//                        
+//                CombustivelJDialog dialog = new CombustivelJDialog(null);
+//                dialog.setCombustivel(c); 
+//                dialog.setVisible(true);
+//                dialog.dispose();
+//                
+//                
+//               
+//                Combustivel c1 = dialog.getCombustivel();
+//                System.out.println("Nome:" +c1.getNome() );
+//                //System.out.println("Id:"+combustivel1.getCombustivelId() );
+//                System.out.println("Preço:" +c1.getPreco() );
+//                
+//                dialog = null;
+//                
+                //fim teste
                 user = ger;
             }
         }

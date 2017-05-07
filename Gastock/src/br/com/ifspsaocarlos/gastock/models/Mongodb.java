@@ -5,8 +5,13 @@
  */
 package br.com.ifspsaocarlos.gastock.models;
 
+
+
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 /**
  *
@@ -22,12 +27,15 @@ public class Mongodb {
         try {
 
             mongoClient = new MongoClient("52.67.101.151", 27017);
-            db = mongoClient.getDB("gastock");
+            MongoDatabase database = mongoClient.getDatabase("gastock");
+            //db = mongoClient.getDB("gastock");
+            
+            //MongoCollection<Document> collection = database.getCollection("combustivel");
 
         } catch (Exception e) {
             System.out.println("Ocorreu um erro na conexão com o banco de dados");
         }
-
+     
     }
 
 }
