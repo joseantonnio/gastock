@@ -56,6 +56,7 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
         tabelaCombustivel = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("COMBUSTIVEL");
 
         adcionarBtn.setText("Adicionar");
         adcionarBtn.addActionListener(new java.awt.event.ActionListener() {

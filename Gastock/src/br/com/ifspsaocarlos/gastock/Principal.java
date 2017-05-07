@@ -23,7 +23,7 @@ public class Principal {
 
         // Declara verificador de abertura
         boolean abriu = false;
-
+        
         while (!abriu) {
 
             String opcao = JOptionPane.showInputDialog(null, "Selecione o sistema que deseja utilizar: \n(1) embarcado \n(2) desktop\n", "Escolha uma opção", JOptionPane.QUESTION_MESSAGE);
