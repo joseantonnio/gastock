@@ -26,8 +26,8 @@ public class Mongodb {
 
             mongoClient = new MongoClient("52.67.101.151", 27017);
             MongoDatabase database = mongoClient.getDatabase("gastock");
-            //db = mongoClient.getDB("gastock");
             
+            //db = mongoClient.getDB("gastock");
             //MongoCollection<Document> collection = database.getCollection("combustivel");
 
         } catch (Exception e) {
