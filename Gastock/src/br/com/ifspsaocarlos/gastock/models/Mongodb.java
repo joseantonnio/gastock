@@ -5,8 +5,6 @@
  */
 package br.com.ifspsaocarlos.gastock.models;
 
-
-
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
