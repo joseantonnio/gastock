@@ -8,6 +8,7 @@ package br.com.ifspsaocarlos.gastock;
 import java.util.Scanner;
 import br.com.ifspsaocarlos.gastock.views.desktop.Login;
 import br.com.ifspsaocarlos.gastock.views.embarcado.Painel;
+import br.com.ifspsaocarlos.gastock.bemVindo.bemVindo;
 
 /**
  *
@@ -17,6 +18,11 @@ public class Principal {
 
     public static void main(String args[]) {
 
+        //Abertura por GUI
+        bemVindo tela = new bemVindo();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        /*
         // Declara verificador de abertura
         boolean abriu = false;
 
@@ -49,7 +55,7 @@ public class Principal {
                     System.out.println("Escolha uma das opções: embarcado (1) ou desktop (2).");
                     break;
             }
-        }
+        }*/
     }
 
 }

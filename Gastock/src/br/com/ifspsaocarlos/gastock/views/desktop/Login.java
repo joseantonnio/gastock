@@ -7,8 +7,15 @@ package br.com.ifspsaocarlos.gastock.views.desktop;
 
 import br.com.ifspsaocarlos.gastock.controllers.Frentista;
 import br.com.ifspsaocarlos.gastock.controllers.Gerente;
+import com.sun.glass.events.KeyEvent;
+import java.awt.EventQueue;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.swing.JOptionPane;
-
+import br.com.ifspsaocarlos.gastock.bemVindo.bemVindo;
 /**
  *
  * @author Alex
@@ -18,12 +25,13 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form sistema
      */
-    
+     
     
     public Login() {
         initComponents();
+       
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,29 +41,33 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        labelDia = new javax.swing.JLabel();
-        labelData = new javax.swing.JLabel();
-        labelMensagem = new javax.swing.JLabel();
-        labelHora = new javax.swing.JLabel();
+        labelHora = new ClockLabel();
         labelLogin = new javax.swing.JLabel();
         textLogin = new javax.swing.JTextField();
         labelSenha = new javax.swing.JLabel();
         textSenha = new javax.swing.JPasswordField();
         imagemFundo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Autenticação - Gastock");
         setAlwaysOnTop(true);
-        setBackground(new java.awt.Color(49, 49, 49));
-        setMaximumSize(new java.awt.Dimension(500, 400));
-        setMinimumSize(new java.awt.Dimension(500, 400));
+        setBackground(new java.awt.Color(204, 204, 204));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(480, 390));
+        setMinimumSize(new java.awt.Dimension(480, 390));
+        setUndecorated(true);
+        setPreferredSize(null);
         setResizable(false);
-        setSize(new java.awt.Dimension(500, 400));
+        setSize(new java.awt.Dimension(480, 390));
         setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(null);
+
+        jLabel1.setText("Unidade São Carlos");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(250, 110, 230, 16);
 
         btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnEntrar.setText("Entrar");
@@ -65,7 +77,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEntrar);
-        btnEntrar.setBounds(30, 340, 120, 50);
+        btnEntrar.setBounds(270, 320, 120, 50);
 
         btnSair.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSair.setText("Sair");
@@ -75,49 +87,21 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSair);
-        btnSair.setBounds(350, 340, 120, 50);
-
-        jLabel1.setText("Unidade: São Carlos");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 120, 230, 15);
-
-        labelDia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        labelDia.setForeground(new java.awt.Color(255, 0, 0));
-        labelDia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelDia.setText("Segunda-Feira");
-        labelDia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(labelDia);
-        labelDia.setBounds(340, 300, 140, 15);
-
-        labelData.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        labelData.setForeground(new java.awt.Color(255, 0, 0));
-        labelData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelData.setText("04/05/2017");
-        labelData.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(labelData);
-        labelData.setBounds(340, 280, 140, 20);
-
-        labelMensagem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        labelMensagem.setForeground(new java.awt.Color(255, 0, 0));
-        labelMensagem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelMensagem.setText("Bom dia!");
-        labelMensagem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(labelMensagem);
-        labelMensagem.setBounds(340, 210, 140, 20);
+        btnSair.setBounds(100, 320, 120, 50);
 
         labelHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelHora.setForeground(new java.awt.Color(255, 0, 0));
         labelHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelHora.setText("22:56:14");
+        labelHora.setText(getDateTime());
         labelHora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(labelHora);
-        labelHora.setBounds(340, 230, 140, 20);
+        labelHora.setBounds(150, 180, 340, 20);
 
         labelLogin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelLogin.setForeground(new java.awt.Color(255, 255, 255));
         labelLogin.setText("Login");
         getContentPane().add(labelLogin);
-        labelLogin.setBounds(30, 190, 60, 22);
+        labelLogin.setBounds(40, 220, 60, 22);
 
         textLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,25 +109,35 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(textLogin);
-        textLogin.setBounds(30, 210, 300, 30);
+        textLogin.setBounds(40, 250, 180, 30);
 
         labelSenha.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelSenha.setForeground(new java.awt.Color(255, 255, 255));
         labelSenha.setText("Senha");
         getContentPane().add(labelSenha);
-        labelSenha.setBounds(30, 260, 100, 22);
+        labelSenha.setBounds(270, 220, 100, 22);
 
         textSenha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textSenhaFocusGained(evt);
             }
         });
+        textSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textSenhaKeyPressed(evt);
+            }
+        });
         getContentPane().add(textSenha);
-        textSenha.setBounds(30, 280, 300, 30);
+        textSenha.setBounds(270, 250, 180, 30);
 
+        imagemFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/fundo.png"))); // NOI18N
+        imagemFundo.setAlignmentY(0.0F);
+        imagemFundo.setMaximumSize(new java.awt.Dimension(480, 390));
+        imagemFundo.setMinimumSize(new java.awt.Dimension(480, 390));
+        imagemFundo.setPreferredSize(new java.awt.Dimension(480, 390));
         getContentPane().add(imagemFundo);
-        imagemFundo.setBounds(0, 0, 500, 400);
+        imagemFundo.setBounds(0, 0, 480, 390);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -165,12 +159,19 @@ public class Login extends javax.swing.JFrame {
         
         for (Gerente ger : g){
             if (textLogin.getText().equals(ger.getNome()) && textSenha.getText().equals(ger.getSenha())) {
+                this.dispose();
                 JOptionPane.showMessageDialog(null, "Bem vindo");
                 user = ger;
             }
         }
-        if (user == null)
+        if (user == null){
+            this.setVisible(false);
              JOptionPane.showMessageDialog(null, "Acesso Negado");
+             this.setVisible(true);
+        }
+            
+        
+        
     }
     private void textLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textLoginActionPerformed
         // TODO add your handling code here:
@@ -181,8 +182,17 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_textSenhaFocusGained
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        System.exit(0);
+        this.dispose();
+        bemVindo tela = new bemVindo();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void textSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSenhaKeyPressed
+       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+           btnEntrar.doClick();
+       }
+    }//GEN-LAST:event_textSenhaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -211,9 +221,10 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Login().setVisible(true);
             }
@@ -225,13 +236,14 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel imagemFundo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel labelData;
-    private javax.swing.JLabel labelDia;
     private javax.swing.JLabel labelHora;
     private javax.swing.JLabel labelLogin;
-    private javax.swing.JLabel labelMensagem;
     private javax.swing.JLabel labelSenha;
     private javax.swing.JTextField textLogin;
     private javax.swing.JPasswordField textSenha;
     // End of variables declaration//GEN-END:variables
+
+    private String getDateTime() {
+         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    }
 }
