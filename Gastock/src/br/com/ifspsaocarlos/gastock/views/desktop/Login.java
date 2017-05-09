@@ -64,7 +64,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Unidade São Carlos");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 110, 230, 16);
+        jLabel1.setBounds(250, 110, 230, 15);
 
         btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnEntrar.setText("Entrar");
@@ -74,7 +74,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEntrar);
-        btnEntrar.setBounds(270, 320, 120, 50);
+        btnEntrar.setBounds(100, 310, 120, 50);
 
         btnSair.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSair.setText("Sair");
@@ -84,7 +84,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSair);
-        btnSair.setBounds(100, 320, 120, 50);
+        btnSair.setBounds(270, 310, 120, 50);
 
         labelHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelHora.setForeground(new java.awt.Color(255, 0, 0));
@@ -92,7 +92,7 @@ public class Login extends javax.swing.JFrame {
         labelHora.setText(getDateTime());
         labelHora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(labelHora);
-        labelHora.setBounds(70, 170, 340, 20);
+        labelHora.setBounds(10, 170, 460, 20);
 
         labelLogin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -157,7 +157,7 @@ public class Login extends javax.swing.JFrame {
         for (Gerente ger : g){
             if (textLogin.getText().equals(ger.getNome()) && textSenha.getText().equals(ger.getSenha())) {
                 this.dispose();
-                JOptionPane.showMessageDialog(null, "Bem vindo");
+                //JOptionPane.showMessageDialog(null, "Bem vindo");
                 user = ger;
                 /*Create and display form*/
             java.awt.EventQueue.invokeLater(new Runnable() {

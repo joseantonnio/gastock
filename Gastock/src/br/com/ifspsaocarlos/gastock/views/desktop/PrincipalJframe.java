@@ -1,6 +1,7 @@
 
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
+import br.com.ifspsaocarlos.gastock.bemVindo.bemVindo;
 import javax.swing.JFrame;
 
 /**
@@ -25,9 +26,10 @@ public class PrincipalJframe extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         cadastroMenu = new javax.swing.JMenu();
         combustivelMenu = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gastock - Modulo de Gerenciamento");
 
         cadastroMenu.setText("Cadastro");
 
@@ -42,8 +44,14 @@ public class PrincipalJframe extends javax.swing.JFrame {
 
         jMenuBar1.add(cadastroMenu);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        menuSair.setText("Sair");
+        menuSair.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        menuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuSairMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -55,7 +63,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
+            .addGap(0, 378, Short.MAX_VALUE)
         );
 
         pack();
@@ -70,11 +78,18 @@ public class PrincipalJframe extends javax.swing.JFrame {
         dialog = null;
     }//GEN-LAST:event_combustivelMenuActionPerformed
 
+    private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
+        this.setVisible(false);        
+        bemVindo tela= new bemVindo();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+    }//GEN-LAST:event_menuSairMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu cadastroMenu;
     private javax.swing.JMenuItem combustivelMenu;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu menuSair;
     // End of variables declaration//GEN-END:variables
 }

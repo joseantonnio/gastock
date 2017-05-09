@@ -51,12 +51,11 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
         adcionarBtn = new javax.swing.JButton();
         editarBtn = new javax.swing.JButton();
         excluirBtn = new javax.swing.JButton();
-        listarBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCombustivel = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("COMBUSTIVEL");
+        setTitle("Gerenciar Combustível");
 
         adcionarBtn.setText("Adicionar");
         adcionarBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -76,13 +75,6 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
         excluirBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 excluirBtnActionPerformed(evt);
-            }
-        });
-
-        listarBtn.setText("Listar");
-        listarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listarBtnActionPerformed(evt);
             }
         });
 
@@ -106,19 +98,15 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(adcionarBtn)
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addComponent(editarBtn)
                         .addGap(18, 18, 18)
                         .addComponent(excluirBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(listarBtn)
-                        .addGap(33, 33, 33))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,8 +115,7 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(adcionarBtn)
                     .addComponent(editarBtn)
-                    .addComponent(excluirBtn)
-                    .addComponent(listarBtn))
+                    .addComponent(excluirBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                 .addContainerGap())
@@ -174,20 +161,6 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
         dialog.dispose();
         dialog = null;
     }//GEN-LAST:event_adcionarBtnActionPerformed
-
-    private void listarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarBtnActionPerformed
-
-        try {
-
-            List<Combustivel> lista = Ccombustivel.getInstancia().listar();
-
-            tableModel.setLista(lista);
-
-        } catch (Exception err) {
-            JOptionPane.showMessageDialog(this, err);
-        }
-
-    }//GEN-LAST:event_listarBtnActionPerformed
 
     private void excluirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirBtnActionPerformed
 
@@ -253,13 +226,12 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adcionarBtn;
     private javax.swing.JButton editarBtn;
     private javax.swing.JButton excluirBtn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton listarBtn;
     private javax.swing.JTable tabelaCombustivel;
     // End of variables declaration//GEN-END:variables
 }
