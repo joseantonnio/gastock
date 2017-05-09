@@ -37,6 +37,7 @@ public class BemVindo extends javax.swing.JFrame {
         labelHora = new ClockLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gastock 0.1");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(204, 204, 255));
 
