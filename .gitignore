@@ -5,7 +5,7 @@
 .mtj.tmp/
 
 # Arquivos compilados #
-*.jar
+#*.jar
 *.war
 *.ear
 

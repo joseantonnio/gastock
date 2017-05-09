@@ -646,7 +646,7 @@ public class Painel extends javax.swing.JFrame {
             if (bomba.verificaTanque(quantidade, numCombustivel)) {
 
                 // Enquanto tiver que abastecer
-                while (retorno[1] < quantidade && abastecendo == true) {
+                while (retorno[1] <= quantidade && abastecendo == true) {
 
                     // Chama o método de abastecimento
                     retorno = bomba.abastece(retorno[1], numCombustivel);
@@ -656,7 +656,7 @@ public class Painel extends javax.swing.JFrame {
 
                     // Simula o tempo de abastecimento da bomba
                     try {
-                        Thread.sleep(5);
+                        Thread.sleep(10);
                     } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
@@ -685,7 +685,7 @@ public class Painel extends javax.swing.JFrame {
             if (bomba.verificaTanque(quantidade / bomba.getPreco(numCombustivel), numCombustivel)) {
 
                 // Enquanto tiver que abastecer
-                while (retorno[0] < quantidade && abastecendo == true) {
+                while (retorno[0] <= quantidade && abastecendo == true) {
 
                     // Chama o método de abastecimento
                     retorno = bomba.abastece(retorno[1], numCombustivel);
@@ -695,7 +695,7 @@ public class Painel extends javax.swing.JFrame {
 
                     // Simula o tempo de abastecimento da bomba
                     try {
-                        Thread.sleep(20);
+                        Thread.sleep(10);
                     } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
