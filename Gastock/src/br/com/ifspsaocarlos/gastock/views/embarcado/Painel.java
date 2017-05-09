@@ -6,11 +6,11 @@
 package br.com.ifspsaocarlos.gastock.views.embarcado;
 
 import br.com.ifspsaocarlos.gastock.views.desktop.Login;
-import br.com.ifspsaocarlos.gastock.controllers.Bomba;
-import br.com.ifspsaocarlos.gastock.controllers.Tanque;
+import br.com.ifspsaocarlos.gastock.library.Bomba;
+import br.com.ifspsaocarlos.gastock.library.Tanque;
 import java.awt.Font;
 import java.text.NumberFormat;
-import br.com.ifspsaocarlos.gastock.bemVindo.bemVindo;
+import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
 import java.util.Arrays;
 
 /**
@@ -610,7 +610,7 @@ public class Painel extends javax.swing.JFrame {
     }
     
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        bemVindo tela= new bemVindo();
+        BemVindo tela= new BemVindo();
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowClosed

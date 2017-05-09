@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.ifspsaocarlos.gastock.models;
+package br.com.ifspsaocarlos.gastock.library;
 
 import com.mongodb.DB;
 import com.mongodb.MongoClient;

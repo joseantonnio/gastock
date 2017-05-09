@@ -5,7 +5,7 @@
  */
 package br.com.ifspsaocarlos.gastock.models;
 
-import br.com.ifspsaocarlos.gastock.controllers.Combustivel;
+import br.com.ifspsaocarlos.gastock.library.Combustivel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +16,12 @@ import java.util.Map;
  *
  * @author Alex
  */
-public class RamCombustivel implements Combustiveldb {
+public class MCombustivel implements ICombustivel {
 
     private Map<Integer, Combustivel> mapa;
     private int contador;
 
-    public RamCombustivel() {
+    public MCombustivel() {
         mapa = new HashMap<>();
         contador = 1;
     }

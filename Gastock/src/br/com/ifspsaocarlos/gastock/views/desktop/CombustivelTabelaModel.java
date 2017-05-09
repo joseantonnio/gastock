@@ -1,6 +1,6 @@
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
-import br.com.ifspsaocarlos.gastock.controllers.Combustivel;
+import br.com.ifspsaocarlos.gastock.library.Combustivel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;

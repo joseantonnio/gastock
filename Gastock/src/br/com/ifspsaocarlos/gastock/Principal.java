@@ -8,7 +8,7 @@ package br.com.ifspsaocarlos.gastock;
 import java.util.Scanner;
 import br.com.ifspsaocarlos.gastock.views.desktop.Login;
 import br.com.ifspsaocarlos.gastock.views.embarcado.Painel;
-import br.com.ifspsaocarlos.gastock.bemVindo.bemVindo;
+import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
 
 /**
  *
@@ -19,7 +19,7 @@ public class Principal {
     public static void main(String args[]) {
 
         //Abertura por GUI
-        bemVindo tela = new bemVindo();
+        BemVindo tela = new BemVindo();
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
         /*

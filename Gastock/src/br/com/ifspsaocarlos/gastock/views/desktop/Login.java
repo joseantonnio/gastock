@@ -5,13 +5,13 @@
  */
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
-import br.com.ifspsaocarlos.gastock.controllers.Frentista;
-import br.com.ifspsaocarlos.gastock.controllers.Gerente;
+import br.com.ifspsaocarlos.gastock.library.Frentista;
+import br.com.ifspsaocarlos.gastock.library.Gerente;
 import com.sun.glass.events.KeyEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
-import br.com.ifspsaocarlos.gastock.bemVindo.bemVindo;
+import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
 
 /**
  *
@@ -188,7 +188,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
-        bemVindo tela = new bemVindo();
+        BemVindo tela = new BemVindo();
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnSairActionPerformed

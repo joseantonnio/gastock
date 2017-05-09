@@ -5,13 +5,13 @@
  */
 package br.com.ifspsaocarlos.gastock.models;
 
-import br.com.ifspsaocarlos.gastock.controllers.Combustivel;
+import br.com.ifspsaocarlos.gastock.library.Combustivel;
 import java.util.List;
 /**
  *
  * @author Alex
  */
-public interface Combustiveldb {
+public interface ICombustivel {
     
     public int adcionar (Combustivel combustivel) throws Exception; //
     public void modificar (Combustivel combustivel) throws Exception;

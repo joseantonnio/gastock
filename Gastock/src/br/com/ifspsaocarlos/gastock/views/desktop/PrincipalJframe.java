@@ -1,7 +1,7 @@
 
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
-import br.com.ifspsaocarlos.gastock.bemVindo.bemVindo;
+import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
 import javax.swing.JFrame;
 
 /**
@@ -134,7 +134,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
 
     private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
         this.setVisible(false);        
-        bemVindo tela= new bemVindo();
+        BemVindo tela= new BemVindo();
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
     }//GEN-LAST:event_menuSairMouseClicked

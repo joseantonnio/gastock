@@ -5,9 +5,10 @@
  */
 package br.com.ifspsaocarlos.gastock.controllers;
 
-import br.com.ifspsaocarlos.gastock.models.Combustiveldb;
-import br.com.ifspsaocarlos.gastock.models.RamCombustivel;
+import br.com.ifspsaocarlos.gastock.library.Combustivel;
+import br.com.ifspsaocarlos.gastock.models.MCombustivel;
 import java.util.List;
+import br.com.ifspsaocarlos.gastock.models.ICombustivel;
 
 /**
  *
@@ -16,11 +17,11 @@ import java.util.List;
 public class Ccombustivel {
     
     private static Ccombustivel instancia;
-    private Combustiveldb dao;
+    private ICombustivel dao;
 
     private Ccombustivel() {
 
-        dao = new RamCombustivel();
+        dao = new MCombustivel();
 
     }
 

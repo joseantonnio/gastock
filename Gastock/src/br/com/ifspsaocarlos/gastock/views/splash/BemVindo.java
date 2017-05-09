@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.ifspsaocarlos.gastock.bemVindo;
+package br.com.ifspsaocarlos.gastock.views.splash;
 
 import br.com.ifspsaocarlos.gastock.views.desktop.Login;
 import br.com.ifspsaocarlos.gastock.views.embarcado.Painel;
@@ -12,12 +12,12 @@ import br.com.ifspsaocarlos.gastock.views.desktop.ClockLabel;
  *
  * @author Dias
  */
-public class bemVindo extends javax.swing.JFrame {
+public class BemVindo extends javax.swing.JFrame {
 
     /**
      * Creates new form bemVindo
      */
-    public bemVindo() {
+    public BemVindo() {
         initComponents();
     }
 
@@ -140,20 +140,21 @@ public class bemVindo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(bemVindo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BemVindo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(bemVindo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BemVindo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(bemVindo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BemVindo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(bemVindo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BemVindo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new bemVindo().setVisible(true);
+                new BemVindo().setVisible(true);
             }
         });
     }
