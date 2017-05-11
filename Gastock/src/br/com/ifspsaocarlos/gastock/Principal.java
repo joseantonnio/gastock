@@ -12,6 +12,10 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.SplashScreen;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -20,10 +24,14 @@ import java.awt.geom.Rectangle2D;
 public class Principal {
 
     static SplashScreen mySplash;
+    static BufferedImage imagem;
     static Graphics2D splashGraphics;
     static Rectangle2D.Double splashTextArea;
     static Rectangle2D.Double splashProgressArea;
     static Font font;
+    static Color branco = new Color(255, 255, 255);
+    static Color azul = new Color(0, 119, 192);
+    static Color amarelo = new Color(255, 213, 27);
 
     public static void main(String args[]) {
 
@@ -44,6 +52,10 @@ public class Principal {
     private static void splashInit() {
 
         mySplash = SplashScreen.getSplashScreen();
+        try {
+            imagem = imagem = ImageIO.read(new File("src/br/com/ifspsaocarlos/gastock/images/gordinho-splash.png"));
+        } catch (IOException e) {
+        }
 
         if (mySplash != null) {
 
@@ -51,14 +63,14 @@ public class Principal {
             int height = ssDim.height;
             int width = ssDim.width;
 
-            splashTextArea = new Rectangle2D.Double(15., height * 0.88, width * .45, 32.);
+            splashTextArea = new Rectangle2D.Double(15, 16, 340, 19);
             splashProgressArea = new Rectangle2D.Double(width * .55, height * .92, width * .4, 12);
 
             splashGraphics = mySplash.createGraphics();
-            font = new Font("Dialog", Font.PLAIN, 14);
+            font = new Font("default", Font.BOLD, 14);
             splashGraphics.setFont(font);
 
-            splashText("Starting");
+            splashText("Iniciando...");
             splashProgress(0);
         }
     }
@@ -67,11 +79,9 @@ public class Principal {
 
         if (mySplash != null && mySplash.isVisible()) {
 
-            splashGraphics.setPaint(Color.LIGHT_GRAY);
-            splashGraphics.fill(splashTextArea);
-
-            splashGraphics.setPaint(Color.BLACK);
-            splashGraphics.drawString(str, (int) (splashTextArea.getX() + 10), (int) (splashTextArea.getY() + 15));
+            splashGraphics.drawImage(imagem.getSubimage(0, 0, 450, 50), 0, 0, null);
+            splashGraphics.setPaint(amarelo);
+            splashGraphics.drawString(str, (int) (splashTextArea.getX()), 30);
 
             mySplash.update();
         }
@@ -84,7 +94,7 @@ public class Principal {
             splashGraphics.setPaint(Color.LIGHT_GRAY);
             splashGraphics.fill(splashProgressArea);
 
-            splashGraphics.setPaint(Color.BLUE);
+            splashGraphics.setPaint(azul);
             splashGraphics.draw(splashProgressArea);
 
             int x = (int) splashProgressArea.getMinX();
@@ -95,7 +105,7 @@ public class Principal {
             int doneWidth = Math.round(pct * wid / 100.f);
             doneWidth = Math.max(0, Math.min(doneWidth, wid - 1));
 
-            splashGraphics.setPaint(Color.BLUE);
+            splashGraphics.setPaint(azul);
             splashGraphics.fillRect(x, y + 1, doneWidth, hgt - 1);
 
             mySplash.update();
@@ -104,15 +114,30 @@ public class Principal {
 
     private static void appInit() {
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 0; i <= 5; i++) {
 
-            int pctDone = i * 10;
-            splashText("Carregando #" + i);
+            int pctDone = i * 20;
+            switch (i){
+                case 0:
+                    splashText("Inicializando componentes básicos.");
+                    break;
+                case 1:
+                    splashText("Verificando conexão com AWS.");
+                    break;
+                case 2:
+                    splashText("Testando integridade do banco de dados.");
+                    break;
+                case 3:
+                    splashText("Verificando chave do produto.");
+                    break;
+                case 4:
+                    splashText("Iniciando sistema...");
+            }
             splashProgress(pctDone);
 
             try {
 
-                Thread.sleep((long) (Math.random() * 1000));
+                Thread.sleep((long) (Math.random() * 2000));
             } catch (InterruptedException ex) {
 
                 // ignore it
