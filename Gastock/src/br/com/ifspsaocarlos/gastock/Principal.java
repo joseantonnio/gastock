@@ -29,6 +29,7 @@ public class Principal {
     static Rectangle2D.Double splashTextArea;
     static Rectangle2D.Double splashProgressArea;
     static Font font;
+    static Color transparente = new Color(255, 255, 255, 0);
     static Color branco = new Color(255, 255, 255);
     static Color azul = new Color(0, 119, 192);
     static Color amarelo = new Color(255, 213, 27);
@@ -52,6 +53,7 @@ public class Principal {
     private static void splashInit() {
 
         mySplash = SplashScreen.getSplashScreen();
+        
         try {
             imagem = imagem = ImageIO.read(new File("src/br/com/ifspsaocarlos/gastock/images/gordinho-splash.png"));
         } catch (IOException e) {
@@ -64,7 +66,7 @@ public class Principal {
             int width = ssDim.width;
 
             splashTextArea = new Rectangle2D.Double(15, 16, 340, 19);
-            splashProgressArea = new Rectangle2D.Double(width * .55, height * .92, width * .4, 12);
+            splashProgressArea = new Rectangle2D.Double(130, 340, 340, 12);
 
             splashGraphics = mySplash.createGraphics();
             font = new Font("default", Font.BOLD, 14);
@@ -91,10 +93,10 @@ public class Principal {
 
         if (mySplash != null && mySplash.isVisible()) {
 
-            splashGraphics.setPaint(Color.LIGHT_GRAY);
+            splashGraphics.setPaint(transparente);
             splashGraphics.fill(splashProgressArea);
 
-            splashGraphics.setPaint(azul);
+            splashGraphics.setPaint(amarelo);
             splashGraphics.draw(splashProgressArea);
 
             int x = (int) splashProgressArea.getMinX();
@@ -105,7 +107,7 @@ public class Principal {
             int doneWidth = Math.round(pct * wid / 100.f);
             doneWidth = Math.max(0, Math.min(doneWidth, wid - 1));
 
-            splashGraphics.setPaint(azul);
+            splashGraphics.setPaint(amarelo);
             splashGraphics.fillRect(x, y + 1, doneWidth, hgt - 1);
 
             mySplash.update();
@@ -117,6 +119,7 @@ public class Principal {
         for (int i = 0; i <= 5; i++) {
 
             int pctDone = i * 20;
+            
             switch (i){
                 case 0:
                     splashText("Inicializando componentes básicos.");
@@ -137,7 +140,7 @@ public class Principal {
 
             try {
 
-                Thread.sleep((long) (Math.random() * 2000));
+                Thread.sleep((long) (Math.random() * 200));
             } catch (InterruptedException ex) {
 
                 // ignore it

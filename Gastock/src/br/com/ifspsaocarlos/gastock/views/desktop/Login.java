@@ -64,7 +64,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Unidade São Carlos");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 110, 230, 16);
+        jLabel1.setBounds(250, 110, 230, 15);
 
         btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnEntrar.setText("Entrar");
