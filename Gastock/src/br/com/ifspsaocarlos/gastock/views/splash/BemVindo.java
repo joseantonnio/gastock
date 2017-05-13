@@ -7,7 +7,10 @@ package br.com.ifspsaocarlos.gastock.views.splash;
 
 import br.com.ifspsaocarlos.gastock.views.desktop.Login;
 import br.com.ifspsaocarlos.gastock.views.embarcado.Painel;
-import br.com.ifspsaocarlos.gastock.views.desktop.ClockLabel;
+import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Dias
@@ -30,17 +33,33 @@ public class BemVindo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonFechar = new javax.swing.JButton();
         buttonVendas = new javax.swing.JButton();
         buttonGerenciamento = new javax.swing.JButton();
         labelEscolha = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gastock 0.1");
         setAlwaysOnTop(true);
-        setBackground(new java.awt.Color(0, 0, 0));
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                abriu(evt);
+            }
+        });
+
+        buttonFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icons/dark/appbar.close.png"))); // NOI18N
+        buttonFechar.setBorderPainted(false);
+        buttonFechar.setContentAreaFilled(false);
+        buttonFechar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonFechar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icons/light/appbar.close.png"))); // NOI18N
+        buttonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFecharActionPerformed(evt);
+            }
+        });
 
         buttonVendas.setBackground(new java.awt.Color(0, 119, 192));
         buttonVendas.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -65,41 +84,34 @@ public class BemVindo extends javax.swing.JFrame {
         labelEscolha.setFont(new java.awt.Font("Felix Titling", 1, 16)); // NOI18N
         labelEscolha.setText("Escolha o Módulo");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icons/dark/appbar.close.png"))); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icons/light/appbar.close.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(115, 115, 115)
+                        .addGap(18, 18, 18)
                         .addComponent(labelEscolha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                        .addComponent(buttonGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addComponent(buttonFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,9 +136,19 @@ public class BemVindo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buttonGerenciamentoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void buttonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFecharActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buttonFecharActionPerformed
+
+    private void abriu(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_abriu
+        this.getContentPane().setBackground(new Color(255, 213, 27));
+        ImageIcon imageIcon = new ImageIcon("src/br/com/ifspsaocarlos/gastock/images/logo2.png"); // load the image to a imageIcon
+        Image image = imageIcon.getImage(); // transform it 
+        Image newimg = image.getScaledInstance(565, 200, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        imageIcon = new ImageIcon(newimg);
+        
+        logo.setIcon(imageIcon);
+    }//GEN-LAST:event_abriu
 
     /**
      * @param args the command line arguments
@@ -165,9 +187,10 @@ public class BemVindo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonFechar;
     private javax.swing.JButton buttonGerenciamento;
     private javax.swing.JButton buttonVendas;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel labelEscolha;
+    private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }

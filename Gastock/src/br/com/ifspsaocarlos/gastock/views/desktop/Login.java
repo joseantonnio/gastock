@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
+import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -22,13 +25,11 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form sistema
      */
-     
-    
     public Login() {
         initComponents();
-       
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,15 +39,14 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        logo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         labelHora = new ClockLabel();
-        labelLogin = new javax.swing.JLabel();
         textLogin = new javax.swing.JTextField();
-        labelSenha = new javax.swing.JLabel();
         textSenha = new javax.swing.JPasswordField();
-        imagemFundo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Autenticação - Gastock");
@@ -56,17 +56,28 @@ public class Login extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(480, 390));
         setMinimumSize(new java.awt.Dimension(480, 390));
         setUndecorated(true);
-        setPreferredSize(null);
+        setPreferredSize(new java.awt.Dimension(1000, 667));
         setResizable(false);
-        setSize(new java.awt.Dimension(480, 390));
+        setSize(new java.awt.Dimension(1000, 667));
         setType(java.awt.Window.Type.UTILITY);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
+        getContentPane().add(logo);
+        logo.setBounds(330, 70, 350, 125);
+        logo.getAccessibleContext().setAccessibleName("logo");
 
-        jLabel1.setText("Unidade São Carlos");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icons/dark/appbar.user.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(250, 110, 230, 15);
+        jLabel1.setBounds(470, 220, 76, 76);
+        jLabel1.getAccessibleContext().setAccessibleName("iconeUsuario");
 
-        btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnEntrar.setBackground(new java.awt.Color(0, 119, 192));
+        btnEntrar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,46 +85,45 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnEntrar);
-        btnEntrar.setBounds(100, 310, 120, 50);
+        btnEntrar.setBounds(310, 430, 390, 50);
 
         btnSair.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnSair.setText("Sair");
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icons/dark/appbar.close.png"))); // NOI18N
+        btnSair.setBorderPainted(false);
+        btnSair.setContentAreaFilled(false);
+        btnSair.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icons/light/appbar.close.png"))); // NOI18N
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
             }
         });
         getContentPane().add(btnSair);
-        btnSair.setBounds(270, 310, 120, 50);
+        btnSair.setBounds(950, 0, 50, 50);
 
         labelHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        labelHora.setForeground(new java.awt.Color(255, 0, 0));
+        labelHora.setForeground(new java.awt.Color(0, 119, 192));
         labelHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelHora.setText(getDateTime());
         labelHora.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(labelHora);
-        labelHora.setBounds(10, 170, 460, 20);
+        labelHora.setBounds(290, 580, 430, 20);
 
-        labelLogin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        labelLogin.setForeground(new java.awt.Color(255, 255, 255));
-        labelLogin.setText("Login");
-        getContentPane().add(labelLogin);
-        labelLogin.setBounds(40, 220, 60, 22);
-
+        textLogin.setText("Usuário");
+        textLogin.setToolTipText("Usuário");
+        textLogin.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textLoginFocusGained(evt);
+            }
+        });
         textLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textLoginActionPerformed(evt);
             }
         });
         getContentPane().add(textLogin);
-        textLogin.setBounds(40, 250, 180, 30);
+        textLogin.setBounds(310, 300, 390, 30);
 
-        labelSenha.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        labelSenha.setForeground(new java.awt.Color(255, 255, 255));
-        labelSenha.setText("Senha");
-        getContentPane().add(labelSenha);
-        labelSenha.setBounds(270, 220, 100, 22);
-
+        textSenha.setText("Senha");
         textSenha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textSenhaFocusGained(evt);
@@ -125,61 +135,53 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(textSenha);
-        textSenha.setBounds(270, 250, 180, 30);
+        textSenha.setBounds(310, 350, 390, 30);
 
-        imagemFundo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/fundo.png"))); // NOI18N
-        imagemFundo.setAlignmentY(0.0F);
-        imagemFundo.setMaximumSize(new java.awt.Dimension(480, 390));
-        imagemFundo.setMinimumSize(new java.awt.Dimension(480, 390));
-        imagemFundo.setPreferredSize(new java.awt.Dimension(480, 390));
-        getContentPane().add(imagemFundo);
-        imagemFundo.setBounds(0, 0, 480, 390);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/fundo.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 1000, 667);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {
 
         Frentista[] f = new Frentista[3];
-        f[0] = new Frentista("Geraldo","1234",1000.01f);
-        f[1] = new Frentista("Agnalda","1234",2000.01f);
-        f[2] = new Frentista("Robertina","1234",2000.01f);
-        
+        f[0] = new Frentista("Geraldo", "1234", 1000.01f);
+        f[1] = new Frentista("Agnalda", "1234", 2000.01f);
+        f[2] = new Frentista("Robertina", "1234", 2000.01f);
+
         Gerente[] g = new Gerente[1];
         g[0] = new Gerente();
         g[0].setNome("admin");
         g[0].setSalario(9999.99f);
         g[0].setSenha("admin");
-        
+
         Gerente user = null;
-        
-        for (Gerente ger : g){
+
+        for (Gerente ger : g) {
             if (textLogin.getText().equals(ger.getNome()) && textSenha.getText().equals(ger.getSenha())) {
                 this.dispose();
                 //JOptionPane.showMessageDialog(null, "Bem vindo");
                 user = ger;
                 /*Create and display form*/
-            java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-             new PrincipalJframe().setVisible(true);   
-            }
-        });
-            this.dispose();
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new PrincipalJframe().setVisible(true);
+                    }
+                });
+                this.dispose();
             }
         }
-        if (user == null){
+        if (user == null) {
             this.setVisible(false);
-             JOptionPane.showMessageDialog(null, "Acesso Negado");
-             this.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Acesso Negado");
+            this.setVisible(true);
         }
-            
-        
-        
+
     }
     private void textLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textLoginActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_textLoginActionPerformed
 
     private void textSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textSenhaFocusGained
@@ -194,10 +196,28 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void textSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSenhaKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-           btnEntrar.doClick();
-       }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnEntrar.doClick();
+        }
     }//GEN-LAST:event_textSenhaKeyPressed
+
+    private void textLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textLoginFocusGained
+
+        String teste = textLogin.getText();
+
+        if (teste.equals("Usuário")) {
+            textLogin.setText("");
+        }
+    }//GEN-LAST:event_textLoginFocusGained
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        ImageIcon imageIcon = new ImageIcon("src/br/com/ifspsaocarlos/gastock/images/logo2.png"); // load the image to a imageIcon
+        Image image = imageIcon.getImage(); // transform it 
+        Image newimg = image.getScaledInstance(350, 125, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        imageIcon = new ImageIcon(newimg);
+        
+        logo.setIcon(imageIcon);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -226,7 +246,7 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -239,16 +259,15 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnSair;
-    private javax.swing.JLabel imagemFundo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labelHora;
-    private javax.swing.JLabel labelLogin;
-    private javax.swing.JLabel labelSenha;
+    private javax.swing.JLabel logo;
     private javax.swing.JTextField textLogin;
     private javax.swing.JPasswordField textSenha;
     // End of variables declaration//GEN-END:variables
 
     private String getDateTime() {
-         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 }
