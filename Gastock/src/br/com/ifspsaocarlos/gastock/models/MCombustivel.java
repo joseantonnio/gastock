@@ -6,6 +6,8 @@
 package br.com.ifspsaocarlos.gastock.models;
 
 import br.com.ifspsaocarlos.gastock.library.Combustivel;
+import br.com.ifspsaocarlos.gastock.library.Mongodb;
+import com.mongodb.BasicDBObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +20,30 @@ import java.util.Map;
  */
 public class MCombustivel implements ICombustivel {
 
-    private Map<Integer, Combustivel> mapa;
+    private List<Combustivel> c;
     private int contador;
 
     public MCombustivel() {
-        mapa = new HashMap<>();
+        
+        Mongodb banco = new Mongodb();
+        banco.setColecao("combustivel");
+        
+        ArrayList<BasicDBObject> dados = (ArrayList<BasicDBObject>) banco.buscaGeral();
+        
+        for (int i = 0; i < dados.size(); i++){
+            
+            Combustivel curr = new Combustivel(
+                    Integer.parseInt(dados.get(i).get("_id").toString()),
+                    dados.get(i).get("nome").toString(),
+                    Double.parseDouble(dados.get(i).get("preco").toString())
+            );
+            
+            System.out.print(curr);
+            
+            c.add(curr);
+            
+        }
+        
         contador = 1;
     }
 
@@ -30,7 +51,7 @@ public class MCombustivel implements ICombustivel {
     public int adcionar(Combustivel combustivel) {
 
         combustivel.setCombustivelId(contador++);
-        mapa.put(combustivel.getCombustivelId(), combustivel);
+        //mapa.put(combustivel.getCombustivelId(), combustivel);
 
         return combustivel.getCombustivelId();
 
@@ -39,25 +60,25 @@ public class MCombustivel implements ICombustivel {
     @Override
     public void modificar(Combustivel combustivel) throws Exception {
 
-        mapa.put(combustivel.getCombustivelId(), combustivel);
+        //mapa.put(combustivel.getCombustivelId(), combustivel);
     }
 
     @Override
     public Combustivel get(int combustivelId) throws Exception {
-        return mapa.get(combustivelId);
+        //return mapa.get(combustivelId);
     }
 
     @Override
     public void excluir(int combustivelId) throws Exception {
 
-        mapa.remove(combustivelId);
+        //mapa.remove(combustivelId);
 
     }
 
     @Override
     public List<Combustivel> listar() throws Exception {
 
-        return new ArrayList<>(mapa.values());
+        //return new ArrayList<>(mapa.values());
     }
 
 }

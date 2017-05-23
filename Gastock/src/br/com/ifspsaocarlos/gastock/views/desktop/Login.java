@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
-import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 

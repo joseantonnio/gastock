@@ -605,6 +605,7 @@ public class Painel extends javax.swing.JFrame {
         BemVindo tela= new BemVindo();
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_formWindowClosed
 
     private void btnGasolinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGasolinaActionPerformed

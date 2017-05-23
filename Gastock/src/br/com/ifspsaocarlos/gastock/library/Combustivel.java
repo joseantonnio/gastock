@@ -15,10 +15,16 @@ public class Combustivel {
     private int combustivel;
     private String nome;
     private double precoL;
-   
 
     public Combustivel() {
 
+    }
+
+    public Combustivel(int num, String nome, double preco) {
+        
+        this.combustivel = num;
+        this.nome = nome;
+        this.precoL = preco;
     }
 
     public int getCombustivelId() {
@@ -51,11 +57,5 @@ public class Combustivel {
 
     public double getPreco() {
         return this.precoL;
-    }
-
-    public Combustivel(int num, String nome, double preco) {
-        this.combustivel = num;
-        this.nome = nome;
-        this.precoL = preco;
     }
 }
