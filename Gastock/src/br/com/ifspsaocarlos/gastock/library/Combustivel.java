@@ -11,7 +11,6 @@ package br.com.ifspsaocarlos.gastock.library;
  */
 public class Combustivel {
 
-    private int combustivelId;
     private int combustivel;
     private String nome;
     private double precoL;
@@ -28,11 +27,11 @@ public class Combustivel {
     }
 
     public int getCombustivelId() {
-        return combustivelId;
+        return combustivel;
     }
 
     public void setCombustivelId(int num) {
-        this.combustivelId = num;
+        this.combustivel = num;
     }
 
     public void setCombustivel(int num) {

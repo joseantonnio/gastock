@@ -1,7 +1,7 @@
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
 import br.com.ifspsaocarlos.gastock.library.Combustivel;
-import java.util.ArrayList;
+import br.com.ifspsaocarlos.gastock.models.MCombustivel;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,12 +15,17 @@ public class CombustivelTabelaModel extends AbstractTableModel {
     private String[] coluna;
 
     public CombustivelTabelaModel() {
-
-        lista = new ArrayList<>();
+        
+        try {
+            this.lista = new MCombustivel().listar();
+        } catch (Exception err) {
+            
+        }
+        
         coluna = new String[3];// Três coluna
-        coluna[0] = "ID";
-        coluna[1] = "COMBUSTÍVEL";
-        coluna[2] = "PREÇO";
+        coluna[0] = "Código";
+        coluna[1] = "Combustível";
+        coluna[2] = "Preço (R$)";
     }
 
     @Override

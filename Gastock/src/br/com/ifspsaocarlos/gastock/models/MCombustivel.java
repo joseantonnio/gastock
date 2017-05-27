@@ -9,9 +9,7 @@ import br.com.ifspsaocarlos.gastock.library.Combustivel;
 import br.com.ifspsaocarlos.gastock.library.Mongodb;
 import com.mongodb.BasicDBObject;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Interface
@@ -20,37 +18,32 @@ import java.util.Map;
  */
 public class MCombustivel implements ICombustivel {
 
-    private List<Combustivel> c;
-    private int contador;
+    private List<Combustivel> c = new ArrayList<>();
 
     public MCombustivel() {
-        
+
         Mongodb banco = new Mongodb();
         banco.setColecao("combustivel");
-        
+
         ArrayList<BasicDBObject> dados = (ArrayList<BasicDBObject>) banco.buscaGeral();
-        
-        for (int i = 0; i < dados.size(); i++){
-            
+
+        for (int i = 0; i < dados.size(); i++) {
+
             Combustivel curr = new Combustivel(
-                    Integer.parseInt(dados.get(i).get("_id").toString()),
+                    dados.get(i).getInt("_id"),
                     dados.get(i).get("nome").toString(),
                     Double.parseDouble(dados.get(i).get("preco").toString())
             );
-            
-            System.out.print(curr);
-            
+
             c.add(curr);
-            
+
         }
-        
-        contador = 1;
     }
 
     @Override
     public int adcionar(Combustivel combustivel) {
 
-        combustivel.setCombustivelId(contador++);
+        //combustivel.setCombustivelId(contador++);
         //mapa.put(combustivel.getCombustivelId(), combustivel);
 
         return combustivel.getCombustivelId();
@@ -72,13 +65,12 @@ public class MCombustivel implements ICombustivel {
     public void excluir(int combustivelId) throws Exception {
 
         //mapa.remove(combustivelId);
-
     }
 
     @Override
     public List<Combustivel> listar() throws Exception {
 
-        //return new ArrayList<>(mapa.values());
+        return c;
     }
 
 }
