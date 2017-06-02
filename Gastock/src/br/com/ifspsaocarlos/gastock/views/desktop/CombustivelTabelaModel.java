@@ -58,7 +58,7 @@ public class CombustivelTabelaModel extends AbstractTableModel {
         switch (coluna) {
 
             case 0:
-                return c.getCombustivelId();
+                return c.getCombustivel();
             case 1:
                 return c.getNome();
             case 2:

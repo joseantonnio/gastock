@@ -19,13 +19,14 @@ import java.util.List;
 public class MCombustivel implements ICombustivel {
 
     private List<Combustivel> c = new ArrayList<>();
+    Mongodb banco;
 
     public MCombustivel() {
 
-        Mongodb banco = new Mongodb();
-        banco.setColecao("combustivel");
+        this.banco = new Mongodb();
+        this.banco.setColecao("combustivel");
 
-        ArrayList<BasicDBObject> dados = (ArrayList<BasicDBObject>) banco.buscaGeral();
+        ArrayList<BasicDBObject> dados = (ArrayList<BasicDBObject>) this.banco.buscaGeral();
 
         for (int i = 0; i < dados.size(); i++) {
 
@@ -34,8 +35,8 @@ public class MCombustivel implements ICombustivel {
                     dados.get(i).get("nome").toString(),
                     Double.parseDouble(dados.get(i).get("preco").toString())
             );
-
-            c.add(curr);
+            
+            this.c.add(curr);
 
         }
     }
@@ -43,17 +44,19 @@ public class MCombustivel implements ICombustivel {
     @Override
     public int adcionar(Combustivel combustivel) {
 
-        //combustivel.setCombustivelId(contador++);
-        //mapa.put(combustivel.getCombustivelId(), combustivel);
+        combustivel.setCombustivel(c.get(c.size() - 1).getCombustivel() + 1);
+        this.c.add(combustivel);
+        
+        combustivel.toJson()
 
-        return combustivel.getCombustivelId();
+        return combustivel.getCombustivel();
 
     }
 
     @Override
     public void modificar(Combustivel combustivel) throws Exception {
 
-        //mapa.put(combustivel.getCombustivelId(), combustivel);
+        //mapa.put(combustivel.getCombustivel(), combustivel);
     }
 
     @Override

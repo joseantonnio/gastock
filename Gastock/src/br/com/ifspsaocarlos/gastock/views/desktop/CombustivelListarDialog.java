@@ -172,7 +172,7 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
 
             if (resultado == JOptionPane.YES_OPTION) {
 
-                Ccombustivel.getInstancia().excluir(c.getCombustivelId());
+                Ccombustivel.getInstancia().excluir(c.getCombustivel());
                 tableModel.excluir(tabelaCombustivel.getSelectedRow());
             } else {
                 throw new Exception("A ação foi cancelada pelo usuário.");

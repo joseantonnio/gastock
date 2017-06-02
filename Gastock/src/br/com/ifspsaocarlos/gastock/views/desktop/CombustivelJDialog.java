@@ -157,7 +157,7 @@ public class CombustivelJDialog extends javax.swing.JDialog {
 
             Combustivel c = getCombustivel();
 
-            if (c.getCombustivelId() == 0) {
+            if (c.getCombustivel() == 0) {
                 Ccombustivel.getInstancia().adcionar(c); // salva no bd    
             } else {
                 Ccombustivel.getInstancia().modificar(c); // modificar 

@@ -44,7 +44,7 @@ public class Ccombustivel {
 
     public void modificar(Combustivel combustivel) throws Exception {
         validar(combustivel);
-        validar(combustivel.getCombustivelId());
+        validar(combustivel.getCombustivel());
         dao.modificar(combustivel);
     }
 

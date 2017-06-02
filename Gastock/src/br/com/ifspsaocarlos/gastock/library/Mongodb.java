@@ -44,7 +44,19 @@ public class Mongodb {
 
     public List<BasicDBObject> buscaGeral() {
 
-        DBCursor cursor = collection.find();
+        DBCursor cursor = collection.find().sort(new BasicDBObject("_id", 1));
+        List<BasicDBObject> resultado = new ArrayList<BasicDBObject>();
+
+        while (cursor.hasNext()) {
+            resultado.add((BasicDBObject) cursor.next());
+        }
+
+        return resultado;
+    }
+    
+    public List<BasicDBObject> cadastraItem() {
+
+        DBCursor cursor = collection.find().sort(new BasicDBObject("_id", 1));
         List<BasicDBObject> resultado = new ArrayList<BasicDBObject>();
 
         while (cursor.hasNext()) {

@@ -26,14 +26,6 @@ public class Combustivel {
         this.precoL = preco;
     }
 
-    public int getCombustivelId() {
-        return combustivel;
-    }
-
-    public void setCombustivelId(int num) {
-        this.combustivel = num;
-    }
-
     public void setCombustivel(int num) {
         this.combustivel = num;
     }
