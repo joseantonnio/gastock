@@ -53,17 +53,12 @@ public class Mongodb {
 
         return resultado;
     }
-    
+
     public List<BasicDBObject> cadastraItem() {
 
-        DBCursor cursor = collection.find().sort(new BasicDBObject("_id", 1));
-        List<BasicDBObject> resultado = new ArrayList<BasicDBObject>();
-
-        while (cursor.hasNext()) {
-            resultado.add((BasicDBObject) cursor.next());
-        }
-
-        return resultado;
+        BasicDBObject document = new BasicDBObject();
+        document.put("database", "mkyongDB");
+        document.put("table", "hosting");
     }
 
 }
