@@ -29,10 +29,10 @@ public class PrincipalJframe extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         cadastroMenu = new javax.swing.JMenu();
         combustivelMenu = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        TanqueMenu = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        frentistalMenu = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenu();
 
@@ -70,9 +70,14 @@ public class PrincipalJframe extends javax.swing.JFrame {
         });
         cadastroMenu.add(combustivelMenu);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
-        jMenuItem1.setText("Tanque");
-        cadastroMenu.add(jMenuItem1);
+        TanqueMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        TanqueMenu.setText("Tanque");
+        TanqueMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TanqueMenuActionPerformed(evt);
+            }
+        });
+        cadastroMenu.add(TanqueMenu);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jMenuItem2.setText("Bomba");
@@ -87,9 +92,14 @@ public class PrincipalJframe extends javax.swing.JFrame {
         jMenuItem3.setText("Bico");
         cadastroMenu.add(jMenuItem3);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
-        jMenuItem4.setText("Frentista");
-        cadastroMenu.add(jMenuItem4);
+        frentistalMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
+        frentistalMenu.setText("Frentista");
+        frentistalMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frentistalMenuActionPerformed(evt);
+            }
+        });
+        cadastroMenu.add(frentistalMenu);
 
         jMenuBar1.add(cadastroMenu);
 
@@ -147,18 +157,34 @@ public class PrincipalJframe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void TanqueMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TanqueMenuActionPerformed
+        TanqueListarDialog dialog = new TanqueListarDialog(this);
+        dialog.setVisible(true);
+        dialog.dispose();
+        
+        dialog = null;
+    }//GEN-LAST:event_TanqueMenuActionPerformed
+
+    private void frentistalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frentistalMenuActionPerformed
+        FrentistaListarDialog dialog = new FrentistaListarDialog(this);
+        dialog.setVisible(true);
+        dialog.dispose();
+        
+        dialog = null;
+    }//GEN-LAST:event_frentistalMenuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem TanqueMenu;
     private javax.swing.JButton bombaBtn;
     private javax.swing.JMenu cadastroMenu;
     private javax.swing.JButton combustivelBtn;
     private javax.swing.JMenuItem combustivelMenu;
+    private javax.swing.JMenuItem frentistalMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu menuSair;
     // End of variables declaration//GEN-END:variables

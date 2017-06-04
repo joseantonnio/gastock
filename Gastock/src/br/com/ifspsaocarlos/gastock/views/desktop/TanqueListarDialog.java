@@ -1,7 +1,7 @@
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
-import br.com.ifspsaocarlos.gastock.controllers.Ccombustivel;
-import br.com.ifspsaocarlos.gastock.library.Combustivel;
+import br.com.ifspsaocarlos.gastock.controllers.Ctanque;
+import br.com.ifspsaocarlos.gastock.library.Tanque;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -9,16 +9,16 @@ import javax.swing.JOptionPane;
  *
  * @author Alex
  */
-public class CombustivelListarDialog extends javax.swing.JDialog {
+public class TanqueListarDialog extends javax.swing.JDialog {
 
-    private CombustivelTabelaModel tableModel;
+    private TanqueTabelaModel tableModel;
 
     /**
-     * Creates new form CombustivelListarDialog
+     * Creates new form TanqueListarDialog
      *
      * @param parent
      */
-    public CombustivelListarDialog(java.awt.Window parent) {
+    public TanqueListarDialog(java.awt.Window parent) {
         super(parent);
 
         initComponents();
@@ -30,13 +30,13 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
 
     private void init() {
 
-        tableModel = new CombustivelTabelaModel();
-        tabelaCombustivel.setModel(tableModel);
+        tableModel = new TanqueTabelaModel();
+        tabelaTanque.setModel(tableModel);
     }
 
-    public Combustivel getCombustivelSelecionado() throws Exception {
+    public Tanque getTanqueSelecionado() throws Exception {
 
-        int row = tabelaCombustivel.getSelectedRow();
+        int row = tabelaTanque.getSelectedRow();
         if (row == -1) {
             throw new Exception("Por favor, selecione uma linha da tabela.");
         }
@@ -52,47 +52,33 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
         editarBtn = new javax.swing.JButton();
         excluirBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaCombustivel = new javax.swing.JTable();
+        tabelaTanque = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gerenciar Combustível");
+        setTitle("Gerenciar Tanque");
 
-        adcionarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/add_01.png"))); // NOI18N
-        adcionarBtn.setBorder(null);
-        adcionarBtn.setBorderPainted(false);
-        adcionarBtn.setContentAreaFilled(false);
-        adcionarBtn.setFocusPainted(false);
-        adcionarBtn.setFocusable(false);
-        adcionarBtn.setOpaque(false);
-        adcionarBtn.setRequestFocusEnabled(false);
-        adcionarBtn.setVerifyInputWhenFocusTarget(false);
+        adcionarBtn.setText("Adicionar");
         adcionarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adcionarBtnActionPerformed(evt);
             }
         });
 
-        editarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/editar_01.png"))); // NOI18N
-        editarBtn.setBorder(null);
-        editarBtn.setBorderPainted(false);
-        editarBtn.setContentAreaFilled(false);
+        editarBtn.setText("Editar");
         editarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarBtnActionPerformed(evt);
             }
         });
 
-        excluirBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/excluir_01.png"))); // NOI18N
-        excluirBtn.setBorder(null);
-        excluirBtn.setBorderPainted(false);
-        excluirBtn.setContentAreaFilled(false);
+        excluirBtn.setText("Excluir");
         excluirBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 excluirBtnActionPerformed(evt);
             }
         });
 
-        tabelaCombustivel.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaTanque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -103,7 +89,7 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tabelaCombustivel);
+        jScrollPane1.setViewportView(tabelaTanque);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,7 +117,7 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
                     .addComponent(editarBtn)
                     .addComponent(excluirBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -143,15 +129,15 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
 
         try {
 
-            Combustivel c = getCombustivelSelecionado();
+            Tanque c = getTanqueSelecionado();
 
-            CombustivelJDialog dialog = new CombustivelJDialog(this);
-            dialog.setCombustivel(c);
+            TanqueJDialog dialog = new TanqueJDialog(this);
+            dialog.setTanque(c);
             dialog.setVisible(true);
 
             if (dialog.isSalvou()) {
-                tableModel.modificar(tabelaCombustivel.getSelectedRow(),
-                        dialog.getCombustivel());
+                tableModel.modificar(tabelaTanque.getSelectedRow(),
+                        dialog.getTanque());
             }
 
             dialog.dispose();
@@ -165,11 +151,11 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
 
     private void adcionarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adcionarBtnActionPerformed
 
-        CombustivelJDialog dialog = new CombustivelJDialog(this);
+        TanqueJDialog dialog = new TanqueJDialog(this);
         dialog.setVisible(true);
 
         if (dialog.isSalvou()) {
-            tableModel.adicionar(dialog.getCombustivel());
+            tableModel.adicionar(dialog.getTanque());
         }
 
         dialog.dispose();
@@ -179,15 +165,15 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
     private void excluirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirBtnActionPerformed
 
         try {
-            Combustivel c = getCombustivelSelecionado();
+            Tanque c = getTanqueSelecionado();
 
-            String txt = "Você deseja deletar o produto " + c.getNome() + " ?";
+            String txt = "Você deseja deletar o produto " + c.getCombustivel() + " ?";
             int resultado = JOptionPane.showConfirmDialog(this, txt);
 
             if (resultado == JOptionPane.YES_OPTION) {
 
-                Ccombustivel.getInstancia().excluir(c.getCombustivel());
-                tableModel.excluir(tabelaCombustivel.getSelectedRow());
+                Ctanque.getInstancia().excluir(c.getTanqueId());
+                tableModel.excluir(tabelaTanque.getSelectedRow());
             } else {
                 throw new Exception("A ação foi cancelada pelo usuário.");
             }
@@ -216,20 +202,21 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CombustivelListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TanqueListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CombustivelListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TanqueListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CombustivelListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TanqueListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CombustivelListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TanqueListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CombustivelListarDialog dialog = new CombustivelListarDialog(new javax.swing.JFrame());
+                TanqueListarDialog dialog = new TanqueListarDialog(new javax.swing.JFrame());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -246,6 +233,6 @@ public class CombustivelListarDialog extends javax.swing.JDialog {
     private javax.swing.JButton editarBtn;
     private javax.swing.JButton excluirBtn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaCombustivel;
+    private javax.swing.JTable tabelaTanque;
     // End of variables declaration//GEN-END:variables
 }

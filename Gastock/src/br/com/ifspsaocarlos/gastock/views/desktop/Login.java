@@ -146,9 +146,9 @@ public class Login extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {
 
         Frentista[] f = new Frentista[3];
-        f[0] = new Frentista("Geraldo", "1234", 1000.01f);
-        f[1] = new Frentista("Agnalda", "1234", 2000.01f);
-        f[2] = new Frentista("Robertina", "1234", 2000.01f);
+        f[0] = new Frentista(1,"Geraldo", "1234", 1000.01f);
+        f[1] = new Frentista(2,"Agnalda", "1234", 2000.01f);
+        f[2] = new Frentista(3,"Robertina", "1234", 2000.01f);
 
         Gerente[] g = new Gerente[1];
         g[0] = new Gerente();
