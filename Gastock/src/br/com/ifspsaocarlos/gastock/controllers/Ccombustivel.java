@@ -39,7 +39,7 @@ public class Ccombustivel {
 
         validar(combustivel);
 
-        return dao.adcionar(combustivel);
+        return dao.adicionar(combustivel);
     }
 
     public void modificar(Combustivel combustivel) throws Exception {

@@ -9,8 +9,10 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.WriteResult;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +46,8 @@ public class Mongodb {
 
     public List<BasicDBObject> buscaGeral() {
 
-        DBCursor cursor = collection.find().sort(new BasicDBObject("_id", 1));
-        List<BasicDBObject> resultado = new ArrayList<BasicDBObject>();
+        DBCursor cursor = collection.find().sort(new BasicDBObject("cod", 1));
+        List<BasicDBObject> resultado = new ArrayList<>();
 
         while (cursor.hasNext()) {
             resultado.add((BasicDBObject) cursor.next());
@@ -53,12 +55,50 @@ public class Mongodb {
 
         return resultado;
     }
+    
+    public DBObject buscaRegistro(String campo, String valor) {
 
-    public List<BasicDBObject> cadastraItem() {
+        DBObject resultado = collection.findOne(new BasicDBObject(campo, valor));
+        
+        return resultado;
+    }
 
-        BasicDBObject document = new BasicDBObject();
-        document.put("database", "mkyongDB");
-        document.put("table", "hosting");
+    public boolean cadastraItem(BasicDBObject item) {
+
+        try {
+            this.collection.save(item);
+        } catch (Exception ex) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    public boolean alterarItem(int codigo, BasicDBObject item) {
+        
+        BasicDBObject query = new BasicDBObject("cod", codigo);
+
+        try {
+            this.collection.update(query, item);
+        } catch (Exception ex) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    public boolean excluirItem(BasicDBObject query) {
+        
+        // invoke findOne so that the first document is fetched
+        DBObject doc = this.collection.findOne(query);
+
+        try {
+            this.collection.remove(doc);
+        } catch (Exception ex) {
+            return false;
+        }
+
+        return true;
     }
 
 }

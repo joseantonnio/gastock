@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ICombustivel {
     
-    public int adcionar (Combustivel combustivel) throws Exception; //
+    public int adicionar (Combustivel combustivel) throws Exception; //
     public void modificar (Combustivel combustivel) throws Exception;
     public Combustivel get(int combustivelId) throws Exception;
     public void excluir(int combustivelId)throws Exception;

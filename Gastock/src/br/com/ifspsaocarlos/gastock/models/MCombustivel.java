@@ -8,6 +8,7 @@ package br.com.ifspsaocarlos.gastock.models;
 import br.com.ifspsaocarlos.gastock.library.Combustivel;
 import br.com.ifspsaocarlos.gastock.library.Mongodb;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,29 +26,49 @@ public class MCombustivel implements ICombustivel {
 
         this.banco = new Mongodb();
         this.banco.setColecao("combustivel");
+    }
+
+    private void buscaCombustivel() {
+
+        this.c = new ArrayList<>();
 
         ArrayList<BasicDBObject> dados = (ArrayList<BasicDBObject>) this.banco.buscaGeral();
 
         for (int i = 0; i < dados.size(); i++) {
 
             Combustivel curr = new Combustivel(
-                    dados.get(i).getInt("_id"),
+                    dados.get(i).getInt("cod"),
                     dados.get(i).get("nome").toString(),
                     Double.parseDouble(dados.get(i).get("preco").toString())
             );
-            
+
             this.c.add(curr);
 
         }
     }
 
     @Override
-    public int adcionar(Combustivel combustivel) {
-
-        combustivel.setCombustivel(c.get(c.size() - 1).getCombustivel() + 1);
-        this.c.add(combustivel);
+    public int adicionar(Combustivel combustivel) {
         
-        combustivel.toJson()
+        try {
+            this.listar();
+        } catch (Exception ex) {
+            
+        }
+        
+        int cod = c.get(c.size() - 1).getCombustivel() + 1;
+
+        combustivel.setCombustivel(cod);
+
+        c.add(combustivel);
+
+        BasicDBObject insert = new BasicDBObject();
+
+        insert.put("cod", combustivel.getCombustivel());
+        insert.put("nome", combustivel.getNome());
+        insert.put("preco", combustivel.getPreco());
+
+        this.banco.cadastraItem(insert);
 
         return combustivel.getCombustivel();
 
@@ -56,23 +77,45 @@ public class MCombustivel implements ICombustivel {
     @Override
     public void modificar(Combustivel combustivel) throws Exception {
 
-        //mapa.put(combustivel.getCombustivel(), combustivel);
+        BasicDBObject set = new BasicDBObject();
+
+        int codigo = combustivel.getCombustivel();
+        
+        set.put("nome", combustivel.getNome());
+        set.put("preco", combustivel.getPreco());
+        
+        BasicDBObject update = new BasicDBObject("$set", set);
+
+        this.banco.alterarItem(codigo, update);
     }
 
     @Override
     public Combustivel get(int combustivelId) throws Exception {
-        //return mapa.get(combustivelId);
+        
+        DBObject dados = this.banco.buscaRegistro("cod", Integer.toString(combustivelId));
+        
+        Combustivel result = new Combustivel(
+                    (int) dados.get("cod"),
+                    dados.get("nome").toString(),
+                    Double.parseDouble(dados.get("preco").toString())
+            );
+        
+        return result;
     }
 
     @Override
     public void excluir(int combustivelId) throws Exception {
 
-        //mapa.remove(combustivelId);
+        BasicDBObject delete = new BasicDBObject();
+        delete.put("cod", combustivelId);
+
+        this.banco.excluirItem(delete);
     }
 
     @Override
     public List<Combustivel> listar() throws Exception {
 
+        this.buscaCombustivel();
         return c;
     }
 

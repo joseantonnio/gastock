@@ -19,7 +19,7 @@ public class CombustivelTabelaModel extends AbstractTableModel {
         try {
             this.lista = new MCombustivel().listar();
         } catch (Exception err) {
-            
+            System.out.println(err);
         }
         
         coluna = new String[3];// Três coluna
