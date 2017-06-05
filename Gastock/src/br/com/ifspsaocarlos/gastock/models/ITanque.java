@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface ITanque {
     
-    public int adcionar (Tanque tanque) throws Exception; 
+    public int adicionar (Tanque tanque) throws Exception; //
     public void modificar (Tanque tanque) throws Exception;
-    public Tanque get(int tanque) throws Exception;
-    public void excluir(int tanque)throws Exception;
-    public List<Tanque>listar() throws Exception; 
+    public Tanque get(int tanqueId) throws Exception;
+    public void excluir(int tanqueId)throws Exception;
+    public List<Tanque>listar() throws Exception;    
 }

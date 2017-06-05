@@ -21,19 +21,19 @@ public class Tanque {
 
     }
 
-    public Tanque(int tanque, String combustivel, double quantidade, boolean status) {
+    public Tanque(int tanque, String combustivel, double quantidade) {
         this.tanque = tanque;
         this.combustivel = combustivel;
         this.quantidade = quantidade;
-        this.status = status;
+       
 
     }
 
-    public void setTanqueId(int tanque) {
+    public void setTanque(int tanque) {
         this.tanque = tanque;
     }
 
-    public int getTanqueId() {
+    public int getTanque() {
         return this.tanque;
     }
 

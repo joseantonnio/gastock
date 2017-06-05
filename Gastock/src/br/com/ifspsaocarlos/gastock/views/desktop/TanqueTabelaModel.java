@@ -19,13 +19,13 @@ public class TanqueTabelaModel extends AbstractTableModel {
         try {
             this.lista = new MTanque().listar();
         } catch (Exception err) {
-            
+            System.out.println(err);
         }
         
         coluna = new String[3];// Três coluna
         coluna[0] = "Código";
         coluna[1] = "Combustível";
-        coluna[2] = "Quantidade)";
+        coluna[2] = "Quantidade";
     }
 
     @Override
@@ -58,7 +58,7 @@ public class TanqueTabelaModel extends AbstractTableModel {
         switch (coluna) {
 
             case 0:
-                return c.getTanqueId();
+                return c.getTanque();
             case 1:
                 return c.getCombustivel();
             case 2:
