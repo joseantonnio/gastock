@@ -4,13 +4,12 @@
  * and open the template in the editor.
  */
 package br.com.ifspsaocarlos.gastock.views.desktop;
+
 import br.com.ifspsaocarlos.gastock.library.Frentista;
 
 import br.com.ifspsaocarlos.gastock.models.MFrentista;
 
 import java.util.List;
-
-
 
 import br.com.ifspsaocarlos.gastock.library.Gerente;
 import com.sun.glass.events.KeyEvent;
@@ -26,26 +25,19 @@ import javax.swing.ImageIcon;
  * @author Alex
  */
 public class Login extends javax.swing.JFrame {
-    
-        private List<Frentista> lista;
+
+    private List<Frentista> lista;
 
     /**
      * Creates new form sistema
      */
     public Login() {
         initComponents();
-        
-        
-         try {
+
+        try {
             this.lista = new MFrentista().listar();
         } catch (Exception err) {
 
-        }
-
-        for (int i = 0; i < lista.size(); i++) {
-            Frentista c = lista.get(i);
-            System.out.println(c.getNome());
-           
         }
 
     }
@@ -165,26 +157,14 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {
+        String user = null;
+        for (int i = 0; i < lista.size(); i++) {
+            Frentista c = lista.get(i);
 
-        Frentista[] f = new Frentista[3];
-        f[0] = new Frentista(1,"Geraldo", "1234", 1000.01f);
-        f[1] = new Frentista(2,"Agnalda", "1234", 2000.01f);
-        f[2] = new Frentista(3,"Robertina", "1234", 2000.01f);
-
-        Gerente[] g = new Gerente[1];
-        g[0] = new Gerente();
-        g[0].setNome("admin");
-        g[0].setSalario(9999.99f);
-        g[0].setSenha("admin");
-
-        Gerente user = null;
-
-        for (Gerente ger : g) {
-            if (textLogin.getText().equals(ger.getNome()) && textSenha.getText().equals(ger.getSenha())) {
+            if (textLogin.getText().equals(c.getNome()) && textSenha.getText().equals(c.getSenha()) && "Gerente".equals(c.getTipo())) {
                 this.dispose();
-                //JOptionPane.showMessageDialog(null, "Bem vindo");
-                user = ger;
-                /*Create and display form*/
+
+                user = c.getNome();
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     @Override
                     public void run() {
@@ -192,8 +172,11 @@ public class Login extends javax.swing.JFrame {
                     }
                 });
                 this.dispose();
+
             }
+
         }
+
         if (user == null) {
             this.setVisible(false);
             JOptionPane.showMessageDialog(null, "Acesso Negado");
@@ -235,7 +218,7 @@ public class Login extends javax.swing.JFrame {
         Image image = imageIcon.getImage(); // transform it 
         Image newimg = image.getScaledInstance(350, 125, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         imageIcon = new ImageIcon(newimg);
-        
+
         logo.setIcon(imageIcon);
     }//GEN-LAST:event_formWindowOpened
 

@@ -45,6 +45,8 @@ public class FrentistaJDialog extends javax.swing.JDialog {
 
         nomeTxt.setText(frentista.getNome());
         senhaTxt.setText(frentista.getSenha());
+        tipoTxt.setText(frentista.getTipo());
+        //CBoxTipo.addItem(frentista.getTipo());
         precoTxt.setText(frentista.getSalario() + "");// Transformando o valor em string
 
         salvou = false;
@@ -54,7 +56,10 @@ public class FrentistaJDialog extends javax.swing.JDialog {
 
         frentista.setNome(nomeTxt.getText());
         frentista.setSenha(senhaTxt.getText());
-
+        frentista.setTipo(tipoTxt.getText());
+        //CBoxTipo.setSelectedItem(frentista.getTipo());
+        //CBoxTipo.setSelectedItem(frentista.getTipo());
+       
         double salario = Double.parseDouble(precoTxt.getText());
         frentista.setSalario(salario);
 
@@ -81,6 +86,9 @@ public class FrentistaJDialog extends javax.swing.JDialog {
         cancelarBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         senhaTxt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tipoTxt = new javax.swing.JTextField();
+        CBoxTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Adicionar/Editar Frentista");
@@ -105,6 +113,10 @@ public class FrentistaJDialog extends javax.swing.JDialog {
 
         jLabel1.setText("Senha");
 
+        jLabel4.setText("Tipo");
+
+        CBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Vendedor", "Supervisor" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,24 +128,33 @@ public class FrentistaJDialog extends javax.swing.JDialog {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(nomeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(40, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(salvarBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelarBtn)
-                        .addGap(15, 15, 15))
+                        .addContainerGap(81, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(senhaTxt))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(precoTxt)))
-                        .addGap(137, 137, 137))))
+                                .addComponent(precoTxt))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(senhaTxt))))
+                        .addGap(137, 137, 137))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(tipoTxt)
+                                .addGap(18, 18, 18)
+                                .addComponent(salvarBtn)
+                                .addGap(12, 12, 12)
+                                .addComponent(cancelarBtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +173,14 @@ public class FrentistaJDialog extends javax.swing.JDialog {
                     .addComponent(senhaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(CBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salvarBtn)
                     .addComponent(cancelarBtn)
-                    .addComponent(salvarBtn))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(tipoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -193,13 +219,16 @@ public class FrentistaJDialog extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Object> CBoxTipo;
     private javax.swing.JButton cancelarBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField nomeTxt;
     private javax.swing.JTextField precoTxt;
     private javax.swing.JButton salvarBtn;
     private javax.swing.JTextField senhaTxt;
+    private javax.swing.JTextField tipoTxt;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,33 +10,41 @@ package br.com.ifspsaocarlos.gastock.library;
  * @author Alex
  */
 public class Frentista {
-    
+
     private int frentista;
     private String nome;
     private String senha;
+    private String tipo;
     private double salario;
-    
-    public Frentista(){
-        
+
+    public Frentista() {
+
     }
-    
-    public Frentista(int frentista, String senha, String nome, double salario){
+
+    public Frentista(int frentista, String nome,  String senha, String tipo, double salario) {
         this.frentista = frentista;
-         this.senha = senha;
+        this.tipo = tipo;
+        this.senha = senha;
         this.nome = nome;
         this.salario = salario;
     }
 
-    
-     public void setFrentista(int frentista) {
+    public void setFrentista(int frentista) {
         this.frentista = frentista;
     }
 
     public int getFrentista() {
         return this.frentista;
     }
-    
-    
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return this.tipo;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -44,6 +52,7 @@ public class Frentista {
     public String getNome() {
         return this.nome;
     }
+
     public void setSenha(String senha) {
         this.senha = senha;
     }
@@ -51,7 +60,7 @@ public class Frentista {
     public String getSenha() {
         return this.senha;
     }
-    
+
     public void setSalario(double salario) {
         this.salario = salario;
     }
@@ -59,5 +68,5 @@ public class Frentista {
     public double getSalario() {
         return this.salario;
     }
- 
+
 }
