@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface IFrentista {
     
-    public int adcionar (Frentista frentista) throws Exception; 
+    public int adicionar (Frentista frentista) throws Exception; //
     public void modificar (Frentista frentista) throws Exception;
-    public Frentista get(int frentista) throws Exception;
-    public void excluir(int frentista)throws Exception;
-    public List<Frentista>listar() throws Exception; 
+    public Frentista get(int frentistaId) throws Exception;
+    public void excluir(int frentistaId)throws Exception;
+    public List<Frentista>listar() throws Exception;    
 }

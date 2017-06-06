@@ -55,23 +55,36 @@ public class TanqueListarDialog extends javax.swing.JDialog {
         tabelaTanque = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gerenciar Tanque");
+        setTitle("Gerenciar Combustível");
 
-        adcionarBtn.setText("Adicionar");
+        adcionarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/add_01.png"))); // NOI18N
+        adcionarBtn.setBorder(null);
+        adcionarBtn.setBorderPainted(false);
+        adcionarBtn.setContentAreaFilled(false);
+        adcionarBtn.setFocusPainted(false);
+        adcionarBtn.setFocusable(false);
+        adcionarBtn.setRequestFocusEnabled(false);
+        adcionarBtn.setVerifyInputWhenFocusTarget(false);
         adcionarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adcionarBtnActionPerformed(evt);
             }
         });
 
-        editarBtn.setText("Editar");
+        editarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/editar_01.png"))); // NOI18N
+        editarBtn.setBorder(null);
+        editarBtn.setBorderPainted(false);
+        editarBtn.setContentAreaFilled(false);
         editarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarBtnActionPerformed(evt);
             }
         });
 
-        excluirBtn.setText("Excluir");
+        excluirBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/excluir_01.png"))); // NOI18N
+        excluirBtn.setBorder(null);
+        excluirBtn.setBorderPainted(false);
+        excluirBtn.setContentAreaFilled(false);
         excluirBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 excluirBtnActionPerformed(evt);
@@ -117,9 +130,11 @@ public class TanqueListarDialog extends javax.swing.JDialog {
                     .addComponent(editarBtn)
                     .addComponent(excluirBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
+
+        getAccessibleContext().setAccessibleName("Gerenciar Tanque");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,7 +187,7 @@ public class TanqueListarDialog extends javax.swing.JDialog {
 
             if (resultado == JOptionPane.YES_OPTION) {
 
-                Ctanque.getInstancia().excluir(c.getTanqueId());
+                Ctanque.getInstancia().excluir(c.getTanque());
                 tableModel.excluir(tabelaTanque.getSelectedRow());
             } else {
                 throw new Exception("A ação foi cancelada pelo usuário.");
