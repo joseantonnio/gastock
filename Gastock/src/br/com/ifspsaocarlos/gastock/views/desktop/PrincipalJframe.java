@@ -5,8 +5,6 @@ import br.com.ifspsaocarlos.gastock.models.MTanque;
 import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -29,20 +27,19 @@ public class PrincipalJframe extends javax.swing.JFrame {
         }
         
         for (int i = 0; i < lista.size(); i++) {
-            jComboBox1.addItem(Integer.toString(lista.get(i).getTanqueId()));
+            jComboBox1.addItem(Integer.toString(lista.get(i).getTanque()));
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        sine1 = new org.pushingpixels.trident.ease.Sine();
         jToolBar1 = new javax.swing.JToolBar();
         combustivelBtn = new javax.swing.JButton();
         bombaBtn = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        radial4Lcd1 = new eu.hansolo.steelseries.gauges.Radial4Lcd();
         jLabel1 = new javax.swing.JLabel();
+        radial4Lcd1 = new eu.hansolo.steelseries.gauges.Radial4Lcd();
         jMenuBar1 = new javax.swing.JMenuBar();
         cadastroMenu = new javax.swing.JMenu();
         combustivelMenu = new javax.swing.JMenuItem();
@@ -91,24 +88,6 @@ public class PrincipalJframe extends javax.swing.JFrame {
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        radial4Lcd1.setDigitalFont(true);
-        radial4Lcd1.setMaxValue(10000.0);
-        radial4Lcd1.setTickLabelPeriod(1000);
-        radial4Lcd1.setTitle("Selecione...");
-        radial4Lcd1.setTrackRange(3000.0);
-        radial4Lcd1.setTrackSection(0.0);
-        radial4Lcd1.setTrackStartColor(new java.awt.Color(255, 0, 0));
-        radial4Lcd1.setTrackStopColor(new java.awt.Color(0, 255, 0));
-        radial4Lcd1.setTrackVisible(true);
-        radial4Lcd1.setUnitString("Litros");
-        radial4Lcd1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                radial4Lcd1CaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -178,14 +157,15 @@ public class PrincipalJframe extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(radial4Lcd1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
+                        .addGap(149, 149, 149)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(radial4Lcd1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(234, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -286,7 +266,6 @@ public class PrincipalJframe extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu menuSair;
     private eu.hansolo.steelseries.gauges.Radial4Lcd radial4Lcd1;
-    private org.pushingpixels.trident.ease.Sine sine1;
     // End of variables declaration//GEN-END:variables
     
     List<Tanque> lista = new ArrayList<>();
