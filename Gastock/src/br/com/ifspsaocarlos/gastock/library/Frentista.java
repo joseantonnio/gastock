@@ -20,19 +20,19 @@ public class Frentista {
         
     }
     
-    public Frentista(int frentista, String nome, String senha, double salario){
+    public Frentista(int frentista, String senha, String nome, double salario){
         this.frentista = frentista;
+         this.senha = senha;
         this.nome = nome;
-        this.senha = senha;
         this.salario = salario;
     }
 
     
-     public void setFrentistaId(int frentista) {
+     public void setFrentista(int frentista) {
         this.frentista = frentista;
     }
 
-    public int getFrentistaId() {
+    public int getFrentista() {
         return this.frentista;
     }
     

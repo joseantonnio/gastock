@@ -19,14 +19,14 @@ public class FrentistaTabelaModel extends AbstractTableModel {
         try {
             this.lista = new MFrentista().listar();
         } catch (Exception err) {
-
+            System.out.println(err);
         }
 
         coluna = new String[4];// Três coluna
         coluna[0] = "Código";
         coluna[1] = "Nome";
-        coluna[2] = "Senha";
-        coluna[3] = "Salario";
+        coluna[2] = "Salario";
+        coluna[3] = "Senha";
     }
 
     @Override
@@ -59,13 +59,13 @@ public class FrentistaTabelaModel extends AbstractTableModel {
         switch (coluna) {
 
             case 0:
-                return c.getFrentistaId();
+                return c.getFrentista();
             case 1:
                 return c.getNome();
             case 2:
-                return c.getSenha();
-            case 3:
                 return c.getSalario();
+            case 3:
+                return c.getSenha();
             default:
                 return null;
         }
@@ -88,9 +88,7 @@ public class FrentistaTabelaModel extends AbstractTableModel {
     }
 
     public Frentista get(int linha) {
-        
         return lista.get(linha);
-        
     }
 
     public void setLista(List<Frentista> l) {

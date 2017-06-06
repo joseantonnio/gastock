@@ -4,8 +4,14 @@
  * and open the template in the editor.
  */
 package br.com.ifspsaocarlos.gastock.views.desktop;
-
 import br.com.ifspsaocarlos.gastock.library.Frentista;
+
+import br.com.ifspsaocarlos.gastock.models.MFrentista;
+
+import java.util.List;
+
+
+
 import br.com.ifspsaocarlos.gastock.library.Gerente;
 import com.sun.glass.events.KeyEvent;
 import java.time.LocalDateTime;
@@ -20,12 +26,27 @@ import javax.swing.ImageIcon;
  * @author Alex
  */
 public class Login extends javax.swing.JFrame {
+    
+        private List<Frentista> lista;
 
     /**
      * Creates new form sistema
      */
     public Login() {
         initComponents();
+        
+        
+         try {
+            this.lista = new MFrentista().listar();
+        } catch (Exception err) {
+
+        }
+
+        for (int i = 0; i < lista.size(); i++) {
+            Frentista c = lista.get(i);
+            System.out.println(c.getNome());
+           
+        }
 
     }
 
