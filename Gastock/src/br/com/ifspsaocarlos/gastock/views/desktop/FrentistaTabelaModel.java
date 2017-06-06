@@ -22,11 +22,12 @@ public class FrentistaTabelaModel extends AbstractTableModel {
             System.out.println(err);
         }
 
-        coluna = new String[4];// Três coluna
+        coluna = new String[5];// Três coluna
         coluna[0] = "Código";
         coluna[1] = "Nome";
         coluna[2] = "Salario";
         coluna[3] = "Senha";
+        coluna[4] = "Tipo";
     }
 
     @Override
@@ -66,6 +67,8 @@ public class FrentistaTabelaModel extends AbstractTableModel {
                 return c.getSalario();
             case 3:
                 return c.getSenha();
+            case 4:
+                return c.getTipo();
             default:
                 return null;
         }

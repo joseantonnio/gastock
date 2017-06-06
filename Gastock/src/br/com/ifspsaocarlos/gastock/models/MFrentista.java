@@ -40,6 +40,7 @@ public class MFrentista implements IFrentista {
                     dados.get(i).getInt("cod"),
                     dados.get(i).get("nome").toString(),
                     dados.get(i).get("senha").toString(),
+                    dados.get(i).get("tipo").toString(),
                     Double.parseDouble(dados.get(i).get("salario").toString())
             );
 
@@ -68,6 +69,7 @@ public class MFrentista implements IFrentista {
         insert.put("cod", frentista.getFrentista());
         insert.put("nome", frentista.getNome());
         insert.put("senha", frentista.getSenha());
+        insert.put("tipo", frentista.getTipo());
         insert.put("salario", frentista.getSalario());
 
         this.banco.cadastraItem(insert);
@@ -85,6 +87,7 @@ public class MFrentista implements IFrentista {
 
         set.put("nome", frentista.getNome());
         set.put("senha", frentista.getSenha());
+        set.put("tipo", frentista.getTipo());
         set.put("salario", frentista.getSalario());
 
         BasicDBObject update = new BasicDBObject("$set", set);
@@ -101,6 +104,7 @@ public class MFrentista implements IFrentista {
                 (int) dados.get("cod"),
                 dados.get("nome").toString(),
                 dados.get("senha").toString(),
+                dados.get("tipo").toString(),
                 Double.parseDouble(dados.get("salario").toString())
         );
 
