@@ -1,11 +1,13 @@
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
+import br.com.ifspsaocarlos.gastock.controllers.Ctanque;
 import br.com.ifspsaocarlos.gastock.library.Tanque;
-import br.com.ifspsaocarlos.gastock.models.MTanque;
 import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
+import eu.hansolo.steelseries.tools.LedColor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,16 +21,18 @@ public class PrincipalJframe extends javax.swing.JFrame {
     public PrincipalJframe() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
         try {
-            lista = new MTanque().listar();
+            lista = new Ctanque().listar();
         } catch (Exception err) {
-            
+            JOptionPane.showMessageDialog(null, err);
         }
-        
+
         for (int i = 0; i < lista.size(); i++) {
             jComboBox1.addItem(Integer.toString(lista.get(i).getTanque()));
         }
+
+        new Thread(verificaTanque).start();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,7 +43,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
         bombaBtn = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        radial4Lcd1 = new eu.hansolo.steelseries.gauges.Radial4Lcd();
+        linear2 = new eu.hansolo.steelseries.gauges.Linear();
         jMenuBar1 = new javax.swing.JMenuBar();
         cadastroMenu = new javax.swing.JMenu();
         combustivelMenu = new javax.swing.JMenuItem();
@@ -91,17 +95,20 @@ public class PrincipalJframe extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Selecione o tanque para visualizar: ");
+        jLabel1.setText("Selecione o tanque: ");
 
-        radial4Lcd1.setMaxValue(10000.0);
-        radial4Lcd1.setTickLabelPeriod(1000);
-        radial4Lcd1.setTitle("Selecione...");
-        radial4Lcd1.setTrackRange(3000.0);
-        radial4Lcd1.setTrackSection(0.0);
-        radial4Lcd1.setTrackStartColor(new java.awt.Color(255, 0, 0));
-        radial4Lcd1.setTrackStopColor(new java.awt.Color(0, 255, 0));
-        radial4Lcd1.setTrackVisible(true);
-        radial4Lcd1.setUnitString("Litros");
+        linear2.setLedBlinking(true);
+        linear2.setLedColor(eu.hansolo.steelseries.tools.LedColor.GREEN_LED);
+        linear2.setLedVisible(true);
+        linear2.setMaxValue(450.0);
+        linear2.setThreshold(0.0);
+        linear2.setTickLabelPeriod(25);
+        linear2.setTitle("Selecione um tanque...");
+        linear2.setTrackRange(450.0);
+        linear2.setTrackSection(0.0);
+        linear2.setTrackStartColor(new java.awt.Color(255, 0, 0));
+        linear2.setTrackStopColor(new java.awt.Color(0, 255, 0));
+        linear2.setUnitString("Litros x100");
 
         cadastroMenu.setText("Cadastro");
 
@@ -165,30 +172,28 @@ public class PrincipalJframe extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(linear2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(radial4Lcd1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(234, Short.MAX_VALUE))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(radial4Lcd1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(linear2, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         getAccessibleContext().setAccessibleName("form");
@@ -245,26 +250,47 @@ public class PrincipalJframe extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        
-        Tanque d = new Tanque();
-        
-        try {
-            d = new MTanque().get(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
-        } catch (Exception err) {
-            System.out.println(err);
+    private Runnable verificaTanque = new Runnable() {
+        public void run() {
+
+            while (true) {
+
+                double tanque = 0.0;
+                int id = Integer.parseInt(jComboBox1.getSelectedItem().toString());
+
+                try {
+                    tanque = new Ctanque().buscaQuantidade(id) / 100.0;
+                } catch (Exception err) {
+                    JOptionPane.showMessageDialog(null, err);
+                }
+
+                linear2.setTitle("Tanque #" + Integer.toString(id));
+                linear2.setValueAnimated(tanque);
+
+                if (tanque <= 50.0) {
+                    linear2.setLedColor(LedColor.RED_LED);
+                } else {
+                    linear2.setLedColor(LedColor.GREEN_LED);
+                }
+
+                try {
+
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+
+                }
+            }
+
         }
-        
-        radial4Lcd1.setValue(d.getQuantidade());
-        
-        if (radial4Lcd1.getValue() <= 1000)
-            radial4Lcd1.setLedBlinking(true);
-        else
-            radial4Lcd1.setLedBlinking(false);
+    };
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        new Thread(verificaTanque).interrupt();
+        new Thread(verificaTanque).start();
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void radial4Lcd1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_radial4Lcd1CaretPositionChanged
- 
+
     }//GEN-LAST:event_radial4Lcd1CaretPositionChanged
 
 
@@ -282,12 +308,9 @@ public class PrincipalJframe extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar1;
+    private eu.hansolo.steelseries.gauges.Linear linear2;
     private javax.swing.JMenu menuSair;
-    private eu.hansolo.steelseries.gauges.Radial4Lcd radial4Lcd1;
     // End of variables declaration//GEN-END:variables
-    
+
     List<Tanque> lista = new ArrayList<>();
-    private List<Tanque> lista2;
-
 }
-

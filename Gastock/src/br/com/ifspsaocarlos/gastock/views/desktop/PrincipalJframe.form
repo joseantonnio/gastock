@@ -113,36 +113,33 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jToolBar1" alignment="0" max="32767" attributes="0"/>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jToolBar1" alignment="0" pref="800" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="linear2" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jComboBox1" min="-2" pref="70" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="radial4Lcd1" min="-2" pref="560" max="-2" attributes="0"/>
-                  </Group>
               </Group>
-              <EmptySpace pref="234" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Component id="jToolBar1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="radial4Lcd1" min="-2" pref="560" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="linear2" min="-2" pref="708" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="50" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -198,15 +195,21 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Selecione o tanque para visualizar: "/>
+        <Property name="text" type="java.lang.String" value="Selecione o tanque: "/>
       </Properties>
     </Component>
-    <Container class="eu.hansolo.steelseries.gauges.Radial4Lcd" name="radial4Lcd1">
+    <Container class="eu.hansolo.steelseries.gauges.Linear" name="linear2">
       <Properties>
-        <Property name="maxValue" type="double" value="10000.0"/>
-        <Property name="tickLabelPeriod" type="int" value="1000"/>
-        <Property name="title" type="java.lang.String" value="Selecione..."/>
-        <Property name="trackRange" type="double" value="3000.0"/>
+        <Property name="ledBlinking" type="boolean" value="true"/>
+        <Property name="ledColor" type="eu.hansolo.steelseries.tools.LedColor" editor="org.netbeans.modules.form.editors.EnumEditor">
+          <Value id="GREEN_LED"/>
+        </Property>
+        <Property name="ledVisible" type="boolean" value="true"/>
+        <Property name="maxValue" type="double" value="450.0"/>
+        <Property name="threshold" type="double" value="0.0"/>
+        <Property name="tickLabelPeriod" type="int" value="25"/>
+        <Property name="title" type="java.lang.String" value="Selecione um tanque..."/>
+        <Property name="trackRange" type="double" value="450.0"/>
         <Property name="trackSection" type="double" value="0.0"/>
         <Property name="trackStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
@@ -214,8 +217,7 @@
         <Property name="trackStopColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="ff" red="0" type="rgb"/>
         </Property>
-        <Property name="trackVisible" type="boolean" value="true"/>
-        <Property name="unitString" type="java.lang.String" value="Litros"/>
+        <Property name="unitString" type="java.lang.String" value="Litros x100"/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
