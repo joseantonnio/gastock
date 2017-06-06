@@ -1,7 +1,12 @@
-
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
+import br.com.ifspsaocarlos.gastock.library.Tanque;
+import br.com.ifspsaocarlos.gastock.models.MTanque;
 import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -16,16 +21,28 @@ public class PrincipalJframe extends javax.swing.JFrame {
     public PrincipalJframe() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        try {
+            lista = new MTanque().listar();
+        } catch (Exception err) {
+            
+        }
+        
+        for (int i = 0; i < lista.size(); i++) {
+            jComboBox1.addItem(Integer.toString(lista.get(i).getTanqueId()));
+        }
     }
 
-
- 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        sine1 = new org.pushingpixels.trident.ease.Sine();
         jToolBar1 = new javax.swing.JToolBar();
         combustivelBtn = new javax.swing.JButton();
         bombaBtn = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        radial4Lcd1 = new eu.hansolo.steelseries.gauges.Radial4Lcd();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         cadastroMenu = new javax.swing.JMenu();
         combustivelMenu = new javax.swing.JMenuItem();
@@ -38,8 +55,15 @@ public class PrincipalJframe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gastock - Modulo de Gerenciamento");
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jToolBar1.setRollover(true);
+        jToolBar1.setAutoscrolls(true);
 
         combustivelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon-combust.png"))); // NOI18N
         combustivelBtn.setFocusable(false);
@@ -58,6 +82,37 @@ public class PrincipalJframe extends javax.swing.JFrame {
         bombaBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bombaBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(bombaBtn);
+
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        radial4Lcd1.setDigitalFont(true);
+        radial4Lcd1.setMaxValue(10000.0);
+        radial4Lcd1.setTickLabelPeriod(1000);
+        radial4Lcd1.setTitle("Selecione...");
+        radial4Lcd1.setTrackRange(3000.0);
+        radial4Lcd1.setTrackSection(0.0);
+        radial4Lcd1.setTrackStartColor(new java.awt.Color(255, 0, 0));
+        radial4Lcd1.setTrackStopColor(new java.awt.Color(0, 255, 0));
+        radial4Lcd1.setTrackVisible(true);
+        radial4Lcd1.setUnitString("Litros");
+        radial4Lcd1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                radial4Lcd1CaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+
+        jLabel1.setText("Selecione o tanque para visualizar: ");
 
         cadastroMenu.setText("Cadastro");
 
@@ -121,30 +176,48 @@ public class PrincipalJframe extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(radial4Lcd1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 319, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radial4Lcd1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("form");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void combustivelMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combustivelMenuActionPerformed
-       
+
         CombustivelListarDialog dialog = new CombustivelListarDialog(this);
         dialog.setVisible(true);
         dialog.dispose();
-        
+
         dialog = null;
     }//GEN-LAST:event_combustivelMenuActionPerformed
 
     private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
-        this.setVisible(false);        
-        BemVindo tela= new BemVindo();
+        this.setVisible(false);
+        BemVindo tela = new BemVindo();
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
     }//GEN-LAST:event_menuSairMouseClicked
@@ -161,7 +234,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
         TanqueListarDialog dialog = new TanqueListarDialog(this);
         dialog.setVisible(true);
         dialog.dispose();
-        
+
         dialog = null;
     }//GEN-LAST:event_TanqueMenuActionPerformed
 
@@ -169,9 +242,32 @@ public class PrincipalJframe extends javax.swing.JFrame {
         FrentistaListarDialog dialog = new FrentistaListarDialog(this);
         dialog.setVisible(true);
         dialog.dispose();
-        
+
         dialog = null;
     }//GEN-LAST:event_frentistalMenuActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+         Tanque item;
+        try {
+           item = new MTanque().get(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
+        } catch (Exception ex) {
+            
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void radial4Lcd1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_radial4Lcd1CaretPositionChanged
+        if (radial4Lcd1.getValue() <= 1000)
+            radial4Lcd1.setLedBlinking(true);
+    }//GEN-LAST:event_radial4Lcd1CaretPositionChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -181,11 +277,19 @@ public class PrincipalJframe extends javax.swing.JFrame {
     private javax.swing.JButton combustivelBtn;
     private javax.swing.JMenuItem combustivelMenu;
     private javax.swing.JMenuItem frentistalMenu;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenu menuSair;
+    private eu.hansolo.steelseries.gauges.Radial4Lcd radial4Lcd1;
+    private org.pushingpixels.trident.ease.Sine sine1;
     // End of variables declaration//GEN-END:variables
+    
+    List<Tanque> lista = new ArrayList<>();
+
 }
+

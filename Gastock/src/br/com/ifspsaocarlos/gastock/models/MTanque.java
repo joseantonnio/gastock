@@ -28,7 +28,7 @@ public class MTanque implements ITanque {
         for (int i = 0; i < dados.size(); i++) {
 
             Tanque curr = new Tanque(
-                    dados.get(i).getInt("_id"), 
+                    dados.get(i).getInt("cod"), 
                     (String) dados.get(i).get("combustivel"),
                     Double.parseDouble(dados.get(i).get("quantidade").toString()),
                     dados.get(i).getBoolean("status")
