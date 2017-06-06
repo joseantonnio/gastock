@@ -56,9 +56,9 @@ public class Mongodb {
         return resultado;
     }
     
-    public DBObject buscaRegistro(String campo, String valor) {
+    public DBObject buscaRegistro(BasicDBObject busca) {
 
-        DBObject resultado = collection.findOne(new BasicDBObject(campo, valor));
+        DBObject resultado = collection.findOne(busca);
         
         return resultado;
     }

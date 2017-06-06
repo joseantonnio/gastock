@@ -92,7 +92,7 @@ public class MCombustivel implements ICombustivel {
     @Override
     public Combustivel get(int combustivelId) throws Exception {
         
-        DBObject dados = this.banco.buscaRegistro("cod", Integer.toString(combustivelId));
+        DBObject dados = this.banco.buscaRegistro(new BasicDBObject("cod", combustivelId));
         
         Combustivel result = new Combustivel(
                     (int) dados.get("cod"),

@@ -92,7 +92,7 @@ public class MTanque implements ITanque {
     @Override
     public Tanque get(int tanqueId) throws Exception {
         
-        DBObject dados = this.banco.buscaRegistro("cod", Integer.toString(tanqueId));
+        DBObject dados = this.banco.buscaRegistro(new BasicDBObject("cod", tanqueId));
         
         Tanque result = new Tanque(
                     (int) dados.get("cod"),

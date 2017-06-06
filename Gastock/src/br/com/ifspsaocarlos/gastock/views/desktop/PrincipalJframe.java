@@ -93,6 +93,16 @@ public class PrincipalJframe extends javax.swing.JFrame {
 
         jLabel1.setText("Selecione o tanque para visualizar: ");
 
+        radial4Lcd1.setMaxValue(10000.0);
+        radial4Lcd1.setTickLabelPeriod(1000);
+        radial4Lcd1.setTitle("Selecione...");
+        radial4Lcd1.setTrackRange(3000.0);
+        radial4Lcd1.setTrackSection(0.0);
+        radial4Lcd1.setTrackStartColor(new java.awt.Color(255, 0, 0));
+        radial4Lcd1.setTrackStopColor(new java.awt.Color(0, 255, 0));
+        radial4Lcd1.setTrackVisible(true);
+        radial4Lcd1.setUnitString("Litros");
+
         cadastroMenu.setText("Cadastro");
 
         combustivelMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
@@ -178,7 +188,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("form");
@@ -236,17 +246,25 @@ public class PrincipalJframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-         Tanque item;
+        
+        Tanque d = new Tanque();
+        
         try {
-           item = new MTanque().get(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
-        } catch (Exception ex) {
-            
+            d = new MTanque().get(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
+        } catch (Exception err) {
+            System.out.println(err);
         }
+        
+        radial4Lcd1.setValue(d.getQuantidade());
+        
+        if (radial4Lcd1.getValue() <= 1000)
+            radial4Lcd1.setLedBlinking(true);
+        else
+            radial4Lcd1.setLedBlinking(false);
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void radial4Lcd1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_radial4Lcd1CaretPositionChanged
-        if (radial4Lcd1.getValue() <= 1000)
-            radial4Lcd1.setLedBlinking(true);
+ 
     }//GEN-LAST:event_radial4Lcd1CaretPositionChanged
 
 
@@ -269,6 +287,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     List<Tanque> lista = new ArrayList<>();
+    private List<Tanque> lista2;
 
 }
 

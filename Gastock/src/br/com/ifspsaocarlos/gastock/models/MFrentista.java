@@ -95,7 +95,7 @@ public class MFrentista implements IFrentista {
     @Override
     public Frentista get(int frentistaId) throws Exception {
 
-        DBObject dados = this.banco.buscaRegistro("cod", Integer.toString(frentistaId));
+        DBObject dados = this.banco.buscaRegistro(new BasicDBObject("cod", frentistaId));
 
         Frentista result = new Frentista(
                 (int) dados.get("cod"),
