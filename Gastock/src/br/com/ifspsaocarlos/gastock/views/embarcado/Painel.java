@@ -7,10 +7,15 @@ package br.com.ifspsaocarlos.gastock.views.embarcado;
 
 import br.com.ifspsaocarlos.gastock.views.desktop.Login;
 import br.com.ifspsaocarlos.gastock.library.Bomba;
-import br.com.ifspsaocarlos.gastock.library.Tanque;
+
 import br.com.ifspsaocarlos.gastock.views.splash.BemVindo;
 import java.awt.Font;
 import java.text.NumberFormat;
+
+import br.com.ifspsaocarlos.gastock.models.MTanque;
+import br.com.ifspsaocarlos.gastock.library.Tanque;
+import java.util.List;
+
 import java.util.Arrays;
 
 /**
@@ -25,14 +30,28 @@ public class Painel extends javax.swing.JFrame {
     private String senha;
     private int numCombustivel = -1;
     private boolean abastecendo = false;
-    private Tanque tanque = new Tanque();
+    //private Tanque tanque = new Tanque();
+
+    private List<Tanque> lista;
 
     /**
      * Creates new form Painel
      */
     public Painel() {
-        
+
         initComponents();
+
+        try {
+            this.lista = new MTanque().listar();
+        } catch (Exception err) {
+
+        }
+
+        for (int i = 0; i < lista.size(); i++) {
+            Tanque c = lista.get(i);
+            System.out.print("Combustivel:" + c.getCombustivel());
+            System.out.println("Quantidade:" + c.getQuantidade());
+        }
     }
 
     /**
@@ -447,14 +466,14 @@ public class Painel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setNumCombustivel(int num){
+    public void setNumCombustivel(int num) {
         this.numCombustivel = num;
     }
-    
-    public int getNumCombustivel(){
+
+    public int getNumCombustivel() {
         return this.numCombustivel;
     }
-    
+
     private void btnCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCincoActionPerformed
         btnPress("5");
     }//GEN-LAST:event_btnCincoActionPerformed
@@ -491,15 +510,14 @@ public class Painel extends javax.swing.JFrame {
 
             case 3:
                 this.numCombustivel = (Integer.parseInt(textQuantidade.getText()));
-                bomba.setCombustiveis(); 
-                try{
+                bomba.setCombustiveis();
+                try {
                     NumberFormat preco = NumberFormat.getInstance();
                     textBandeira.setText(bomba.getCombustivel(this.numCombustivel));
                     textPreco.setText(preco.format(bomba.getPreco(this.numCombustivel)));
                     textQuantidade.setText("0");
                     entrarStatus = 4;
-                }
-                catch(ArrayIndexOutOfBoundsException e){
+                } catch (ArrayIndexOutOfBoundsException e) {
                     this.numCombustivel = -1;
                     entrarStatus = 3;
                     textBandeira.setText("(1, 2, 3 OU 4)");
@@ -564,22 +582,22 @@ public class Painel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnAbastecerLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerLActionPerformed
-        if (numCombustivel == -1){
+        if (numCombustivel == -1) {
             textBandeira.setText("POR FAVOR ENTRE");
-        }
-        else{
-            if (abastecendo == false)
+        } else {
+            if (abastecendo == false) {
                 new Thread(abastecendoL).start();
+            }
         }
     }//GEN-LAST:event_btnAbastecerLActionPerformed
 
     private void btnAbastecerRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbastecerRSActionPerformed
-        if (numCombustivel == -1){
+        if (numCombustivel == -1) {
             textBandeira.setText("POR FAVOR ENTRE");
-        }
-        else{
-            if (abastecendo == false)
+        } else {
+            if (abastecendo == false) {
                 new Thread(abastecendoRS).start();
+            }
         }
     }//GEN-LAST:event_btnAbastecerRSActionPerformed
 
@@ -591,7 +609,7 @@ public class Painel extends javax.swing.JFrame {
         abastecendo = false;
     }//GEN-LAST:event_btnPararActionPerformed
 
-     private void atualizaValores(double valorTotal, double litrosAbastecido) {
+    private void atualizaValores(double valorTotal, double litrosAbastecido) {
         // Declara objetos do NumberFormat
         NumberFormat total_pagar = NumberFormat.getInstance();
         NumberFormat litros_abastecido = NumberFormat.getInstance();
@@ -600,9 +618,9 @@ public class Painel extends javax.swing.JFrame {
         textTotal.setText(total_pagar.format(valorTotal));
         textLitros.setText(litros_abastecido.format(litrosAbastecido));
     }
-    
+
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        BemVindo tela= new BemVindo();
+        BemVindo tela = new BemVindo();
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
         this.dispose();
@@ -625,10 +643,10 @@ public class Painel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDieselActionPerformed
 
     private void btnTrocaBombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrocaBombaActionPerformed
-       this.setVisible(false);
-       Painel tela=new Painel();
-       tela.setVisible(true);
-       tela.setLocationRelativeTo(null);       
+        this.setVisible(false);
+        Painel tela = new Painel();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnTrocaBombaActionPerformed
 
     private Runnable abastecendoL = new Runnable() {
@@ -673,7 +691,7 @@ public class Painel extends javax.swing.JFrame {
     private Runnable abastecendoRS = new Runnable() {
         public void run() {
 
-             // Define a quantidade que já foi abastecida para zero
+            // Define a quantidade que já foi abastecida para zero
             bomba.setAbastecido(0);
 
             // Declara a quantidade que vai ser abastecida
@@ -742,12 +760,12 @@ public class Painel extends javax.swing.JFrame {
             }
         });
     }
-    
-    private float strToFloat(String valor){
-        
+
+    private float strToFloat(String valor) {
+
         valor = valor.replace(".", "");
         valor = valor.replace(",", ".");
-        
+
         return Float.parseFloat(valor);
     }
 
