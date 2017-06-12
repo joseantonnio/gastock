@@ -15,7 +15,7 @@ import br.com.ifspsaocarlos.gastock.models.ITanque;
  * @author Alex
  */
 public class Ctanque {
-    
+
     private static Ctanque instancia;
     private ITanque dao;
 
@@ -25,16 +25,15 @@ public class Ctanque {
 
     }
 
-    public static Ctanque getInstancia(){
-        
-        if( instancia == null){
-          
+    public static Ctanque getInstancia() {
+
+        if (instancia == null) {
+
             instancia = new Ctanque();
         }
         return instancia;
     }
-    
-    
+
     public int adcionar(Tanque tanque) throws Exception {
 
         validar(tanque);
@@ -58,19 +57,45 @@ public class Ctanque {
         validar(tanqueId);
         dao.excluir(tanqueId);
     }
+
     
-    public double buscaQuantidade(int codigo) throws Exception {
-        
+    
+        public void ModificaQtd(double qtd, int codigo) throws Exception {
+
         Tanque d = new Tanque();
-        
+
         try {
             d = this.get(codigo);
         } catch (Exception err) {
             throw new Exception("Não foi possível encontrar o tanque solicitado");
         }
-        
+
+          d.setQuantidade(qtd);
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public double buscaQuantidade(int codigo) throws Exception {
+
+        Tanque d = new Tanque();
+
+        try {
+            d = this.get(codigo);
+        } catch (Exception err) {
+            throw new Exception("Não foi possível encontrar o tanque solicitado");
+        }
+
         return d.getQuantidade();
-        
+
     }
 
     public List<Tanque> listar() throws Exception {

@@ -1,7 +1,7 @@
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
-import br.com.ifspsaocarlos.gastock.library.Tanque;
-import br.com.ifspsaocarlos.gastock.models.MTanque;
+import br.com.ifspsaocarlos.gastock.library.Relatorio;
+import br.com.ifspsaocarlos.gastock.models.MRelatorio;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -9,24 +9,25 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Alex
  */
-public class TanqueTabelaModel extends AbstractTableModel {
+public class RelatorioTabelaModel extends AbstractTableModel {
 
-    private List<Tanque> lista;
+    private List<Relatorio> lista;
     private String[] coluna;
 
-    public TanqueTabelaModel() {
+    public RelatorioTabelaModel() {
 
         try {
-            this.lista = new MTanque().listar();
+            this.lista = new MRelatorio().listar();
         } catch (Exception err) {
             System.out.println(err);
         }
 
-        coluna = new String[4];// Três coluna
+        coluna = new String[5];// Três coluna
         coluna[0] = "Código";
         coluna[1] = "Combustível";
-        coluna[2] = "Preço";
+        coluna[2] = "Bomba";
         coluna[3] = "Quantidade";
+        coluna[4] = "Preço Total";
     }
 
     @Override
@@ -49,7 +50,7 @@ public class TanqueTabelaModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int linha, int coluna) {
 
-        Tanque c = lista.get(linha);
+        Relatorio c = lista.get(linha);
 
         if (c == null) {
 
@@ -59,25 +60,27 @@ public class TanqueTabelaModel extends AbstractTableModel {
         switch (coluna) {
 
             case 0:
-                return c.getTanque();
+                return c.getRelatorio();
             case 1:
                 return c.getCombustivel();
             case 2:
-                return c.getPreco();
+                return c.getBomba();
             case 3:
                 return c.getQuantidade();
+            case 4:
+                return c.getPrecoTotal();
             default:
                 return null;
         }
 
     }
 
-    public void adicionar(Tanque c) {
+    public void adicionar(Relatorio c) {
         lista.add(c);
         fireTableRowsInserted(lista.size() - 1, lista.size() - 1);
     }
 
-    public void modificar(int linha, Tanque c) {
+    public void modificar(int linha, Relatorio c) {
         lista.set(linha, c);
         fireTableRowsInserted(linha, linha);
     }
@@ -87,11 +90,11 @@ public class TanqueTabelaModel extends AbstractTableModel {
         fireTableRowsDeleted(linha, linha);
     }
 
-    public Tanque get(int linha) {
+    public Relatorio get(int linha) {
         return lista.get(linha);
     }
 
-    public void setLista(List<Tanque> l) {
+    public void setLista(List<Relatorio> l) {
         lista.clear();
 
         if (l != null) {

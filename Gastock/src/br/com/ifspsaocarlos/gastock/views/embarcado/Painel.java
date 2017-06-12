@@ -17,6 +17,8 @@ import br.com.ifspsaocarlos.gastock.library.Tanque;
 import java.util.List;
 
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,28 +32,32 @@ public class Painel extends javax.swing.JFrame {
     private String senha;
     private int numCombustivel = -1;
     private boolean abastecendo = false;
-    //private Tanque tanque = new Tanque();
 
+    //private Tanque tanque = new Tanque();
     private List<Tanque> lista;
 
     /**
      * Creates new form Painel
      */
-    public Painel() {
+    public Painel() throws Exception {
 
         initComponents();
 
-        try {
-            this.lista = new MTanque().listar();
-        } catch (Exception err) {
-
-        }
-
-        for (int i = 0; i < lista.size(); i++) {
-            Tanque c = lista.get(i);
-            System.out.print("Combustivel:" + c.getCombustivel());
-            System.out.println("Quantidade:" + c.getQuantidade());
-        }
+//        try {
+//            this.lista = new MTanque().listar();
+//        } catch (Exception err) {
+//
+//        }
+//
+//        for (int i = 0; i < lista.size(); i++) {
+//            Tanque c = lista.get(i);
+//            System.out.print("Combustivel:" + c.getCombustivel());
+//            System.out.println("Quantidade:" + c.getQuantidade());
+//        }
+//        
+        //Modifica quantidaede de combustivel
+//        MTanque alteraqtd = new MTanque();
+//        alteraqtd.modificarQuantidade(3, 1500);
     }
 
     /**
@@ -290,7 +296,7 @@ public class Painel extends javax.swing.JFrame {
             }
         });
 
-        btnGAditivada.setText("G. Aditivada");
+        btnGAditivada.setText("Diesel");
         btnGAditivada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGAditivadaActionPerformed(evt);
@@ -304,7 +310,7 @@ public class Painel extends javax.swing.JFrame {
             }
         });
 
-        btnDiesel.setText("Diesel");
+        btnDiesel.setText("G.Aditivada");
         btnDiesel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDieselActionPerformed(evt);
@@ -326,24 +332,6 @@ public class Painel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelPreco)
-                            .addComponent(labelQuantidade))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(labelTotal)
-                                    .addComponent(textTotal))
-                                .addGap(30, 30, 30))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(labelLitros)
-                                    .addComponent(textLitros, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
-                                .addGap(30, 30, 30))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -377,27 +365,44 @@ public class Painel extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnGasolina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGAditivada, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnGAditivada, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEtanol, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDiesel, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnAbastecerRS, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEtanol, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnAbastecerL, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDiesel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnParar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnTrocaBomba, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 24, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnTrocaBomba, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnParar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnAbastecerRS, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnAbastecerL, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(28, 28, 28)))
+                        .addGap(0, 48, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textBandeira)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelPreco)
+                                    .addComponent(labelQuantidade))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(labelTotal, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(textTotal, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelLitros, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(textLitros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)))
+                            .addComponent(textBandeira))
                         .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
@@ -434,8 +439,10 @@ public class Painel extends javax.swing.JFrame {
                             .addComponent(btnDiesel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAbastecerL, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAbastecerRS, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnAbastecerRS, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAbastecerL, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSete, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -451,8 +458,7 @@ public class Painel extends javax.swing.JFrame {
                             .addComponent(btnUm, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDois, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnTres, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnParar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnParar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAsterisco, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -644,7 +650,12 @@ public class Painel extends javax.swing.JFrame {
 
     private void btnTrocaBombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrocaBombaActionPerformed
         this.setVisible(false);
-        Painel tela = new Painel();
+        Painel tela = null;
+        try {
+            tela = new Painel();
+        } catch (Exception ex) {
+            Logger.getLogger(Painel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnTrocaBombaActionPerformed
@@ -664,6 +675,12 @@ public class Painel extends javax.swing.JFrame {
             //Verifica quantidade no tanque
             if (bomba.verificaTanque(quantidade, numCombustivel)) {
 
+                try {
+                    bomba.diminuiQtd(quantidade, numCombustivel);
+                } catch (Exception ex) {
+                    Logger.getLogger(Painel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 // Enquanto tiver que abastecer
                 while (retorno[1] <= quantidade && abastecendo == true) {
 
@@ -680,6 +697,8 @@ public class Painel extends javax.swing.JFrame {
                         Thread.currentThread().interrupt();
                     }
                 }
+            } else {
+                textBandeira.setText("Combustivel Insuficiente");
             }
 
             // Define que acabou de abastecer            
@@ -756,7 +775,11 @@ public class Painel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Painel().setVisible(true);
+                try {
+                    new Painel().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(Painel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

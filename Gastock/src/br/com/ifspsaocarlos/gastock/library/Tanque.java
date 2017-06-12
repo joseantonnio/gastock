@@ -13,6 +13,7 @@ public class Tanque {
 
     private int tanque;
     private double quantidade;
+    private double preco;
     private String combustivel;
     private boolean status;
 
@@ -21,10 +22,11 @@ public class Tanque {
 
     }
 
-    public Tanque(int tanque, String combustivel, double quantidade) {
+    public Tanque(int tanque, String combustivel, double quantidade, double preco) {
         this.tanque = tanque;
         this.combustivel = combustivel;
         this.quantidade = quantidade;
+        this.preco = preco;
        
 
     }
@@ -45,6 +47,15 @@ public class Tanque {
         return this.quantidade;
     }
 
+    
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public double getPreco() {
+        return this.preco;
+    }
+    
     public void setStatus(boolean status) {
         this.status = status;
     }
@@ -63,9 +74,10 @@ public class Tanque {
 
     // Métodos
     public boolean verificarQuantidade(double qtd) {
-
+        
+        System.out.println(qtd);
         // Verifica se possui a quantidade de combustivel pedida no tanque
-        if (qtd > this.quantidade) // Se não tiver retorna falso
+        if (qtd > 10) // Se não tiver retorna falso
         {
             return false;
         } else // Se tiver retira do tanque a quantidade

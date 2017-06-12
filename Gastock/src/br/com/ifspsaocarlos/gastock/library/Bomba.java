@@ -5,6 +5,14 @@
  */
 package br.com.ifspsaocarlos.gastock.library;
 
+import br.com.ifspsaocarlos.gastock.models.MTanque;
+import br.com.ifspsaocarlos.gastock.library.Tanque;
+
+import br.com.ifspsaocarlos.gastock.models.MRelatorio;
+import br.com.ifspsaocarlos.gastock.library.Relatorio;
+
+import java.util.List;
+
 /**
  *
  * @author IFSP
@@ -14,12 +22,21 @@ public class Bomba {
     private int numero;
     public double abastecido;
     private String senha;
-    private Combustivel[] combustivel = new Combustivel[4];
+    //private Combustivel[] combustivel = new Combustivel[4];
+    private Tanque[] combustivel = new Tanque[4];
     public boolean autenticado;
     private Tanque tanque = new Tanque();
 
+    private List<Tanque> lista;
+
     // Construtor
     public Bomba(int num, String pass) {
+
+        try {
+            this.lista = new MTanque().listar();
+        } catch (Exception err) {
+
+        }
 
         if (num == 5 && pass.equals("1234")) {
             autenticado = true;
@@ -28,16 +45,23 @@ public class Bomba {
         }
     }
 
+
     // Métodos
-    public boolean verificaTanque(double abastecer, int numCombustivel) {
-        // Verifica se possui a quantidade no tanque
-        if (tanque.verificarQuantidade(abastecido)) {
+    public boolean verificaTanque(double qtd, int codCombistivel) {
+
+        Tanque c = lista.get(codCombistivel - 1);
+
+        if (qtd < c.getQuantidade()) {
+
             return true;
+
         } else {
+
             return false;
         }
+
     }
-    
+
     public double[] abastece(double abastecido, int numCombustivel) {
 
         // Cria uma array de retorno com as informações
@@ -64,7 +88,7 @@ public class Bomba {
 
     // Getters e Setters
     public String getCombustivel(int num) {
-        return this.combustivel[num - 1].getNome();
+        return this.combustivel[num - 1].getCombustivel();
     }
 
     public double getPreco(int num) {
@@ -75,10 +99,28 @@ public class Bomba {
         return this.abastecido = quantidade;
     }
 
+    public void diminuiQtd(double qtd, int codCombistivel) throws Exception {
+        MTanque alteraqtd = new MTanque();
+        MRelatorio insertVenda = new MRelatorio();
+        Tanque c = lista.get(codCombistivel - 1);
+        double qtdTotal = c.getQuantidade() - qtd;
+        
+        double valorTotal = qtd * c.getPreco();
+        System.out.println("Combustive: "+c.getCombustivel()+ "Quantidade: "+ qtd+ "Valor total: "+valorTotal);
+        
+      
+        insertVenda.adicionarVenda(c.getCombustivel(),5,qtd,valorTotal);
+        
+        alteraqtd.modificarQuantidade(codCombistivel, qtdTotal);
+    }
+
     public void setCombustiveis() {
-        this.combustivel[0] = new Combustivel(1, "Gasolina", 3.769);
-        this.combustivel[1] = new Combustivel(2, "Gasolina Aditivada", 3.899);
-        this.combustivel[2] = new Combustivel(3, "Etanol", 2.769);
-        this.combustivel[3] = new Combustivel(4, "Diesel", 2.999);
+
+        for (int i = 0; i < lista.size(); i++) {
+            Tanque c = lista.get(i);
+
+            combustivel[i] = new Tanque(c.getTanque(), c.getCombustivel(), c.getQuantidade(), c.getPreco());
+        }
+
     }
 }

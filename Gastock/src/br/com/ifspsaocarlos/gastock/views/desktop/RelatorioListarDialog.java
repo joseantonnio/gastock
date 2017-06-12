@@ -1,7 +1,7 @@
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
-import br.com.ifspsaocarlos.gastock.controllers.Ctanque;
-import br.com.ifspsaocarlos.gastock.library.Tanque;
+import br.com.ifspsaocarlos.gastock.controllers.Crelatorio;
+import br.com.ifspsaocarlos.gastock.library.Relatorio;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -9,16 +9,16 @@ import javax.swing.JOptionPane;
  *
  * @author Alex
  */
-public class TanqueListarDialog extends javax.swing.JDialog {
+public class RelatorioListarDialog extends javax.swing.JDialog {
 
-    private TanqueTabelaModel tableModel;
+    private RelatorioTabelaModel tableModel;
 
     /**
-     * Creates new form TanqueListarDialog
+     * Creates new form RelatorioListarDialog
      *
      * @param parent
      */
-    public TanqueListarDialog(java.awt.Window parent) {
+    public RelatorioListarDialog(java.awt.Window parent) {
         super(parent);
 
         initComponents();
@@ -30,13 +30,13 @@ public class TanqueListarDialog extends javax.swing.JDialog {
 
     private void init() {
 
-        tableModel = new TanqueTabelaModel();
-        tabelaTanque.setModel(tableModel);
+        tableModel = new RelatorioTabelaModel();
+        tabelaRelatorio.setModel(tableModel);
     }
 
-    public Tanque getTanqueSelecionado() throws Exception {
+    public Relatorio getRelatorioSelecionado() throws Exception {
 
-        int row = tabelaTanque.getSelectedRow();
+        int row = tabelaRelatorio.getSelectedRow();
         if (row == -1) {
             throw new Exception("Por favor, selecione uma linha da tabela.");
         }
@@ -52,7 +52,7 @@ public class TanqueListarDialog extends javax.swing.JDialog {
         editarBtn = new javax.swing.JButton();
         excluirBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaTanque = new javax.swing.JTable();
+        tabelaRelatorio = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Combustível");
@@ -91,7 +91,7 @@ public class TanqueListarDialog extends javax.swing.JDialog {
             }
         });
 
-        tabelaTanque.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -102,7 +102,7 @@ public class TanqueListarDialog extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tabelaTanque);
+        jScrollPane1.setViewportView(tabelaRelatorio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,15 +144,15 @@ public class TanqueListarDialog extends javax.swing.JDialog {
 
         try {
 
-            Tanque c = getTanqueSelecionado();
+            Relatorio c = getRelatorioSelecionado();
             
-            TanqueJDialog dialog = new TanqueJDialog(this);
-            dialog.setTanque(c);
+            RelatorioJDialog dialog = new RelatorioJDialog(this);
+            dialog.setRelatorio(c);
             dialog.setVisible(true);
 
             if (dialog.isSalvou()) {
-                tableModel.modificar(tabelaTanque.getSelectedRow(),
-                        dialog.getTanque());
+                tableModel.modificar(tabelaRelatorio.getSelectedRow(),
+                        dialog.getRelatorio());
             }
 
             dialog.dispose();
@@ -166,11 +166,11 @@ public class TanqueListarDialog extends javax.swing.JDialog {
 
     private void adcionarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adcionarBtnActionPerformed
 
-        TanqueJDialog dialog = new TanqueJDialog(this);
+        RelatorioJDialog dialog = new RelatorioJDialog(this);
         dialog.setVisible(true);
 
         if (dialog.isSalvou()) {
-            tableModel.adicionar(dialog.getTanque());
+            tableModel.adicionar(dialog.getRelatorio());
         }
 
         dialog.dispose();
@@ -180,15 +180,15 @@ public class TanqueListarDialog extends javax.swing.JDialog {
     private void excluirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirBtnActionPerformed
 
         try {
-            Tanque c = getTanqueSelecionado();
+            Relatorio c = getRelatorioSelecionado();
 
             String txt = "Você deseja deletar o produto " + c.getCombustivel() + " ?";
             int resultado = JOptionPane.showConfirmDialog(this, txt);
 
             if (resultado == JOptionPane.YES_OPTION) {
 
-                Ctanque.getInstancia().excluir(c.getTanque());
-                tableModel.excluir(tabelaTanque.getSelectedRow());
+                Crelatorio.getInstancia().excluir(c.getRelatorio());
+                tableModel.excluir(tabelaRelatorio.getSelectedRow());
             } else {
                 throw new Exception("A ação foi cancelada pelo usuário.");
             }
@@ -217,21 +217,23 @@ public class TanqueListarDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TanqueListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TanqueListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TanqueListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TanqueListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioListarDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TanqueListarDialog dialog = new TanqueListarDialog(new javax.swing.JFrame());
+                RelatorioListarDialog dialog = new RelatorioListarDialog(new javax.swing.JFrame());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -248,6 +250,6 @@ public class TanqueListarDialog extends javax.swing.JDialog {
     private javax.swing.JButton editarBtn;
     private javax.swing.JButton excluirBtn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaTanque;
+    private javax.swing.JTable tabelaRelatorio;
     // End of variables declaration//GEN-END:variables
 }

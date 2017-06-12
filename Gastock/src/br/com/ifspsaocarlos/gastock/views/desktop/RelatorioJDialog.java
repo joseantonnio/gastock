@@ -1,10 +1,8 @@
 package br.com.ifspsaocarlos.gastock.views.desktop;
 
-import br.com.ifspsaocarlos.gastock.controllers.Ctanque;
-import br.com.ifspsaocarlos.gastock.library.Tanque;
+import br.com.ifspsaocarlos.gastock.controllers.Crelatorio;
+import br.com.ifspsaocarlos.gastock.library.Relatorio;
 
-import br.com.ifspsaocarlos.gastock.models.MCombustivel;
-import br.com.ifspsaocarlos.gastock.library.Combustivel;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -13,78 +11,65 @@ import javax.swing.JOptionPane;
  *
  * @author Alex
  */
-public class TanqueJDialog extends javax.swing.JDialog {
+public class RelatorioJDialog extends javax.swing.JDialog {
 
-    private Tanque tanque;
+    private Relatorio relatorio;
     private boolean salvou;
-    private List<Combustivel> lista;
+    
 
     /**
-     * Creates new form CombustivelJDialog
+     * Creates new form RelatorioJDialog
      *
      * @param parent
      */
-    public TanqueJDialog(java.awt.Window parent) {
+    public RelatorioJDialog(java.awt.Window parent) {
 
         super(parent);
 
         initComponents();
         init();//Inicializar os itens posto na tela
 
-        try {
-            this.lista = new MCombustivel().listar();
-        } catch (Exception err) {
-
-        }
-
-        for (int i = 0; i < lista.size(); i++) {
-            Combustivel c = lista.get(i);
-            CBoxCombustivel.addItem(c.getNome());
-        }
-
+        
         setModal(true); // sempre ira travar a tela anterior
         setLocationRelativeTo(parent);// a tela irá abrir no centro
     }
 
     private void init() {
         salvou = false;
-        setTanque(new Tanque());
+        setRelatorio(new Relatorio());
     }
 
-//    public void ModificaQtd(double qtd, int codigo) {
-//
-//        qtd = 350.00;
-//        codigo = 3;
-//        tanque.setQuantidade(qtd);
-//    }
+    public void setRelatorio(Relatorio c) {
 
-    public void setTanque(Tanque c) {
+        relatorio = c;
 
-        tanque = c;
+        if (relatorio == null) {
 
-        if (tanque == null) {
-
-            tanque = new Tanque();
+            relatorio = new Relatorio();
         }
 
-        CBoxCombustivel.setSelectedItem(tanque.getCombustivel());
-        quantidadeTxt.setText(tanque.getQuantidade() + "");// Transformando o valor em string
-        precoTxt.setText(tanque.getPreco() + "");// Transformando o valor em string
+        combustivelTxt.setText(relatorio.getCombustivel() + "");// Transformando o valor em string
+        bombaTxt.setText(relatorio.getBomba() + "");// Transformando o valor em string
+        quantidadeTxt.setText(relatorio.getQuantidade() + "");// Transformando o valor em string
+        precoTxt.setText(relatorio.getPrecoTotal() + "");// Transformando o valor em string
 
         salvou = false;
     }
 
-    public Tanque getTanque() {
+    public Relatorio getRelatorio() {
 
-        tanque.setCombustivel((String) CBoxCombustivel.getSelectedItem());
-
+        relatorio.setCombustivel(combustivelTxt.getText());
+        
+        int bomba = Integer.parseInt(bombaTxt.getText());
+        relatorio.setBomba(bomba);
+        
         double quantidade = Double.parseDouble(quantidadeTxt.getText());
-        tanque.setQuantidade(quantidade);
+        relatorio.setQuantidade(quantidade);
         
         double preco = Double.parseDouble(precoTxt.getText());
-        tanque.setPreco(preco);
+        relatorio.setPrecoTotal(preco);
 
-        return tanque;
+        return relatorio;
     }
 
     public boolean isSalvou() {
@@ -104,9 +89,11 @@ public class TanqueJDialog extends javax.swing.JDialog {
         quantidadeTxt = new javax.swing.JTextField();
         salvarBtn = new javax.swing.JButton();
         cancelarBtn = new javax.swing.JButton();
-        CBoxCombustivel = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         precoTxt = new javax.swing.JTextField();
+        combustivelTxt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        bombaTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Adicionar/Editar Combustível");
@@ -131,6 +118,8 @@ public class TanqueJDialog extends javax.swing.JDialog {
 
         jLabel1.setText("Preço:");
 
+        jLabel4.setText("Bomba");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,30 +137,37 @@ public class TanqueJDialog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(quantidadeTxt)
-                                    .addComponent(CBoxCombustivel, 0, 200, Short.MAX_VALUE))
+                                    .addComponent(quantidadeTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(combustivelTxt))
                                 .addGap(131, 131, 131))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(precoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(precoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bombaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(CBoxCombustivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(quantidadeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(combustivelTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(bombaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(quantidadeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(precoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -196,12 +192,12 @@ public class TanqueJDialog extends javax.swing.JDialog {
 
             salvou = false;
 
-            Tanque c = getTanque();
+            Relatorio c = getRelatorio();
 
-            if (c.getTanque() == 0) {
-                Ctanque.getInstancia().adcionar(c); // salva no bd    
+            if (c.getRelatorio() == 0) {
+                Crelatorio.getInstancia().adcionar(c); // salva no bd    
             } else {
-                Ctanque.getInstancia().modificar(c); // modificar 
+                Crelatorio.getInstancia().modificar(c); // modificar 
 
             }
 
@@ -218,11 +214,13 @@ public class TanqueJDialog extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Object> CBoxCombustivel;
+    private javax.swing.JTextField bombaTxt;
     private javax.swing.JButton cancelarBtn;
+    private javax.swing.JTextField combustivelTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField precoTxt;
     private javax.swing.JTextField quantidadeTxt;
     private javax.swing.JButton salvarBtn;

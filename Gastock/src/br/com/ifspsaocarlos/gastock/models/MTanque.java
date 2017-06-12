@@ -39,7 +39,8 @@ public class MTanque implements ITanque {
             Tanque curr = new Tanque(
                     dados.get(i).getInt("cod"),
                     dados.get(i).get("combustivel").toString(),
-                    Double.parseDouble(dados.get(i).get("quantidade").toString())
+                    Double.parseDouble(dados.get(i).get("quantidade").toString()),
+                    Double.parseDouble(dados.get(i).get("preco").toString())
             );
 
             this.c.add(curr);
@@ -49,13 +50,13 @@ public class MTanque implements ITanque {
 
     @Override
     public int adicionar(Tanque tanque) {
-        
+
         try {
             this.listar();
         } catch (Exception ex) {
-            
+
         }
-        
+
         int cod = c.get(c.size() - 1).getTanque() + 1;
 
         tanque.setTanque(cod);
@@ -67,11 +68,27 @@ public class MTanque implements ITanque {
         insert.put("cod", tanque.getTanque());
         insert.put("combustivel", tanque.getCombustivel());
         insert.put("quantidade", tanque.getQuantidade());
+        insert.put("preco", tanque.getPreco());
 
         this.banco.cadastraItem(insert);
 
         return tanque.getTanque();
 
+    }
+    
+    
+    
+    public void modificarQuantidade(int cod, double newQtd) throws Exception {
+
+        BasicDBObject set = new BasicDBObject();
+
+        int codigo = cod;
+       
+        set.put("quantidade", newQtd);
+
+        BasicDBObject update = new BasicDBObject("$set", set);
+
+        this.banco.alterarItem(codigo, update);
     }
 
     @Override
@@ -80,10 +97,10 @@ public class MTanque implements ITanque {
         BasicDBObject set = new BasicDBObject();
 
         int codigo = tanque.getTanque();
-        
         set.put("combustivel", tanque.getCombustivel());
         set.put("quantidade", tanque.getQuantidade());
-        
+        set.put("preco", tanque.getPreco());
+
         BasicDBObject update = new BasicDBObject("$set", set);
 
         this.banco.alterarItem(codigo, update);
@@ -91,15 +108,16 @@ public class MTanque implements ITanque {
 
     @Override
     public Tanque get(int tanqueId) throws Exception {
-        
+
         DBObject dados = this.banco.buscaRegistro(new BasicDBObject("cod", tanqueId));
-        
+
         Tanque result = new Tanque(
-                    (int) dados.get("cod"),
-                    dados.get("combustivel").toString(),
-                    Double.parseDouble(dados.get("quantidade").toString())
-            );
-        
+                (int) dados.get("cod"),
+                dados.get("combustivel").toString(),
+                Double.parseDouble(dados.get("quantidade").toString()),
+                Double.parseDouble(dados.get("preco").toString())
+        );
+
         return result;
     }
 
