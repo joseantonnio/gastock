@@ -38,6 +38,7 @@ public class MRelatorio implements IRelatorio {
 
             Relatorio curr = new Relatorio(
                     dados.get(i).getInt("cod"),
+                    dados.get(i).get("dataAtual").toString(),
                     dados.get(i).get("combustivel").toString(),
                     dados.get(i).getInt("bomba"),
                     Double.parseDouble(dados.get(i).get("quantidade").toString()),
@@ -49,7 +50,7 @@ public class MRelatorio implements IRelatorio {
         }
     }
     
-     public void adicionarVenda(String combustivel, int bomba, double quantidade, double precoTotal ) throws Exception {
+     public void adicionarVenda(int codigo, String dataAtual, String combustivel, int bomba, double quantidade, double precoTotal) throws Exception {
 
         try {
             this.listar();
@@ -67,7 +68,8 @@ public class MRelatorio implements IRelatorio {
 
         BasicDBObject insert = new BasicDBObject();
 
-        insert.put("cod", 5); // tem que arrumar , pegar o codigo do bd e somar +1
+        insert.put("cod", codigo); // tem que arrumar , pegar o codigo do bd e somar +1
+        insert.put("dataAtual", dataAtual);
         insert.put("combustivel", combustivel);
         insert.put("bomba", bomba);
         insert.put("quantidade", quantidade);
@@ -98,6 +100,7 @@ public class MRelatorio implements IRelatorio {
         BasicDBObject insert = new BasicDBObject();
 
         insert.put("cod", relatorio.getRelatorio());
+        insert.put("dataAtual", relatorio.getDataAtual());
         insert.put("combustivel", relatorio.getCombustivel());
         insert.put("bomba", relatorio.getBomba());
         insert.put("quantidade", relatorio.getQuantidade());
@@ -115,6 +118,7 @@ public class MRelatorio implements IRelatorio {
         BasicDBObject set = new BasicDBObject();
 
         int codigo = relatorio.getRelatorio();
+        set.put("dataAtual", relatorio.getDataAtual());
         set.put("combustivel", relatorio.getCombustivel());
         set.put("quantidade", relatorio.getQuantidade());
         set.put("bomba", relatorio.getBomba());
@@ -132,6 +136,7 @@ public class MRelatorio implements IRelatorio {
 
         Relatorio result = new Relatorio(
                 (int) dados.get("cod"),
+                dados.get("dataAtual").toString(),
                 dados.get("combustivel").toString(),
                 (int) dados.get("bomba"),
                 Double.parseDouble(dados.get("quantidade").toString()),

@@ -48,48 +48,12 @@ public class RelatorioListarDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        adcionarBtn = new javax.swing.JButton();
-        editarBtn = new javax.swing.JButton();
-        excluirBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaRelatorio = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gerenciar Combustível");
-
-        adcionarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/add_01.png"))); // NOI18N
-        adcionarBtn.setBorder(null);
-        adcionarBtn.setBorderPainted(false);
-        adcionarBtn.setContentAreaFilled(false);
-        adcionarBtn.setFocusPainted(false);
-        adcionarBtn.setFocusable(false);
-        adcionarBtn.setRequestFocusEnabled(false);
-        adcionarBtn.setVerifyInputWhenFocusTarget(false);
-        adcionarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adcionarBtnActionPerformed(evt);
-            }
-        });
-
-        editarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/editar_01.png"))); // NOI18N
-        editarBtn.setBorder(null);
-        editarBtn.setBorderPainted(false);
-        editarBtn.setContentAreaFilled(false);
-        editarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarBtnActionPerformed(evt);
-            }
-        });
-
-        excluirBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/excluir_01.png"))); // NOI18N
-        excluirBtn.setBorder(null);
-        excluirBtn.setBorderPainted(false);
-        excluirBtn.setContentAreaFilled(false);
-        excluirBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                excluirBtnActionPerformed(evt);
-            }
-        });
+        setTitle("Relatório de Vendas");
+        setPreferredSize(new java.awt.Dimension(900, 700));
 
         tabelaRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,27 +74,14 @@ public class RelatorioListarDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(adcionarBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(editarBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(excluirBtn)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(adcionarBtn)
-                    .addComponent(editarBtn)
-                    .addComponent(excluirBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -139,66 +90,6 @@ public class RelatorioListarDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void editarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBtnActionPerformed
-
-        try {
-
-            Relatorio c = getRelatorioSelecionado();
-            
-            RelatorioJDialog dialog = new RelatorioJDialog(this);
-            dialog.setRelatorio(c);
-            dialog.setVisible(true);
-
-            if (dialog.isSalvou()) {
-                tableModel.modificar(tabelaRelatorio.getSelectedRow(),
-                        dialog.getRelatorio());
-            }
-
-            dialog.dispose();
-            dialog = null;
-
-        } catch (Exception err) {
-            JOptionPane.showMessageDialog(this, err);
-        }
-
-    }//GEN-LAST:event_editarBtnActionPerformed
-
-    private void adcionarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adcionarBtnActionPerformed
-
-        RelatorioJDialog dialog = new RelatorioJDialog(this);
-        dialog.setVisible(true);
-
-        if (dialog.isSalvou()) {
-            tableModel.adicionar(dialog.getRelatorio());
-        }
-
-        dialog.dispose();
-        dialog = null;
-    }//GEN-LAST:event_adcionarBtnActionPerformed
-
-    private void excluirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirBtnActionPerformed
-
-        try {
-            Relatorio c = getRelatorioSelecionado();
-
-            String txt = "Você deseja deletar o produto " + c.getCombustivel() + " ?";
-            int resultado = JOptionPane.showConfirmDialog(this, txt);
-
-            if (resultado == JOptionPane.YES_OPTION) {
-
-                Crelatorio.getInstancia().excluir(c.getRelatorio());
-                tableModel.excluir(tabelaRelatorio.getSelectedRow());
-            } else {
-                throw new Exception("A ação foi cancelada pelo usuário.");
-            }
-            JOptionPane.showMessageDialog(this, "O produto foi excluido com sucesso.");
-        } catch (Exception err) {
-            JOptionPane.showMessageDialog(this, err);
-        }
-
-
-    }//GEN-LAST:event_excluirBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,9 +137,6 @@ public class RelatorioListarDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adcionarBtn;
-    private javax.swing.JButton editarBtn;
-    private javax.swing.JButton excluirBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaRelatorio;
     // End of variables declaration//GEN-END:variables

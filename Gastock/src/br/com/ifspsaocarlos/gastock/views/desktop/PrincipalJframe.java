@@ -28,7 +28,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
                     double tanque2 = 0.0;
                     double tanque3 = 0.0;
                     double tanque4 = 0.0;
-                    int id = Integer.parseInt(jComboBox1.getSelectedItem().toString());
+                    //int id = Integer.parseInt(jComboBox1.getSelectedItem().toString());
                     
                     try {
                         tanque1 = new Ctanque().buscaQuantidade(1) / 100;
@@ -89,15 +89,15 @@ public class PrincipalJframe extends javax.swing.JFrame {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        try {
-            lista = new Ctanque().listar();
-        } catch (Exception err) {
-            JOptionPane.showMessageDialog(null, err);
-        }
-
-        for (int i = 0; i < lista.size(); i++) {
-            jComboBox1.addItem(Integer.toString(lista.get(i).getTanque()));
-        }
+//        try {
+//            lista = new Ctanque().listar();
+//        } catch (Exception err) {
+//            JOptionPane.showMessageDialog(null, err);
+//        }
+//
+//        for (int i = 0; i < lista.size(); i++) {
+//            jComboBox1.addItem(Integer.toString(lista.get(i).getTanque()));
+//        }
 
         new Thread(verificaTanque).start();
     }
@@ -107,9 +107,9 @@ public class PrincipalJframe extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         combustivelBtn = new javax.swing.JButton();
-        bombaBtn = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        btnFrentista = new javax.swing.JButton();
+        btnTanque = new javax.swing.JButton();
+        btnRelatorio = new javax.swing.JButton();
         nivel1 = new eu.hansolo.steelseries.gauges.Linear();
         nivel2 = new eu.hansolo.steelseries.gauges.Linear();
         nivel3 = new eu.hansolo.steelseries.gauges.Linear();
@@ -127,7 +127,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gastock - Modulo de Gerenciamento");
-        setPreferredSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(900, 800));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -138,6 +138,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
         jToolBar1.setAutoscrolls(true);
 
         combustivelBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon-combust.png"))); // NOI18N
+        combustivelBtn.setText("Combustível");
         combustivelBtn.setFocusable(false);
         combustivelBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         combustivelBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -148,25 +149,41 @@ public class PrincipalJframe extends javax.swing.JFrame {
         });
         jToolBar1.add(combustivelBtn);
 
-        bombaBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/bomba.png"))); // NOI18N
-        bombaBtn.setFocusPainted(false);
-        bombaBtn.setFocusable(false);
-        bombaBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        bombaBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(bombaBtn);
-
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
-            }
-        });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        btnFrentista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/frentista.png"))); // NOI18N
+        btnFrentista.setText("Frentista");
+        btnFrentista.setFocusable(false);
+        btnFrentista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFrentista.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFrentista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                btnFrentistaActionPerformed(evt);
             }
         });
+        jToolBar1.add(btnFrentista);
 
-        jLabel1.setText("Selecione o tanque: ");
+        btnTanque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/tanque.png"))); // NOI18N
+        btnTanque.setText("Tanque");
+        btnTanque.setFocusable(false);
+        btnTanque.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTanque.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTanque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTanqueActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnTanque);
+
+        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/relatorio.png"))); // NOI18N
+        btnRelatorio.setText("Relatório");
+        btnRelatorio.setFocusable(false);
+        btnRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRelatorio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnRelatorio);
 
         nivel1.setLedBlinking(true);
         nivel1.setLedColor(eu.hansolo.steelseries.tools.LedColor.GREEN_LED);
@@ -288,22 +305,20 @@ public class PrincipalJframe extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nivel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(nivel2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(nivel3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(nivel4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(nivel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(nivel2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(nivel3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(nivel4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 123, Short.MAX_VALUE))
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,11 +330,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
                     .addComponent(nivel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nivel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nivel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(36, 36, 36))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("form");
@@ -372,16 +383,7 @@ public class PrincipalJframe extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowOpened
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private Runnable verificaTanque;
-
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        new Thread(verificaTanque).interrupt();
-        new Thread(verificaTanque).start();
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void radial4Lcd1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_radial4Lcd1CaretPositionChanged
 
@@ -395,17 +397,29 @@ public class PrincipalJframe extends javax.swing.JFrame {
         dialog = null;
     }//GEN-LAST:event_VendasMenuActionPerformed
 
+    private void btnFrentistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrentistaActionPerformed
+        frentistalMenuActionPerformed(evt);
+    }//GEN-LAST:event_btnFrentistaActionPerformed
+
+    private void btnTanqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTanqueActionPerformed
+       TanqueMenuActionPerformed(evt);
+    }//GEN-LAST:event_btnTanqueActionPerformed
+
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
+        VendasMenuActionPerformed(evt);
+    }//GEN-LAST:event_btnRelatorioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem TanqueMenu;
     private javax.swing.JMenuItem VendasMenu;
-    private javax.swing.JButton bombaBtn;
+    private javax.swing.JButton btnFrentista;
+    private javax.swing.JButton btnRelatorio;
+    private javax.swing.JButton btnTanque;
     private javax.swing.JMenu cadastroMenu;
     private javax.swing.JButton combustivelBtn;
     private javax.swing.JMenuItem combustivelMenu;
     private javax.swing.JMenuItem frentistalMenu;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;

@@ -10,6 +10,10 @@ import br.com.ifspsaocarlos.gastock.library.Tanque;
 
 import br.com.ifspsaocarlos.gastock.models.MRelatorio;
 import br.com.ifspsaocarlos.gastock.library.Relatorio;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 
 import java.util.List;
 
@@ -22,12 +26,13 @@ public class Bomba {
     private int numero;
     public double abastecido;
     private String senha;
-    //private Combustivel[] combustivel = new Combustivel[4];
     private Tanque[] combustivel = new Tanque[4];
     public boolean autenticado;
     private Tanque tanque = new Tanque();
+    private int codigo;
 
     private List<Tanque> lista;
+    private List<Relatorio> listaRelatorio;
 
     // Construtor
     public Bomba(int num, String pass) {
@@ -38,13 +43,18 @@ public class Bomba {
 
         }
 
+        try {
+            this.listaRelatorio = new MRelatorio().listar();
+        } catch (Exception err) {
+
+        }
+
         if (num == 5 && pass.equals("1234")) {
             autenticado = true;
         } else {
             autenticado = false;
         }
     }
-
 
     // Métodos
     public boolean verificaTanque(double qtd, int codCombistivel) {
@@ -104,14 +114,27 @@ public class Bomba {
         MRelatorio insertVenda = new MRelatorio();
         Tanque c = lista.get(codCombistivel - 1);
         double qtdTotal = c.getQuantidade() - qtd;
-        
+
         double valorTotal = qtd * c.getPreco();
-        System.out.println("Combustive: "+c.getCombustivel()+ "Quantidade: "+ qtd+ "Valor total: "+valorTotal);
-        
-      
-        insertVenda.adicionarVenda(c.getCombustivel(),5,qtd,valorTotal);
-        
+
+        for (int i = 0; i < listaRelatorio.size(); i++) {
+            Relatorio r = listaRelatorio.get(i);
+
+            this.codigo = r.getRelatorio();
+        }
+
+       
+        System.out.println("Data" + getDateTime()+ "Codigo: " + this.codigo + "Combustive: " + c.getCombustivel() + "Quantidade: " + qtd + "Valor total: " + valorTotal);
+
+        insertVenda.adicionarVenda(this.codigo + 1, getDateTime(), c.getCombustivel(), 5, qtd, valorTotal);
+
         alteraqtd.modificarQuantidade(codCombistivel, qtdTotal);
+    }
+
+    private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
     public void setCombustiveis() {

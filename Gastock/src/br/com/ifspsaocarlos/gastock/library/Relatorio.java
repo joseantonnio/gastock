@@ -13,6 +13,7 @@ public class Relatorio {
 
     private int relatorio;
     private String combustivel;
+    private String dataAtual;
     private int bomba;
     private double quantidade;
     private double precoTotal;
@@ -22,8 +23,9 @@ public class Relatorio {
 
     }
 
-    public Relatorio(int relatorio, String combustivel, int bomba, double quantidade, double precoTotal) {
+    public Relatorio(int relatorio, String dataAtual, String combustivel, int bomba, double quantidade, double precoTotal) {
         this.relatorio = relatorio;
+        this.dataAtual = dataAtual;
         this.combustivel = combustivel;
         this.bomba = bomba;
         this.quantidade = quantidade;
@@ -61,6 +63,14 @@ public class Relatorio {
 
     public String getCombustivel() {
         return this.combustivel;
+    }
+
+    public void setDataAtual(String dataAtual) {
+        this.dataAtual = dataAtual;
+    }
+
+    public String getDataAtual() {
+        return this.dataAtual;
     }
 
     public void setBomba(int bomba) {

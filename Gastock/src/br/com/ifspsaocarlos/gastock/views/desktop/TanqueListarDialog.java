@@ -55,7 +55,7 @@ public class TanqueListarDialog extends javax.swing.JDialog {
         tabelaTanque = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gerenciar Combustível");
+        setTitle("Gerenciar Tanque");
 
         adcionarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifspsaocarlos/gastock/images/icon/add_01.png"))); // NOI18N
         adcionarBtn.setBorder(null);

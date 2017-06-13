@@ -9,6 +9,8 @@ import br.com.ifspsaocarlos.gastock.views.desktop.Login;
 import br.com.ifspsaocarlos.gastock.views.embarcado.Painel;
 import java.awt.Color;
 import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -123,7 +125,12 @@ public class BemVindo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVendasActionPerformed
-        Painel embarcado = new Painel();
+        Painel embarcado = null;
+        try {
+            embarcado = new Painel();
+        } catch (Exception ex) {
+            Logger.getLogger(BemVindo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         embarcado.setVisible(true);
         embarcado.setLocationRelativeTo(null);
         this.dispose();

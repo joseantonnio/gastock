@@ -22,12 +22,13 @@ public class RelatorioTabelaModel extends AbstractTableModel {
             System.out.println(err);
         }
 
-        coluna = new String[5];// Três coluna
+        coluna = new String[6];// Três coluna
         coluna[0] = "Código";
-        coluna[1] = "Combustível";
-        coluna[2] = "Bomba";
-        coluna[3] = "Quantidade";
-        coluna[4] = "Preço Total";
+        coluna[1] = "Data/Hora";
+        coluna[2] = "Combustível";
+        coluna[3] = "Bomba";
+        coluna[4] = "Quantidade";
+        coluna[5] = "Preço Total";
     }
 
     @Override
@@ -62,12 +63,14 @@ public class RelatorioTabelaModel extends AbstractTableModel {
             case 0:
                 return c.getRelatorio();
             case 1:
-                return c.getCombustivel();
+                return c.getDataAtual();
             case 2:
-                return c.getBomba();
+                return c.getCombustivel();
             case 3:
-                return c.getQuantidade();
+                return c.getBomba();
             case 4:
+                return c.getQuantidade();
+            case 5:
                 return c.getPrecoTotal();
             default:
                 return null;
